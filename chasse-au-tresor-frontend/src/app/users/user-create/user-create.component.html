@@ -1,0 +1,25 @@
+<div *ngIf="createdUser; else form">
+  <h2>Utilisateur déjà créé ({{createdUser.username}})</h2>
+  <p>Vous ne pouvez pas changer d'utilisateur.</p>
+</div>
+
+<ng-template #form>
+  <h2>Créer un utilisateur</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="user-form">
+    <mat-form-field>
+      <mat-label>Nom du joueur</mat-label>
+      <input matInput formControlName="username" placeholder="Entrez un nom unique" 
+      (blur)="checkUniqueUsername()"/>
+      <mat-error *ngIf="userForm.get('username')?.hasError('required')">
+        Le nom du joueur est obligatoire.
+      </mat-error>
+      <mat-error *ngIf="userForm.get('username')?.hasError('notUnique')">
+        Ce nom est déjà pris. Veuillez en choisir un autre.
+      </mat-error>
+      </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+      Créer
+    </button>
+  </form>
+</ng-template>
+

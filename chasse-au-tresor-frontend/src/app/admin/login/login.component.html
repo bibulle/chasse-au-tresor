@@ -1,0 +1,20 @@
+<h2>Connexion Administrateur</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+      Le nom de l'admin est obligatoire.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mot de passe</mat-label>
+    <input matInput formControlName="password" type="password" />
+    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+      Le mot de passe est obligatoire.
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Se connecter</button>
+</form>
