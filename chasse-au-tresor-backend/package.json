@@ -1,6 +1,6 @@
 {
   "name": "chasse-au-tresor-backend",
-  "version": "0.0.1",
+  "version": "0.5.4",
   "description": "",
   "author": "",
   "private": true,
@@ -17,7 +17,21 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "release-patch": "standard-version --no-verify --commit-all --release-as patch",
+    "release-minor": "standard-version --no-verify --commit-all --release-as minor",
+    "release-major": "standard-version --no-verify --commit-all --release-as major",
+    "replace:version": "json -I -f ../chasse-au-tresor-frontend/src/app/core/version.json -e \"this.version='`cat package.json | json version`'; this.github_url='`cat package.json | npx json repository.url`'; this.name='$npm_package_name'; this.copyright='2016-`date +%Y` `cat package.json | npx json author.name`'\" && git add ../chasse-au-tresor-frontend/src/app/core/version.json"
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "npm run replace:version"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -63,7 +77,11 @@
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "standard-version": "^9.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
+    "commitlint": "^17.5.0",
+    "json": "^11.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
