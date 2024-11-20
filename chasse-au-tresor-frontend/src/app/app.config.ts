@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 const socketConfig: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: '/api',
   options: {},
 };
 

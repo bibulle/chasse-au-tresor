@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/players'; // URL backend
+  private apiUrl = '/api/players'; // URL backend
   private mockExistingUsernames = ['Alice', 'Bob', 'Charlie']; // Mock temporaire
 
   constructor(private http: HttpClient) {}

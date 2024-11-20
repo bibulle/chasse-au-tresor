@@ -10,17 +10,17 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getPlayers(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/players');
+    return this.http.get<any[]>('/api/players');
   }
   
   getTeams(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/teams');
+    return this.http.get<any[]>('/api/teams');
   }
   
   assignPlayerToTeam(playerId: string, teamId: string): Observable<any> {
-    return this.http.patch(`http://localhost:3000/teams/${teamId}/add-player`, { playerId });
+    return this.http.patch(`/api/teams/${teamId}/add-player`, { playerId });
   }
   removePlayerFromTeam(playerId: string, teamId: string): Observable<any> {
-    return this.http.patch(`http://localhost:3000/teams/${teamId}/remove-player`, { playerId });
+    return this.http.patch(`/api/teams/${teamId}/remove-player`, { playerId });
   }
 }
