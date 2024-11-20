@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.7](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.6...v0.5.7) (2024-11-20)
+
+
+### Bug Fixes
+
+* remove localhost ([63ff094](https://github.com/bibulle/chasse-au-tresor/commit/63ff0940684df078420bb81ebbac3d7720419a44))
+
 ### [0.5.6](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.5...v0.5.6) (2024-11-20)
 
 
