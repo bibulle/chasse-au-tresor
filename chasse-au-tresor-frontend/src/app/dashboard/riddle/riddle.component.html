@@ -1,0 +1,29 @@
+<!-- <div class="enigme-box">
+  <h2>Énigme en cours</h2>
+  <p>{{ currentRiddle.text }}</p>
+  <button mat-mini-fab ng-click="showHint()"><mat-icon>help</mat-icon></button>
+</div> -->
+
+<mat-card class="enigme-card">
+  <mat-card-header>
+    <mat-card-title> Énigme en cours </mat-card-title>
+    <mat-card-subtitle>
+      pour {{ currentRiddle.gain }} points
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="card-content">
+      <img
+        mat-card-md-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Image of a Shiba Inu"
+      />
+      <div>{{ currentRiddle.text }}</div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer class="card-footer">
+    <button mat-mini-fab ng-click="showHint()">
+      <mat-icon>help</mat-icon>
+    </button>
+  </mat-card-footer>
+</mat-card>

@@ -5,13 +5,14 @@ import { PositionService } from '../core/positions.service';
 import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
 import { UserService } from '../core/user.service';
+import { RiddleComponent } from "./riddle/riddle.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, RiddleComponent],
 })
 export class DashboardComponent implements OnInit {
   player: any;

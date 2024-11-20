@@ -9,6 +9,10 @@ $dark-theme: mat.define-theme(
       theme-type: dark,
       primary: mat.$azure-palette,
     ),
+    typography: (
+      brand-family: "Sour Gummy",
+      bold-weight: 900,
+    ),
   )
 );
 
@@ -19,18 +23,25 @@ $light-theme: mat.define-theme(
       theme-type: light,
       primary: mat.$azure-palette,
     ),
+    typography: (
+      brand-family: "Sour Gummy",
+      bold-weight: 900,
+    ),
   )
 );
 
+
 html {
   // Apply the dark theme by default
+  @include mat.all-component-themes($dark-theme);
   @include mat.core-theme($dark-theme);
-  @include mat.button-theme($dark-theme); 
+  @include mat.button-theme($dark-theme);
 
   // Apply the light theme only when the user prefers light themes.
   @media (prefers-color-scheme: light) {
     // Use the `-color` mixins to only apply color styles without reapplying the same
     // typography and density styles.
+    @include mat.all-component-themes($light-theme);
     @include mat.core-color($light-theme);
     @include mat.button-color($light-theme);
   }
@@ -42,5 +53,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Sour Gummy", Roboto, "Helvetica Neue", sans-serif;
 }
