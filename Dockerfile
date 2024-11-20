@@ -26,6 +26,7 @@ COPY chasse-au-tresor-frontend/package*.json ./
 RUN npm ci
 
 COPY chasse-au-tresor-frontend/src ./src
+COPY chasse-au-tresor-frontend/public ./public
 COPY chasse-au-tresor-frontend/tsconfig*.json ./
 COPY chasse-au-tresor-frontend/angular.json ./
 RUN npm run build
