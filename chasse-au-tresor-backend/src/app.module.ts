@@ -19,7 +19,7 @@ import { TeamsModule } from './teams/teams.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('DATABASE_URI'), // Récupère l'URI depuis les variables d'environnement
+        uri: configService.get<string>('MONGO_URL'), // Récupère l'URI depuis les variables d'environnement
       }),
       inject: [ConfigService],
     }),
