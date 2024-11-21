@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.8](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.7...v0.5.8) (2024-11-21)
+
+
+### Features
+
+* add current riddle management ([b590847](https://github.com/bibulle/chasse-au-tresor/commit/b590847eb83f4216acd86a188b5dc84b926b8458))
+* add import export of the database ([3d5704a](https://github.com/bibulle/chasse-au-tresor/commit/3d5704a7e241282c9cdfc909f3834377ba4dd109))
+* add riddle panel (and change fonts) ([00d49f3](https://github.com/bibulle/chasse-au-tresor/commit/00d49f33f059d88ced5482370314617add70c7dc))
+
+
+### Bug Fixes
+
+* map ([bea86fa](https://github.com/bibulle/chasse-au-tresor/commit/bea86fac4f1233194aadd49d7e863004c01344e2))
+
 ### [0.5.7](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.6...v0.5.7) (2024-11-20)
 
 
