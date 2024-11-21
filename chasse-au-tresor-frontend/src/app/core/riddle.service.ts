@@ -2,11 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
+  catchError,
   distinctUntilChanged,
   interval,
   map,
   Observable,
   of,
+  startWith,
+  Subscription,
   switchMap,
 } from 'rxjs';
 import { Riddle, Team, TeamRiddle } from '../reference/types';
@@ -23,6 +26,7 @@ export class RiddleService {
   // BehaviorSubject qui stocke l'énigme actuelle
   private currentRiddleSubject: BehaviorSubject<Riddle | undefined> =
     new BehaviorSubject<Riddle | undefined>(undefined);
+    private pollingSubscription: Subscription | undefined;
 
   constructor(private http: HttpClient) {
     this.startPolling();
@@ -30,17 +34,34 @@ export class RiddleService {
 
   // Méthode pour démarrer le polling
   private startPolling(): void {
-    interval(5000) // Interroge toutes les 5 secondes
+    this.pollingSubscription = interval(5000) // Interroge toutes les 5 secondes
       .pipe(
+        startWith(0), // Démarre immédiatement avec une première valeur
         switchMap(() => this.fetchCurrentRiddle()), // Fait une requête au backend
-        distinctUntilChanged() // N'émet que si l'énigme change
+        distinctUntilChanged(), // N'émet que si l'énigme change
+        catchError((err) => {
+          console.error('Erreur lors de la récupération de l’énigme:', err);
+          return of(null); // Retourne une valeur neutre pour éviter que le stream s'arrête
+        })
       )
-      .subscribe({
-        next: (riddle) => this.currentRiddleSubject.next(riddle),
-        error: (err) =>
-          console.error('Erreur lors de la récupération de l’énigme:', err),
+      .subscribe((riddle) => {
+        if (riddle) {
+          this.currentRiddleSubject.next(riddle);
+        }
       });
   }
+  private stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+      console.log('Polling arrêté.');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.stopPolling();
+  }
+  
+  
 
   // Observable pour les abonnés
   getCurrentRiddle$(username: string): Observable<Riddle | undefined> {
@@ -53,9 +74,7 @@ export class RiddleService {
     if (this.username === '') {
       return of(undefined);
     }
-    const url = `${this.apiUrl}/current?username=${encodeURIComponent(
-      this.username
-    )}`;
+    const url = `${this.apiUrl}/current/${encodeURIComponent(this.username)}`;
     return this.http.get<Riddle>(url);
   }
 

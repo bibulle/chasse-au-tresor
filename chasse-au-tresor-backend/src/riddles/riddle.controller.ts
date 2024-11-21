@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { RiddleService } from './riddle.service';
 import { Riddle } from './schemas/riddle.schema';
 
@@ -6,8 +6,8 @@ import { Riddle } from './schemas/riddle.schema';
 export class RiddleController {
   constructor(private readonly riddleService: RiddleService) {}
 
-  @Get('current')
-  async getCurrentRiddle(@Query('username') username: string): Promise<Riddle> {
+  @Get('current/:username')
+  async getCurrentRiddle(@Param('username') username: string): Promise<Riddle> {
     return this.riddleService.getCurrentRiddle(username);
   }
 }
