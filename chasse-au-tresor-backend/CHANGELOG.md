@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.9](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.8...v0.5.9) (2024-11-21)
+
+
+### Features
+
+* add paam for db uri ([84c01be](https://github.com/bibulle/chasse-au-tresor/commit/84c01be1f9f2ebd14d9150a8922d8e4ba0083d14))
+
 ### [0.5.8](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.7...v0.5.8) (2024-11-21)
 
 
