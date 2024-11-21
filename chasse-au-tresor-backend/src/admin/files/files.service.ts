@@ -34,18 +34,46 @@ export class FilesService {
       throw new Error("Le fichier fourni n'est pas un JSON valide.");
     }
 
-    // // Convertir les IDs en ObjectId si nécessaire
-    // if (parsedData.riddles) {
-    //   parsedData.riddles = parsedData.riddles.map((riddle) => {
-    //     this.logger.debug(
-    //       `_id : '${riddle._id}' ${typeof riddle._id} ${riddle._id.length}`,
-    //     );
-    //     return {
-    //       ...riddle,
-    //       _id: new Types.ObjectId('' + riddle._id),
-    //     };
-    //   });
-    // }
+    // Convertir les IDs en ObjectId si nécessaire
+    if (parsedData.teams) {
+      parsedData.teams = parsedData.teams.map((team) => {
+        team._id = new Types.ObjectId('' + team._id);
+        team.players = team.players.map((id) => {
+          return new Types.ObjectId('' + id);
+        });
+        return team;
+      });
+    }
+    if (parsedData.players) {
+      parsedData.players = parsedData.players.map((player) => {
+        player._id = new Types.ObjectId('' + player._id);
+        player.team = new Types.ObjectId('' + player.team);
+        return player;
+      });
+    }
+    if (parsedData.riddles) {
+      parsedData.riddles = parsedData.riddles.map((riddle) => {
+        riddle._id = new Types.ObjectId('' + riddle._id);
+        return riddle;
+      });
+    }
+    if (parsedData.teamRiddles) {
+      parsedData.teamRiddles = parsedData.teamRiddles.map((teamRiddle) => {
+        teamRiddle._id = new Types.ObjectId('' + teamRiddle._id);
+        teamRiddle.team = new Types.ObjectId('' + teamRiddle.team);
+        teamRiddle.riddle = new Types.ObjectId('' + teamRiddle.riddle);
+        teamRiddle.solutions = teamRiddle.solutions.map((id) => {
+          return new Types.ObjectId('' + id);
+        });
+        return teamRiddle;
+      });
+    }
+    if (parsedData.solutions) {
+      parsedData.solutions = parsedData.solutions.map((solution) => {
+        solution._id = new Types.ObjectId('' + solution._id);
+        return solution;
+      });
+    }
 
     // Clear existing data
     await this.teamModel.deleteMany({});
