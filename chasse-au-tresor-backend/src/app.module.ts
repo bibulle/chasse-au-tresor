@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FilesModule } from './admin/files/files.module';
 import { AppController } from './app.controller';
@@ -13,12 +13,16 @@ import { TeamsModule } from './teams/teams.module';
 
 @Module({
   imports: [
-    // MongooseModule.forRoot('mongodb://localhost:27017/chasse-au-tresor', {}),
-    MongooseModule.forRoot(
-      // 'mongodb+srv://famillemartin:VEJn3wSol1sHYE5T@cluster0.xntnh.mongodb.net/chasse-au-tresor?retryWrites=true&w=majority&appName=Cluster0',
-      'mongodb://localhost:27017/chasse-au-tresor',
-      {},
-    ),
+    ConfigModule.forRoot(), // Charge les variables d'environnement
+    // 'mongodb://localhost:27017/chasse-au-tresor'
+    // 'mongodb+srv://famillemartin:VEJn3wSol1sHYE5T@cluster0.xntnh.mongodb.net/chasse-au-tresor?retryWrites=true&w=majority&appName=Cluster0'
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('DATABASE_URI'), // Récupère l'URI depuis les variables d'environnement
+      }),
+      inject: [ConfigService],
+    }),
     PlayersModule,
     AuthModule,
     TeamsModule,
