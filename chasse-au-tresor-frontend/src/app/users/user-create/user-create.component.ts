@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UserService } from '../../core/user.service';
+import { PlayerService } from '../../core/player.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,7 +33,7 @@ export class UserCreateComponent implements OnInit {
   // isUserCreated = false;
   createdUser: { username: String; } | undefined;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: PlayerService, private router: Router) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
     });
@@ -52,7 +52,7 @@ export class UserCreateComponent implements OnInit {
   onSubmit() {
     if (this.userForm.valid) {
       const userData = this.userForm.value;
-      this.userService.createUser(userData).subscribe({
+      this.userService.createPlayer(userData).subscribe({
         next: () => {
           alert('Utilisateur créé avec succès !');
           // this.isUserCreated = true;

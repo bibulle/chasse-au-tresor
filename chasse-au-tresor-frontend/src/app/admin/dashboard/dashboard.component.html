@@ -1,50 +1,19 @@
-<mat-toolbar color="primary">
-  <span>Administration</span>
-</mat-toolbar>
-
 <div class="dashboard-container">
-  <!-- Section des équipes -->
-  <div class="card" *ngFor="let team of teams">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ team.name }}</mat-card-title>
-        <mat-card-subtitle>
-          <span [style.color]="team.color">Couleur : {{ team.color }}</span>
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <h4>Joueurs</h4>
-        <mat-list>
-          <mat-list-item *ngFor="let player of team.players" class="player-row">
-            <div class="player-content">
-              <div>{{ player.username }}</div>
-              <button
-                color="warn"
-                mat-icon-button
-                (click)="removePlayer(player._id, team._id)"
-              >
-                <mat-icon color="warn">delete</mat-icon>
-              </button>
-            </div>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
   <!-- Section d'affectation -->
-  <div class="card">
+  <div class="card unassigned-player" *ngIf="unassignedPlayer().length > 0">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Affecter un joueur à une équipe</mat-card-title>
+        <mat-card-title>Joueur à affecter à une équipe</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="assignmentForm" (ngSubmit)="assignPlayer()">
+        <form [formGroup]="assignmentForm" (ngSubmit)="assignPlayerToTeam()">
           <mat-form-field appearance="outline">
             <mat-label>Joueur</mat-label>
             <mat-select formControlName="playerId">
-              <mat-option *ngFor="let player of unassignedPlayer()" [value]="player._id">
+              <mat-option
+                *ngFor="let player of unassignedPlayer()"
+                [value]="player._id"
+              >
                 {{ player.username }}
               </mat-option>
             </mat-select>
@@ -71,4 +40,36 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- Section des équipes -->
+  <div class="card team" *ngFor="let team of teams">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ team.name }}</mat-card-title>
+        <mat-card-subtitle>
+          <span [style.color]="team.color">Couleur : {{ team.color }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h4>Joueurs</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let player of team.players" class="player-row">
+            <div class="player-content">
+              <div>{{ player.username }}</div>
+              <button
+                color="warn"
+                mat-icon-button
+                (click)="removePlayerFromTeam(player._id, team._id)"
+              >
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
+
+<app-riddle-form (formSubmitted)="onRiddleSubmit($event)"></app-riddle-form>

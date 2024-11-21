@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Team } from './schemas/team.schema';
-import { Player } from 'src/player/schemas/player.schema';
+import { Player } from 'src/players/schemas/player.schema';
 
 @Injectable()
 export class TeamsService implements OnModuleInit {

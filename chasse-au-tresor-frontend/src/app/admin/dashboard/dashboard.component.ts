@@ -3,12 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatLine, MatLineModule, MatOption } from '@angular/material/core';
+import { MatLineModule, MatOption } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatFormField, MatLabel, MatSelect } from '@angular/material/select';
-import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AdminService } from '../../core/admin.service';
+import { Player, Team, TeamRiddle } from '../../reference/types';
+import { PlayerService } from '../../core/player.service';
+import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,15 +30,19 @@ import { AdminService } from '../../core/admin.service';
     MatCardModule,
     MatListModule,
     MatIconModule,
-    MatLineModule
+    MatLineModule, 
+    RiddleFormComponent
   ],
 })
 export class AdminDashboardComponent implements OnInit {
-  players: any[] = [];
-  teams: any[] = [];
+  players: Player[] = [];
+  teams: Team[] = [];
+  teamRiddle: TeamRiddle[] = [];
+
+
   assignmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private adminService: AdminService) {
+  constructor(private fb: FormBuilder, private adminService: AdminService, private userService: PlayerService) {
     this.assignmentForm = this.fb.group({
       playerId: [''],
       teamId: [''],
@@ -48,7 +55,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   loadPlayers() {
-    this.adminService
+    this.userService
       .getPlayers()
       .subscribe((players) => (this.players = players));
   }
@@ -60,11 +67,18 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
+  loadTeamRiddles() {
+    // this.adminService
+    //    .getTeamRiddles()
+    //    .subscribe((teamRiddle) => (this.teamRiddle = teamRiddle));
+  }
+
+  
   unassignedPlayer() {
     return this.players.filter((p) => !p.team);
   }
 
-  assignPlayer() {
+  assignPlayerToTeam() {
     const { playerId, teamId } = this.assignmentForm.value;
     this.adminService.assignPlayerToTeam(playerId, teamId).subscribe(() => {
       this.loadTeams();
@@ -72,10 +86,17 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  removePlayer(playerId: string, teamId: string) {
+  removePlayerFromTeam(playerId: string, teamId: string) {
     this.adminService.removePlayerFromTeam(playerId, teamId).subscribe(() => {
       this.loadTeams(); 
       this.loadPlayers();
     });
   }
+
+  onRiddleSubmit(formData: FormData): void {
+
+    this.adminService.createRiddle(formData).subscribe(()=>{console.log("onRiddleSubmit done")});
+  }
+
+
 }

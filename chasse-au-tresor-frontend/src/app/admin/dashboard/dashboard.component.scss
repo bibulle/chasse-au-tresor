@@ -1,24 +1,36 @@
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-    padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  align-items: stretch;
+}
+
+.card {
+}
+
+.unassigned-player {
+  width: 100%;
+  mat-form-field {
+    padding-right: 16px;
   }
-  
-  .card {
-    width: 100%;
-  }
-  
-  mat-card {
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .player-content {
-    display: flex; /* Active le comportement flex pour aligner les éléments */
-    justify-content: space-between; /* Espace entre le nom et le bouton */
-    align-items: center; /* Aligne verticalement les éléments */
-  }
-    
-  button[mat-icon-button] {
-    margin-left: 8px; /* Optionnel : espace entre le texte et le bouton */
-  }
+}
+
+.team {
+  flex: 1 0 auto;
+}
+
+mat-card {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.player-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button[mat-icon-button] {
+  margin-left: 8px; /* Optionnel : espace entre le texte et le bouton */
+}

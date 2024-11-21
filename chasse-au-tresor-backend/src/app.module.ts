@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PlayersModule } from './player/players.module';
+import { PlayersModule } from './players/players.module';
 import { AuthModule } from './auth/auth.module';
 import { TeamsModule } from './teams/teams.module';
-import { RiddleModule } from './riddle/riddle.module';
+import { RiddleModule } from './riddles/riddle.module';
 import { PositionsModule } from './positions/positions.module';
 import { ConfigModule } from '@nestjs/config';
+import { SolutionsModule } from './solutions/solutions.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     RiddleModule,
     PositionsModule,
     ConfigModule.forRoot(),
+    SolutionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

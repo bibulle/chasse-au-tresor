@@ -1,0 +1,58 @@
+<mat-card>
+  <form [formGroup]="riddleForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Texte de l'énigme</mat-label>
+      <textarea
+        matInput
+        formControlName="text"
+        placeholder="Saisissez l'énigme"
+      ></textarea>
+      <mat-error *ngIf="riddleForm.get('text')?.hasError('required')">
+        Le texte est obligatoire.
+      </mat-error>
+      <mat-error *ngIf="riddleForm.get('text')?.hasError('minlength')">
+        Le texte doit contenir au moins 5 caractères.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Points à gagner</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="points"
+        placeholder="Nombre de points"
+      />
+      <mat-error *ngIf="riddleForm.get('points')?.hasError('required')">
+        Les points sont obligatoires.
+      </mat-error>
+      <mat-error *ngIf="riddleForm.get('points')?.hasError('min')">
+        Les points doivent être au moins 1.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="photo-upload">
+      <button mat-raised-button color="accent" (click)="fileInput.click()">
+        Ajouter une photo
+      </button>
+      <input
+        type="file"
+        #fileInput
+        (change)="onFileChange($event)"
+        style="display: none"
+      />
+      <mat-hint *ngIf="uploadedPhoto">
+        Fichier sélectionné : {{ uploadedPhoto?.name }}
+      </mat-hint>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="riddleForm.invalid"
+    >
+      Enregistrer
+    </button>
+  </form>
+</mat-card>

@@ -9,5 +9,5 @@
     <div id="map"></div>
   </div>
 
-  <app-riddle></app-riddle>
+  <app-riddle *ngIf="currentRiddle" [riddle]="currentRiddle"></app-riddle>
 </div>

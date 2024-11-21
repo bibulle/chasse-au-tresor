@@ -4,20 +4,22 @@ import { RiddleService } from '../core/riddle.service';
 import { PositionService } from '../core/positions.service';
 import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
-import { UserService } from '../core/user.service';
-import { RiddleComponent } from "./riddle/riddle.component";
+import { PlayerService } from '../core/player.service';
+import { RiddleComponent } from './riddle/riddle.component';
+import { Player, Riddle } from '../reference/types';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [HeaderComponent, RiddleComponent],
+  imports: [CommonModule, HeaderComponent, RiddleComponent],
 })
 export class DashboardComponent implements OnInit {
-  player: any;
+  player: Player | undefined;
   playerName = ''; // Nom du joueur
-  currentRiddle = 'énigme courante'; // Énigme courante
+  currentRiddle: Riddle | undefined;
 
   private map: any;
   private markers: Map<string, L.Marker> = new Map();
@@ -26,23 +28,20 @@ export class DashboardComponent implements OnInit {
     private riddleService: RiddleService,
     private positionService: PositionService,
     private router: Router,
-    private userService: UserService
+    private userService: PlayerService
   ) {}
 
   ngOnInit(): void {
     this.loadPlayerData();
     this.initMap();
     this.listenForPositionUpdates();
-
-    const playerId = 'player-1'; // Remplacez par l'ID réel du joueur
-    this.trackPosition(playerId);
   }
 
   async loadPlayerData() {
     // Récupérer les informations du joueur depuis localStorage
     const player = JSON.parse(localStorage.getItem('createdUser') || '{}');
 
-    this.userService.getUserByUsername(player.username).subscribe({
+    this.userService.getPlayerByUsername(player.username).subscribe({
       next: (p) => {
         console.log('player', p);
         this.playerName = p?.username;
@@ -52,6 +51,8 @@ export class DashboardComponent implements OnInit {
           this.router.navigate(['/create-user']);
         } else {
           this.player = p;
+          this.trackPosition(this.playerName);
+          this.subscribeToRiddles(this.playerName);
         }
       },
       error: (err) => {
@@ -60,14 +61,19 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/create-user']);
       },
     });
+  }
 
-    this.currentRiddle = 'Trouver le trésor caché'; // À remplacer par une API
+  subscribeToRiddles(username: string) {
+    // S'abonner aux changements d'énigmes
+    this.riddleService.getCurrentRiddle$(username).subscribe((riddle) => {
+      this.currentRiddle = riddle;
+    });
   }
 
   initMap() {
-    L.Icon.Default.imagePath = 'assets/leaflet/'
+    L.Icon.Default.imagePath = 'assets/leaflet/';
 
-    this.map = L.map('map').setView([43.6045, 1.4442], 13, ); // Position Toulouse
+    this.map = L.map('map').setView([43.6045, 1.4442], 13); // Position Toulouse
     var Stadia_OSMBright = L.tileLayer(
       'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
       {
@@ -78,16 +84,24 @@ export class DashboardComponent implements OnInit {
         // ext: 'png',
       }
     );
-    var Stadia_AlidadeSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg', {
-      minZoom: 0,
-      maxZoom: 20,
-      attribution: '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      // ext: 'jpg'
-    });
-    var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-      attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
+    var Stadia_AlidadeSatellite = L.tileLayer(
+      'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
+      {
+        minZoom: 0,
+        maxZoom: 20,
+        attribution:
+          '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        // ext: 'jpg'
+      }
+    );
+    var OpenStreetMap_France = L.tileLayer(
+      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+      {
+        maxZoom: 20,
+        attribution:
+          '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }
+    );
 
     Stadia_OSMBright.addTo(this.map);
     //Stadia_AlidadeSatellite.addTo(this.map);
