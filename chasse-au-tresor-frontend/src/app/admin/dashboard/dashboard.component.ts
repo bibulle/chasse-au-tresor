@@ -12,6 +12,7 @@ import { AdminService } from '../../core/admin.service';
 import { Player, Team, TeamRiddle } from '../../reference/types';
 import { PlayerService } from '../../core/player.service';
 import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
+import { DatabaseFileManagerComponent } from '../database-file-manager/database-file-manager.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
     MatListModule,
     MatIconModule,
     MatLineModule, 
-    RiddleFormComponent
+    RiddleFormComponent,
+    DatabaseFileManagerComponent
   ],
 })
 export class AdminDashboardComponent implements OnInit {

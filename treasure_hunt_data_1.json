@@ -61,13 +61,13 @@
     ],
     "riddles": [
         {
-            "_id": "64b2f9c2d5a29e3c3e5a6r01",
+            "_id": "64b2f9c2d5a29e3c3e5a6b01",
             "text": "Quelle place embl\u00e9matique de Toulouse est connue pour son architecture rose ?",
             "gain": 50,
             "photo": "capitole.jpg"
         },
         {
-            "_id": "64b2f9c2d5a29e3c3e5a6r02",
+            "_id": "64b2f9c2d5a29e3c3e5a6b02",
             "text": "Quel monument traverse la Garonne et est c\u00e9l\u00e8bre pour ses arches ?",
             "gain": 30,
             "photo": "pont_neuf.jpg"
@@ -75,19 +75,19 @@
     ],
     "teamRiddles": [
         {
-            "_id": "64b2f9c2d5a29e3c3e5a6tr01",
+            "_id": "64b2f9c2d5a29e3c3e5a6b01",
             "team": "64b2f9c2d5a29e3c3e5a6e01",
-            "riddle": "64b2f9c2d5a29e3c3e5a6r01",
+            "riddle": "64b2f9c2d5a29e3c3e5a6b01",
             "order": 1,
             "resolved": true,
             "solutions": [
-                "64b2f9c2d5a29e3c3e5a6s01"
+                "64b2f9c2d5a29e3c3e5a6b01"
             ]
         },
         {
-            "_id": "64b2f9c2d5a29e3c3e5a6tr02",
+            "_id": "64b2f9c2d5a29e3c3e5a6b02",
             "team": "64b2f9c2d5a29e3c3e5a6e02",
-            "riddle": "64b2f9c2d5a29e3c3e5a6r02",
+            "riddle": "64b2f9c2d5a29e3c3e5a6b02",
             "order": 1,
             "resolved": false,
             "solutions": []
@@ -95,7 +95,7 @@
     ],
     "solutions": [
         {
-            "_id": "64b2f9c2d5a29e3c3e5a6s01",
+            "_id": "64b2f9c2d5a29e3c3e5a6b01",
             "player": "64b2f9c2d5a29e3c3e5a6f01",
             "photo": "capitole_solution.jpg",
             "text": "Place du Capitole",

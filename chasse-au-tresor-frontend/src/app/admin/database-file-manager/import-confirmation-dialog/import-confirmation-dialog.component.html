@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Confirmation de l'importation</h2>
+<mat-dialog-content>
+    <b>Cela va supprimer toute les données existantes !!</b>
+  <p>Voici un aperçu du fichier JSON :</p>
+  <pre>{{ data | json }}</pre>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">Confirmer</button>
+</mat-dialog-actions>
