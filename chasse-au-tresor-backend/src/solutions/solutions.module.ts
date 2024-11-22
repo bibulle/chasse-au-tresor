@@ -6,6 +6,11 @@ import { multerOptionsFactory } from '../config/multer.config';
 import { Solution, SolutionSchema } from './schemas/solution.schema';
 import { SolutionsController } from './solutions.controller';
 import { SolutionsService } from './solutions.service';
+import {
+  TeamRiddle,
+  TeamRiddleSchema,
+} from 'src/riddles/schemas/team-riddle.schema';
+import { Player, PlayerSchema } from 'src/players/schemas/player.schema';
 
 @Module({
   imports: [
@@ -13,6 +18,10 @@ import { SolutionsService } from './solutions.service';
     MongooseModule.forFeature([
       { name: Solution.name, schema: SolutionSchema },
     ]),
+    MongooseModule.forFeature([
+      { name: TeamRiddle.name, schema: TeamRiddleSchema },
+    ]),
+    MongooseModule.forFeature([{ name: Player.name, schema: PlayerSchema }]),
     MulterModule.registerAsync({
       imports: [ConfigModule], // Permet l'accès à ConfigService
       useFactory: multerOptionsFactory,

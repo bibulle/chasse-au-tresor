@@ -1,0 +1,78 @@
+<!-- Table des solutions -->
+<mat-table *ngIf="solutions" [dataSource]="solutions" class="mat-elevation-z8">
+  <ng-container matColumnDef="player">
+    <mat-header-cell *matHeaderCellDef> Joueur </mat-header-cell>
+    <mat-cell *matCellDef="let solution">
+      {{ solution.player?.username }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="text">
+    <mat-header-cell *matHeaderCellDef> Texte </mat-header-cell>
+    <mat-cell *matCellDef="let solution">
+      {{ solution.text }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="photo">
+    <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
+    <mat-cell *matCellDef="let solution">
+      <div
+        class="image-container"
+        (click)="openPhotoClick(solution.photo)"
+      >
+        <img
+          *ngIf="solution.photo"
+          [src]="'/api/files' + solution.photo"
+          alt="Photo"
+          class="solution-photo"
+        />
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Colonne Statut avec icône -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> Statut </mat-header-cell>
+    <mat-cell *matCellDef="let solution">
+      <button
+        mat-icon-button
+        aria-label="Good answer"
+        color="{{ solution.validated === false ? 'grey' : 'green' }}"
+        (click)="onStatusClick(solution, true)"
+      >
+        <mat-icon>check</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        aria-label="Wrong answer"
+        color="{{ solution.validated === true ? 'grey' : 'red' }}"
+        (click)="onStatusClick(solution, false)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <!-- Colonne Validée avec checkbox
+                <ng-container matColumnDef="validated">
+                  <mat-header-cell *matHeaderCellDef> Validée </mat-header-cell>
+                  <mat-cell *matCellDef="let solution">
+                    <mat-checkbox
+                      [checked]="solution.validated"
+                      (change)="toggleValidation(solution._id, $event.checked)"
+                    ></mat-checkbox>
+                  </mat-cell>
+                </ng-container> -->
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<div
+  class="image-popup"
+  *ngIf="isHovered"
+  [style.top.px]="popupPosition.y"
+  [style.left.px]="popupPosition.x"
+>
+  <img [src]="'/api/files' + hoveredPhoto" alt="Aperçu de la photo" />
+</div>

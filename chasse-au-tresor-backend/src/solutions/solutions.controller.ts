@@ -1,16 +1,27 @@
 import {
+  Body,
   Controller,
+  Get,
+  Logger,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
-  Body,
 } from '@nestjs/common';
+
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Solution } from './schemas/solution.schema';
 import { SolutionsService } from './solutions.service';
 
 @Controller('solutions')
 export class SolutionsController {
-  constructor(private readonly solutionsService: SolutionsService) {}
+  readonly logger = new Logger(SolutionsController.name);
+
+  constructor(
+    private readonly solutionsService: SolutionsService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Post('submit')
   @UseInterceptors(FileInterceptor('photo')) // Permet l'upload de la photo
@@ -27,5 +38,20 @@ export class SolutionsController {
       text,
       photoPath,
     );
+  }
+
+  @Get('toggle/:solutionId/:validated')
+  async toggleValidated(
+    @Param('solutionId') solutionId: string,
+    @Param('validated') validatedS: string,
+  ): Promise<Solution> {
+    let validated: boolean|undefined;
+    if (validatedS.toLocaleLowerCase() === 'true') {
+      validated = true;
+    } else if (validatedS.toLocaleLowerCase() === 'false') {
+      validated = false;
+    }
+
+    return this.solutionsService.toggleValidated(solutionId, validated);
   }
 }

@@ -1,0 +1,6 @@
+<mat-divider></mat-divider>
+<h3>{{ teamRiddle?.riddle?.text }}</h3>
+<p>
+  Statut : {{ teamRiddle?.resolved ? "Résolue" : "Non résolue" }}
+</p>
+<app-solutions [solutions]="teamRiddle?.solutions"></app-solutions>

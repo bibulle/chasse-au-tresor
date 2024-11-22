@@ -41,6 +41,17 @@
     </mat-card>
   </div>
 
+  <mat-card class="teams">
+    <mat-card-header>
+      <mat-card-title>Équipes et Énigmes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <app-team *ngFor="let team of teams" [team]="team"></app-team>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+
   <!-- Section des équipes -->
   <div class="card team" *ngFor="let team of teams">
     <mat-card>
@@ -74,3 +85,4 @@
 
 <app-riddle-form (formSubmitted)="onRiddleSubmit($event)"></app-riddle-form>
 <app-database-file-manager></app-database-file-manager>
+

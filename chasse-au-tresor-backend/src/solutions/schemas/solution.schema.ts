@@ -12,7 +12,7 @@ export class Solution extends Document {
   @Prop({ type: String, default: '' })
   text: string;
 
-  @Prop({ type: Boolean, default: false })
+  @Prop({ type: Boolean, default: undefined })
   validated: boolean;
 }
 

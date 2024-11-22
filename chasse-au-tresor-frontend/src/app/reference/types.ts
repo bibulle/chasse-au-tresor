@@ -39,5 +39,5 @@ export class Solution {
   player: Player | undefined;
   photo: string = '';
   text: string = '';
-  validated = false;
+  validated:boolean | undefined;
 }

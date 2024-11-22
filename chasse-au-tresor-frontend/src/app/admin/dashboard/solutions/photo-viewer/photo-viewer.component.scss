@@ -1,0 +1,16 @@
+.photo-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+//   .dialog-photo {
+//     max-width: 100%;
+//     max-height: 100%;
+//   }
+  .dialog-photo {
+    max-width: 90vw; /* Limite la largeur à 90% de l'écran */
+    max-height: 90vh; /* Limite la hauteur à 90% de l'écran */
+    object-fit: contain; /* Conserve les proportions de l'image */
+  }
+  

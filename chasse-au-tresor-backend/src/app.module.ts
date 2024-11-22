@@ -10,6 +10,7 @@ import { PositionsModule } from './positions/positions.module';
 import { RiddleModule } from './riddles/riddle.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { TeamsModule } from './teams/teams.module';
+import { FilesController } from './files/files.controller';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { TeamsModule } from './teams/teams.module';
     SolutionsModule,
     FilesModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, FilesController],
   providers: [AppService],
 })
 export class AppModule {}

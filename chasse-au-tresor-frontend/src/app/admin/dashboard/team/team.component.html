@@ -1,0 +1,33 @@
+<mat-expansion-panel *ngIf="team" (opened)="loadRiddlesForTeam()">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="team-name">{{ team.name }}</mat-panel-title>
+    <mat-panel-description>
+      <span [style.background-color]="team.color" class="color-box"></span>
+      Score : {{ team.score }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <!-- Liste des joueurs -->
+  <div class="team-players">
+    <mat-label class="titre">Joueurs :</mat-label>
+    <mat-chip-set>
+      <mat-chip *ngFor="let player of team.players">{{
+        player.username
+      }}</mat-chip>
+    </mat-chip-set>
+  </div>
+
+  <!-- Liste des énigmes -->
+  <div
+    class="team-riddles"
+    *ngIf="riddles && riddles.length > 0; else noRiddles"
+  >
+    <div *ngFor="let teamRiddle of riddles">
+      <app-riddle [teamRiddle]="teamRiddle"></app-riddle>
+    </div>
+  </div>
+
+  <ng-template #noRiddles>
+    <p>Aucune énigme associée à cette équipe.</p>
+  </ng-template>
+</mat-expansion-panel>

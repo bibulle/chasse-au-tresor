@@ -1,0 +1,58 @@
+.mat-green {
+    color: green;
+  }
+  .mat-red {
+    color: red;
+  }
+  .mat-grey {
+    color: lightgray;
+  }
+
+
+  .mat-column-player {
+    flex: 1 1 40%;
+  }
+  .mat-column-text {
+    flex: 1 1 100%;
+  }
+  .mat-column-photo {
+    flex: 1 1 10%;
+    display: flex;
+    justify-content: center;
+  }
+  .mat-column-status {
+    flex: 1 1 10%;
+    display: flex;
+    justify-content: center;
+    min-width: 6em;
+  }
+  
+
+
+  .solution-photo {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .image-container {
+    position: relative;
+  }
+
+  .image-popup {
+    position: absolute;
+    z-index: 2000;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    img {
+      max-width: 200px;
+      max-height: 200px;
+      display: block;
+    }
+  }
+  

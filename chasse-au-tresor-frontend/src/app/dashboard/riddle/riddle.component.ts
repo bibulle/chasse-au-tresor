@@ -3,7 +3,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCalendar } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
-import { Riddle } from '../../reference/types';
+import { Player, Riddle } from '../../reference/types';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submit-solution-dialog.component';
@@ -18,12 +18,17 @@ import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submi
 export class RiddleComponent {
 
   @Input() riddle:Riddle | undefined;
+  @Input() player:Player | undefined;
 
   constructor(private dialog: MatDialog) {}
 
   openSubmitSolutionDialog(): void {
     this.dialog.open(SubmitSolutionDialogComponent, {
       width: '600px',
+      data: {
+        playerId: this.player?._id, 
+        riddleId: this.riddle?._id
+      }
     });
   }
 

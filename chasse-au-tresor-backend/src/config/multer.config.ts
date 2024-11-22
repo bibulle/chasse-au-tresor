@@ -1,21 +1,14 @@
 import { ConfigService } from '@nestjs/config';
 import { diskStorage } from 'multer';
 import * as path from 'path';
-
-// export const multerOptions = {
-//   storage: diskStorage({
-//     destination: './uploads/photos', // Répertoire de sauvegarde
-//     filename: (req, file, cb) => {
-//       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-//       const ext = path.extname(file.originalname);
-//       cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-//     },
-//   }),
-// };
+import { join } from 'path';
 
 export const multerOptionsFactory = (configService: ConfigService) => ({
   storage: diskStorage({
-    destination: configService.get<string>('UPLOAD_PATH'), // Charge le chemin depuis NestJS Config
+    destination: join(
+      configService.get<string>('BASE_PATH'),
+      configService.get<string>('UPLOAD_PATH'),
+    ),
     filename: (req, file, cb) => {
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
       const ext = path.extname(file.originalname);

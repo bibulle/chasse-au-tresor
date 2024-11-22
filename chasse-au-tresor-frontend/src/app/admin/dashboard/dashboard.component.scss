@@ -4,6 +4,10 @@
   gap: 16px;
   padding: 16px;
   align-items: stretch;
+
+  .teams {
+    width: 100%;
+  }
 }
 
 .card {
@@ -33,4 +37,10 @@ mat-card {
 
 button[mat-icon-button] {
   margin-left: 8px; /* Optionnel : espace entre le texte et le bouton */
+}
+
+.solution-photo {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 4px;
 }

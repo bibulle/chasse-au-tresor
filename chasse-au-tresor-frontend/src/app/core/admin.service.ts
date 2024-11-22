@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Player, Team } from '../reference/types';
+import { Player, Solution, Team, TeamRiddle } from '../reference/types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class AdminService {
     return this.http.get<Team[]>('/api/teams');
   }
   
+  getRiddlesByTeam(teamId: string): Observable<TeamRiddle[]> {
+    return this.http.get<TeamRiddle[]>(`/api/teams/${teamId}/riddles`);
+  }
+
   assignPlayerToTeam(playerId: string, teamId: string): Observable<Team> {
     return this.http.patch<Team>(`/api/teams/${teamId}/add-player`, { playerId });
   }
@@ -27,4 +31,9 @@ export class AdminService {
     // Exemple de requête HTTP vers le backend
     return this.http.post('/api/riddle', formData);
   }
+
+  updateSolutionStatus(solution: Solution): Observable<Solution> {
+    return this.http.get<Solution>(`/api/solutions/toggle/${solution._id}/${solution.validated}`);
+  }
+
 }
