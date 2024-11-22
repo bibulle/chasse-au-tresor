@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Proposition de solution </mat-card-title>
+    <mat-card-subtitle> </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="submitSolution()">
+      <mat-form-field appearance="fill">
+        <mat-label>Texte de la solution</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="solutionText"
+          name="text"
+          required
+        ></textarea>
+      </mat-form-field>
+
+      <div class="file-input">
+        <!-- Capture une photo directement depuis la caméra -->
+        <input
+          type="file"
+          #fileInput
+          accept="image/*"
+          capture="user"
+          (change)="onFileSelected($event)"
+          hidden
+        />
+        <button mat-raised-button color="accent" (click)="fileInput.click()" type="button">
+          Prendre un selfie
+        </button>
+      </div>
+      <div class="preview" *ngIf="preview">
+        <img [src]="preview" alt="Aperçu de la photo" />
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="card-footer">
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" (click)="submitSolution()">Soumettre</button>
+      <button mat-button type="button" (click)="closeDialog()">Annuler</button>
+    </div>
+  </mat-card-footer>
+</mat-card>

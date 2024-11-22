@@ -21,8 +21,11 @@
     </div>
   </mat-card-content>
   <mat-card-footer class="card-footer">
-    <button mat-mini-fab ng-click="showHint()">
+    <button mat-mini-fab color="secondary" (click)="showHint()">
       <mat-icon>help</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="openSubmitSolutionDialog()">
+      <mat-icon>lightbulb</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
