@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.11](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.10...v0.5.11) (2024-11-23)
+
+
+### Bug Fixes
+
+* give more budget to the app ([3aed139](https://github.com/bibulle/chasse-au-tresor/commit/3aed139295b0cf7b2256a37263703693661e7913))
+
 ### [0.5.10](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.9...v0.5.10) (2024-11-23)
 
 
