@@ -1,9 +1,14 @@
+import { Logger } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
+import { PlayersService } from 'src/players/players.service';
+import { Player } from 'src/players/schemas/player.schema';
+import { TeamsService } from 'src/teams/teams.service';
 
 @WebSocketGateway({
   cors: {
@@ -11,17 +16,56 @@ import { Server } from 'socket.io';
   },
 })
 export class NotificationsGateway {
+  private logger = new Logger(NotificationsGateway.name);
+
+  private playersService: PlayersService;
+  private teamsService: TeamsService;
+
   @WebSocketServer()
   server: Server;
 
+  constructor(private moduleRef: ModuleRef) {}
+
+  setPlayersService(playersService: PlayersService) {
+    this.playersService = playersService;
+  }
+  setTeamsService(teamsService: TeamsService) {
+    this.teamsService = teamsService;
+  }
+
   // Exemple de méthode pour mettre à jour la position
   @SubscribeMessage('updatePosition')
-  handleUpdatePosition(
+  async handleUpdatePosition(
     client: any,
     data: { playerId: string; latitude: number; longitude: number },
   ) {
-    // Diffuser les nouvelles positions à tous les clients
-    this.server.emit('positionUpdated', data);
+    this.logger.log(`handleUpdatePosition(${data})`);
+
+    // on cherche le joueur pour le mettre a jour
+    const player = await this.playersService?.findByName(data.playerId);
+    if (player) {
+      player.latitude = data.latitude;
+      player.longitude = data.longitude;
+      player.save();
+    }
+    // this.logger.log(JSON.stringify(player, null, 2));
+
+    // on recherche tous les joueur de l'équipe
+    const team = await this.teamsService?.getTeamById(player.team._id);
+    // this.logger.log(JSON.stringify(team, null, 2));
+    const payload = [];
+    if (team) {
+      team.players.forEach((p) => {
+        const player = p as unknown as Player;
+        payload.push({
+          playerId: player.username,
+          latitude: player.latitude,
+          longitude: player.longitude,
+        });
+      });
+      // Diffuser les nouvelles positions à tous les clients de la meme equipe
+      this.server.emit('positionUpdated', payload);
+    }
   }
 
   // Méthode pour envoyer une notification à tous les clients

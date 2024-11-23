@@ -20,6 +20,7 @@ export class TeamsService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
+    this.notificationsGateway.setTeamsService(this);
     await this.initializeTeams();
   }
 
@@ -126,6 +127,14 @@ export class TeamsService implements OnModuleInit {
       .exec(); // Inclure les joueurs
     // console.log(teams);
     return teams;
+  }
+
+  async getTeamById(teamId: Types.ObjectId): Promise<Team> {
+    const team = await this.teamModel
+      .findOne({ _id: teamId })
+      .populate({ path: 'players', model: 'Player' })
+      .exec();
+    return team;
   }
 
   async getRiddlesByTeam(teamId: string): Promise<TeamRiddle[]> {

@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
 import { PlayerService } from '../core/player.service';
 import { RiddleComponent } from './riddle/riddle.component';
-import { Player, TeamRiddle } from '../reference/types';
+import { Player, PlayerPosition, TeamRiddle } from '../reference/types';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom, Subscription } from 'rxjs';
 
@@ -19,18 +19,19 @@ import { firstValueFrom, Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   player: Player | null = null;
-  teamId : string | undefined;
+  teamId: string | undefined;
   currentTeamRiddle: TeamRiddle | null = null;
 
   userSubscription: Subscription | undefined;
   riddleSubscription: Subscription | undefined;
+  geoLocalisationId: number | null = null;
 
   private map: any;
   private markers: Map<string, L.Marker> = new Map();
 
   constructor(
     private riddleService: RiddleService,
-    private positionService: NotificationsService,
+    private notificationsService: NotificationsService,
     private router: Router,
     private userService: PlayerService
   ) {}
@@ -56,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.riddleSubscription) {
       this.riddleSubscription.unsubscribe();
     }
-}
+  }
   async initPlayer(username: string) {
     this.player = await firstValueFrom(this.userService.loadUser(username));
     if (!this.player) {
@@ -71,12 +72,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.user$.subscribe((user) => {
       if (user) {
         this.player = user;
+        this.trackPosition(this.player.username);
         this.subscribeTeamRiddle(this.player);
       }
     });
   }
 
-  async subscribeTeamRiddle(player:Player) {
+  async subscribeTeamRiddle(player: Player) {
     if (player.team?._id && this.teamId !== player.team?._id) {
       // this.riddleService.stopListenForRiddleUpdates(this.teamId);
       if (this.riddleSubscription) {
@@ -84,13 +86,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       this.teamId = player.team?._id;
-      this.currentTeamRiddle = await firstValueFrom(this.riddleService.loadCurrentRiddle(this.teamId));
+      this.currentTeamRiddle = await firstValueFrom(
+        this.riddleService.loadCurrentRiddle(this.teamId)
+      );
       this.riddleService.listenCurrentForRiddleUpdates(this.teamId);
-      this.riddleSubscription = this.riddleService.currentRiddle$.subscribe((teamRiddle) => {
-        this.currentTeamRiddle = teamRiddle;
-      });
+      this.riddleSubscription = this.riddleService.currentRiddle$.subscribe(
+        (teamRiddle) => {
+          this.currentTeamRiddle = teamRiddle;
+        }
+      );
     }
-}
+  }
 
   initMap() {
     L.Icon.Default.imagePath = 'assets/leaflet/';
@@ -133,18 +139,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   listenForPositionUpdates() {
-    this.positionService.onPositionUpdated().subscribe((data: any) => {
-      const { playerId, latitude, longitude } = data;
+    this.notificationsService
+      .onPositionUpdated()
+      .subscribe((data: PlayerPosition[]) => {
+          // Ajouter ou mettre à jour les marqueurs sur la carte
+          data.forEach((p) => {
+          if (this.markers.has(p.playerId)) {
+            const marker = this.markers.get(p.playerId);
+            marker?.setLatLng([p.latitude, p.longitude]);
+          } else {
+            const newMarker = L.marker([p.latitude, p.longitude]);
+            this.map.addLayer(newMarker);
+            newMarker.bindPopup(`${p.playerId}`);
 
-      // Ajouter ou mettre à jour le marqueur sur la carte
-      if (this.markers.has(playerId)) {
-        const marker = this.markers.get(playerId);
-        marker?.setLatLng([latitude, longitude]);
-      } else {
-        const newMarker = L.marker([latitude, longitude]).addTo(this.map);
-        this.markers.set(playerId, newMarker);
-      }
-    });
+            this.markers.set(p.playerId, newMarker);
+          }
+        });
+        // Supprimer ou mettre à jour les marqueurs sur la carte
+        this.markers.forEach((marker, playerId) => {
+          if (!data.find(d => d.playerId === playerId)) {
+            this.map.removeLayer(marker);
+          }
+        });
+
+      });
   }
 
   simulatePositionUpdate() {
@@ -152,18 +170,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const latitude = 43.6045 + Math.random() * 0.01; // Simulez des coordonnées
     const longitude = 1.4442 + Math.random() * 0.01;
 
-    this.positionService.updatePosition(playerId, latitude, longitude);
+    this.notificationsService.updatePosition(playerId, latitude, longitude);
   }
 
   trackPosition(playerId: string) {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+      if (this.geoLocalisationId !== null) {
+        navigator.geolocation.clearWatch(this.geoLocalisationId);
+      }
 
-        // Envoyer la position au backend
-        this.positionService.updatePosition(playerId, latitude, longitude);
-      });
+      this.geoLocalisationId = navigator.geolocation.watchPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // Envoyer la position au backend
+          this.notificationsService.updatePosition(
+            playerId,
+            latitude,
+            longitude
+          );
+        }
+      );
     } else {
       alert('La géolocalisation n’est pas supportée par ce navigateur.');
     }

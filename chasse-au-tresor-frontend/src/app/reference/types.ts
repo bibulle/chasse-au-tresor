@@ -49,3 +49,9 @@ export class Version {
   name = '';
   copyright = '';
 }
+
+export class PlayerPosition {
+  playerId = '';
+  latitude = 0;
+  longitude = 0;
+}

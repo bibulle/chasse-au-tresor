@@ -1,20 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Player } from './schemas/player.schema';
+import { AuthService } from 'src/auth/auth.service';
 import { NotificationsGateway } from 'src/notifications/notifications.gateway';
 import { TeamsService } from 'src/teams/teams.service';
-import { AuthService } from 'src/auth/auth.service';
+import { Player } from './schemas/player.schema';
 
 @Injectable()
-export class PlayersService {
+export class PlayersService implements OnModuleInit {
   constructor(
     @InjectModel(Player.name) private playerModel: Model<Player>,
-    private positionsGateway: NotificationsGateway,
     private teamsService: TeamsService,
     private authService: AuthService,
     private notificationsGateway: NotificationsGateway,
   ) {}
+
+  onModuleInit() {
+    this.notificationsGateway.setPlayersService(this);
+  }
 
   async createPlayer(username: string): Promise<Player> {
     const player = new this.playerModel({ username });
@@ -32,15 +35,15 @@ export class PlayersService {
     return !player; // Retourne `true` si le nom est unique
   }
 
-  async findById(playerId: string): Promise<Player> {
-    const player = await this.playerModel
-      .findOne({ _id: playerId })
-      .populate({ path: 'team', model: 'Team' })
-      .exec();
+  // async findById(playerId: string): Promise<Player> {
+  //   const player = await this.playerModel
+  //     .findOne({ _id: playerId })
+  //     .populate({ path: 'team', model: 'Team' })
+  //     .exec();
 
-    // if (!player) throw new Error('Player not found');
-    return player;
-  }
+  //   // if (!player) throw new Error('Player not found');
+  //   return player;
+  // }
 
   async findByName(username: string): Promise<Player> {
     const player = await this.playerModel
@@ -109,7 +112,7 @@ export class PlayersService {
       .exec();
 
     // Diffusez la position mise à jour
-    this.positionsGateway.server.emit('positionUpdated', {
+    this.notificationsGateway.server.emit('positionUpdated', {
       playerId,
       latitude: updatedPlayer.latitude,
       longitude: updatedPlayer.longitude,
