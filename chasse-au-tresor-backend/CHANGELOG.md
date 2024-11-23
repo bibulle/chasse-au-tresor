@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.10](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.9...v0.5.10) (2024-11-23)
+
+
+### Features
+
+* add accordion for riddle in admin ([f521139](https://github.com/bibulle/chasse-au-tresor/commit/f521139134cb0fae85dcfbe284aa53eb64228608))
+* add solution management ([44fdcf3](https://github.com/bibulle/chasse-au-tresor/commit/44fdcf3016e04ef3f099ba74f3a462192b217eb6))
+* add solution upload ([72c29ba](https://github.com/bibulle/chasse-au-tresor/commit/72c29bafe0cef27f365b903e15bb6d049d8614d9))
+
+
+### Bug Fixes
+
+* change mongo url key in config ([c52c175](https://github.com/bibulle/chasse-au-tresor/commit/c52c175bfb6288ecb22bf7f81823d5fe5752c9d5))
+* transform _ids to ObjectId in import ([f69dafb](https://github.com/bibulle/chasse-au-tresor/commit/f69dafb43da56f8b6723db67f89fc0cf211863a0))
+
 ### [0.5.9](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.8...v0.5.9) (2024-11-21)
 
 
