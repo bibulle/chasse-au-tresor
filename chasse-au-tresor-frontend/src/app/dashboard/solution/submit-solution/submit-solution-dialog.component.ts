@@ -1,13 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 import { SolutionsService } from '../../../core/solutions.service';
-import { Player, Riddle } from '../../../reference/types';
 
 @Component({
   selector: 'app-submit-solution-dialog',
@@ -21,10 +20,9 @@ import { Player, Riddle } from '../../../reference/types';
     MatButtonModule,
   ],
   templateUrl: './submit-solution-dialog.component.html',
-  styleUrl: './submit-solution-dialog.component.scss'
+  styleUrl: './submit-solution-dialog.component.scss',
 })
 export class SubmitSolutionDialogComponent {
-
   solutionText: string = '';
   selectedFile: File | null = null;
   preview: string | null = null;
@@ -32,8 +30,8 @@ export class SubmitSolutionDialogComponent {
   constructor(
     private solutionsService: SolutionsService,
     private dialogRef: MatDialogRef<SubmitSolutionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {playerId:string, riddleId:string}
-
+    @Inject(MAT_DIALOG_DATA)
+    public data: { playerId: string; teamRiddleId: string }
   ) {}
 
   onFileSelected(event: Event): void {
@@ -54,7 +52,12 @@ export class SubmitSolutionDialogComponent {
     console.log(this.data);
     if (this.solutionText && this.selectedFile) {
       this.solutionsService
-        .submitSolution(this.data.playerId, this.data.riddleId, this.solutionText, this.selectedFile)
+        .submitSolution(
+          this.data.playerId,
+          this.data.teamRiddleId,
+          this.solutionText,
+          this.selectedFile
+        )
         .subscribe({
           next: () => {
             alert('Solution soumise avec succès !');

@@ -1,23 +1,18 @@
-<!-- <div class="enigme-box">
-  <h2>Énigme en cours</h2>
-  <p>{{ currentRiddle.text }}</p>
-  <button mat-mini-fab ng-click="showHint()"><mat-icon>help</mat-icon></button>
-</div> -->
 
-<mat-card *ngIf="riddle" class="enigme-card">
+<mat-card *ngIf="teamRiddle?.riddle" class="enigme-card">
   <mat-card-header>
     <mat-card-title> Énigme en cours </mat-card-title>
     <mat-card-subtitle>
-      pour {{ riddle.gain }} points
+      pour {{ teamRiddle?.riddle?.gain }} points
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="card-content">
-      <img *ngIf="riddle.photo"
+      <img *ngIf="teamRiddle?.riddle?.photo"
         mat-card-md-image
-        src="/assets/{{riddle.photo}}"
+        src="/assets/{{teamRiddle?.riddle?.photo}}"
       />
-      <div>{{ riddle.text }}</div>
+      <div>{{ teamRiddle?.riddle?.text }}</div>
     </div>
   </mat-card-content>
   <mat-card-footer class="card-footer">

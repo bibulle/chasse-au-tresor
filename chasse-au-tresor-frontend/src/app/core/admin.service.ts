@@ -10,16 +10,10 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-
-  
   getTeams(): Observable<Team[]> {
     return this.http.get<Team[]>('/api/teams');
   }
   
-  getRiddlesByTeam(teamId: string): Observable<TeamRiddle[]> {
-    return this.http.get<TeamRiddle[]>(`/api/teams/${teamId}/riddles`);
-  }
-
   assignPlayerToTeam(playerId: string, teamId: string): Observable<Team> {
     return this.http.patch<Team>(`/api/teams/${teamId}/add-player`, { playerId });
   }

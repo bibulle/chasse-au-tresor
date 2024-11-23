@@ -20,6 +20,7 @@ import { DatabaseFileManagerComponent } from '../database-file-manager/database-
 import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
 import { TeamComponent } from './team/team.component';
 import { HeaderComponent } from '../header/header.component';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -47,7 +48,7 @@ import { HeaderComponent } from '../header/header.component';
     RiddleFormComponent,
     DatabaseFileManagerComponent,
     TeamComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
 })
 export class AdminDashboardComponent implements OnInit {
@@ -68,15 +69,16 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.loadPlayers();
-    this.loadTeams();
-  }
+  async ngOnInit() {
+    this.players = await firstValueFrom(this.userService.loadUsers());
+    this.userService.listenForUsersUpdates();
+    this.userService.users$.subscribe((users) => {
+      if (users) {
+        this.players = users;
+      }
+    });
 
-  loadPlayers() {
-    this.userService
-      .getPlayers()
-      .subscribe((players) => (this.players = players));
+    this.loadTeams();
   }
 
   loadTeams() {
@@ -87,12 +89,6 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  loadTeamRiddles() {
-    // this.adminService
-    //    .getTeamRiddles()
-    //    .subscribe((teamRiddle) => (this.teamRiddle = teamRiddle));
-  }
-
   unassignedPlayer() {
     return this.players.filter((p) => !p.team);
   }
@@ -101,14 +97,14 @@ export class AdminDashboardComponent implements OnInit {
     const { playerId, teamId } = this.assignmentForm.value;
     this.adminService.assignPlayerToTeam(playerId, teamId).subscribe(() => {
       this.loadTeams();
-      this.loadPlayers();
+      //this.loadPlayers();
     });
   }
 
   removePlayerFromTeam(playerId: string, teamId: string) {
     this.adminService.removePlayerFromTeam(playerId, teamId).subscribe(() => {
       this.loadTeams();
-      this.loadPlayers();
+      //this.loadPlayers();
     });
   }
 
@@ -117,5 +113,4 @@ export class AdminDashboardComponent implements OnInit {
       console.log('onRiddleSubmit done');
     });
   }
-
 }

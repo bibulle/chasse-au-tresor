@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { PlayersModule } from './players/players.module';
-import { PositionsModule } from './positions/positions.module';
+import { NotificationsModule } from './notifications/notifications.module';
 import { RiddleModule } from './riddles/riddle.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { TeamsModule } from './teams/teams.module';
@@ -28,7 +28,7 @@ import { FilesController } from './files/files.controller';
     AuthModule,
     TeamsModule,
     RiddleModule,
-    PositionsModule,
+    NotificationsModule,
     ConfigModule.forRoot(),
     SolutionsModule,
     FilesModule,

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { RiddleService } from '../core/riddle.service';
-import { PositionService } from '../core/positions.service';
+import { NotificationsService } from '../core/notifications.service';
 import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
 import { PlayerService } from '../core/player.service';
 import { RiddleComponent } from './riddle/riddle.component';
-import { Player, Riddle } from '../reference/types';
+import { Player, TeamRiddle } from '../reference/types';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,59 +17,80 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent],
 })
-export class DashboardComponent implements OnInit {
-  player: Player | undefined;
-  playerName = ''; // Nom du joueur
-  currentRiddle: Riddle | undefined;
+export class DashboardComponent implements OnInit, OnDestroy {
+  player: Player | null = null;
+  teamId : string | undefined;
+  currentTeamRiddle: TeamRiddle | null = null;
+
+  userSubscription: Subscription | undefined;
+  riddleSubscription: Subscription | undefined;
 
   private map: any;
   private markers: Map<string, L.Marker> = new Map();
 
   constructor(
     private riddleService: RiddleService,
-    private positionService: PositionService,
+    private positionService: NotificationsService,
     private router: Router,
     private userService: PlayerService
   ) {}
 
-  ngOnInit(): void {
-    this.loadPlayerData();
+  async ngOnInit(): Promise<void> {
+    // Récupérer les informations du joueur depuis localStorage
+    const player = JSON.parse(localStorage.getItem('createdUser') || '{}');
+
+    if (!player.username) {
+      this.router.navigate(['/create-user']);
+    }
+
+    this.initPlayer(player.username);
+
     this.initMap();
     this.listenForPositionUpdates();
   }
 
-  async loadPlayerData() {
-    // Récupérer les informations du joueur depuis localStorage
-    const player = JSON.parse(localStorage.getItem('createdUser') || '{}');
+  async ngOnDestroy(): Promise<void> {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+    if (this.riddleSubscription) {
+      this.riddleSubscription.unsubscribe();
+    }
+}
+  async initPlayer(username: string) {
+    this.player = await firstValueFrom(this.userService.loadUser(username));
+    if (!this.player) {
+      localStorage.removeItem('createdUser');
+      this.router.navigate(['/create-user']);
+      return;
+    }
 
-    this.userService.getPlayerByUsername(player.username).subscribe({
-      next: (p) => {
-        console.log('player', p);
-        this.playerName = p?.username;
-        if (!p?.username) {
-          console.log('routing');
-          localStorage.removeItem('createdUser');
-          this.router.navigate(['/create-user']);
-        } else {
-          this.player = p;
-          this.trackPosition(this.playerName);
-          this.subscribeToRiddles(this.playerName);
-        }
-      },
-      error: (err) => {
-        console.error("Erreur en récuperant l'utilisateur:", err);
-        localStorage.removeItem('createdUser');
-        this.router.navigate(['/create-user']);
-      },
+    this.userService.listenForUserUpdates(username);
+
+    // S'abonner aux données de l'utilisateur
+    this.userSubscription = this.userService.user$.subscribe((user) => {
+      if (user) {
+        this.player = user;
+        this.subscribeTeamRiddle(this.player);
+      }
     });
   }
 
-  subscribeToRiddles(username: string) {
-    // S'abonner aux changements d'énigmes
-    this.riddleService.getCurrentRiddle$(username).subscribe((riddle) => {
-      this.currentRiddle = riddle;
-    });
-  }
+  async subscribeTeamRiddle(player:Player) {
+    if (player.team?._id && this.teamId !== player.team?._id) {
+      // this.riddleService.stopListenForRiddleUpdates(this.teamId);
+      if (this.riddleSubscription) {
+        this.riddleSubscription.unsubscribe();
+      }
+
+      this.teamId = player.team?._id;
+      this.currentTeamRiddle = await firstValueFrom(this.riddleService.loadCurrentRiddle(this.teamId));
+      this.riddleService.listenCurrentForRiddleUpdates(this.teamId);
+      this.riddleSubscription = this.riddleService.currentRiddle$.subscribe((teamRiddle) => {
+        this.currentTeamRiddle = teamRiddle;
+      });
+    }
+}
 
   initMap() {
     L.Icon.Default.imagePath = 'assets/leaflet/';

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PositionsModule } from 'src/positions/positions.module';
+import { NotificationsModule } from 'src/notifications/notifications.module';
 import { TeamsModule } from 'src/teams/teams.module';
 import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
@@ -12,7 +12,7 @@ import { AuthModule } from 'src/auth/auth.module';
   imports: [
     MongooseModule.forFeature([{ name: Player.name, schema: PlayerSchema }]),
     MongooseModule.forFeature([{ name: Team.name, schema: TeamSchema }]),
-    PositionsModule,
+    NotificationsModule,
     TeamsModule,
     AuthModule,
   ],
