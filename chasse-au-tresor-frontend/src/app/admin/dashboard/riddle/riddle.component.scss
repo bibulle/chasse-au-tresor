@@ -1,0 +1,32 @@
+.riddle-text {
+    font-size: large;
+  }
+  
+  .icon-not-resolved {
+  color: grey;
+  padding-right: 16px;
+}
+.icon-resolved {
+    color: green;
+    display: none;
+    padding-right: 16px;
+}
+.resolved {
+  background-color: lightgray;
+  .icon-not-resolved {
+    display: none;
+  }
+  .icon-resolved {
+    display: block;
+  }
+}
+
+.icon-action-needed {
+    color: red; 
+    padding-right: 16px;
+    display: none;
+}
+.action-needed .icon-action-needed {
+    display: block;
+}
+

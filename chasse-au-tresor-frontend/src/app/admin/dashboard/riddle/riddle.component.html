@@ -1,6 +1,19 @@
-<mat-divider></mat-divider>
-<h3>{{ teamRiddle?.riddle?.text }}</h3>
-<p>
-  Statut : {{ teamRiddle?.resolved ? "Résolue" : "Non résolue" }}
-</p>
-<app-solutions [solutions]="teamRiddle?.solutions"></app-solutions>
+<mat-expansion-panel
+  *ngIf="teamRiddle?.riddle"
+  [ngClass]="{
+    resolved: teamRiddle?.resolved,
+    'action-needed': actionNeeded()
+  }"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title class="riddle-text">{{
+      teamRiddle?.riddle?.text
+    }}</mat-panel-title>
+    <mat-icon class="icon-resolved" title="Résolue">check</mat-icon>
+    <mat-icon class="icon-not-resolved" title="Non résolue">close</mat-icon>
+    <mat-icon class="icon-action-needed" title="Action nécessaire"
+      >priority_high</mat-icon
+    >
+  </mat-expansion-panel-header>
+  <app-solutions [solutions]="teamRiddle?.solutions"></app-solutions>
+</mat-expansion-panel>
