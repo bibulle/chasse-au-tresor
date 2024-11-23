@@ -20,9 +20,9 @@
   <!-- Liste des énigmes -->
   <div
     class="team-riddles"
-    *ngIf="riddles && riddles.length > 0; else noRiddles"
+    *ngIf="teamRiddles && teamRiddles.length > 0; else noRiddles"
   >
-    <div *ngFor="let teamRiddle of riddles">
+    <div *ngFor="let teamRiddle of teamRiddles">
       <app-admin-riddle [teamRiddle]="teamRiddle"></app-admin-riddle>
     </div>
   </div>

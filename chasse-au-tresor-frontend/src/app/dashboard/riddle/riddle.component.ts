@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCalendar } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
-import { Player, Riddle } from '../../reference/types';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { Player, TeamRiddle } from '../../reference/types';
 import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submit-solution-dialog.component';
 
 @Component({
@@ -17,8 +16,8 @@ import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submi
 })
 export class RiddleComponent {
 
-  @Input() riddle:Riddle | undefined;
-  @Input() player:Player | undefined;
+  @Input() teamRiddle:TeamRiddle | undefined;
+  @Input() player:Player | null = null;
 
   constructor(private dialog: MatDialog) {}
 
@@ -27,7 +26,7 @@ export class RiddleComponent {
       width: '600px',
       data: {
         playerId: this.player?._id, 
-        riddleId: this.riddle?._id
+        teamRiddleId: this.teamRiddle?._id
       }
     });
   }

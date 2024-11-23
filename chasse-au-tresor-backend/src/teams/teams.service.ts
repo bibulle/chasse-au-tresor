@@ -5,6 +5,7 @@ import { Model, Types } from 'mongoose';
 import { Team } from './schemas/team.schema';
 import { Player } from 'src/players/schemas/player.schema';
 import { TeamRiddle } from 'src/riddles/schemas/team-riddle.schema';
+import { NotificationsGateway } from 'src/notifications/notifications.gateway';
 
 @Injectable()
 export class TeamsService implements OnModuleInit {
@@ -15,6 +16,7 @@ export class TeamsService implements OnModuleInit {
     @InjectModel(Player.name) private playerModel: Model<Player>,
     @InjectModel(TeamRiddle.name) private teamRiddleModel: Model<TeamRiddle>,
     private configService: ConfigService,
+    private notificationsGateway: NotificationsGateway,
   ) {}
 
   async onModuleInit() {
@@ -71,6 +73,9 @@ export class TeamsService implements OnModuleInit {
       console.log(`Le joueur ${playerId} n'est plus dans une équipe`);
     }
 
+    // Notifier via WebSocket que le joueur a été mis à jour
+    this.notificationsGateway.notifyPlayerUpdate(currentPlayer.username);
+
     return currentTeam;
   }
 
@@ -107,6 +112,9 @@ export class TeamsService implements OnModuleInit {
       currentPlayer.team = new Types.ObjectId('' + newTeam._id);
       await currentPlayer.save();
     }
+
+    // Notifier via WebSocket que le joueur a été mis à jour
+    this.notificationsGateway.notifyPlayerUpdate(currentPlayer.username);
 
     return newTeam;
   }

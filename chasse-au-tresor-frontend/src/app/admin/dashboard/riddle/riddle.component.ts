@@ -23,7 +23,7 @@ export class RiddleComponent {
   @Input() teamRiddle: TeamRiddle | undefined;
 
   actionNeeded() {
-    console.log('actionNeeded');
+    //console.log('actionNeeded');
     if (!this.teamRiddle) {
       return false;
     }

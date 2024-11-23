@@ -9,6 +9,7 @@ import {
   TeamRiddle,
   TeamRiddleSchema,
 } from 'src/riddles/schemas/team-riddle.schema';
+import { NotificationsModule } from 'src/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import {
       { name: TeamRiddle.name, schema: TeamRiddleSchema },
     ]),
     ConfigModule,
+    NotificationsModule,
   ],
   providers: [TeamsService],
   controllers: [TeamsController],

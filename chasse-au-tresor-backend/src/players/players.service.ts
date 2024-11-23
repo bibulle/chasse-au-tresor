@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Player } from './schemas/player.schema';
-import { PositionsGateway } from 'src/positions/positions.gateway';
+import { NotificationsGateway } from 'src/notifications/notifications.gateway';
 import { TeamsService } from 'src/teams/teams.service';
 import { AuthService } from 'src/auth/auth.service';
 
@@ -10,14 +10,21 @@ import { AuthService } from 'src/auth/auth.service';
 export class PlayersService {
   constructor(
     @InjectModel(Player.name) private playerModel: Model<Player>,
-    private positionsGateway: PositionsGateway,
+    private positionsGateway: NotificationsGateway,
     private teamsService: TeamsService,
     private authService: AuthService,
+    private notificationsGateway: NotificationsGateway,
   ) {}
 
   async createPlayer(username: string): Promise<Player> {
-    const newPlayer = new this.playerModel({ username });
-    return newPlayer.save();
+    const player = new this.playerModel({ username });
+
+    const newPlayer = await player.save();
+
+    // Notifier via WebSocket que le joueur a été mis à jour
+    this.notificationsGateway.notifyPlayerUpdate(username);
+
+    return newPlayer;
   }
 
   async isUsernameUnique(username: string): Promise<boolean> {
