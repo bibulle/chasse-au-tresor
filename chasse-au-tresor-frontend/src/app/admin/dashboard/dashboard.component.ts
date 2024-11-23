@@ -19,9 +19,10 @@ import { Player, Team } from '../../reference/types';
 import { DatabaseFileManagerComponent } from '../database-file-manager/database-file-manager.component';
 import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
 import { TeamComponent } from './team/team.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-admin-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   standalone: true,
@@ -46,6 +47,7 @@ import { TeamComponent } from './team/team.component';
     RiddleFormComponent,
     DatabaseFileManagerComponent,
     TeamComponent,
+    HeaderComponent
   ],
 })
 export class AdminDashboardComponent implements OnInit {

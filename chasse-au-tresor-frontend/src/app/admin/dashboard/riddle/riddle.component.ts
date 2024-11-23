@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { TeamRiddle } from '../../../reference/types';
-import { SolutionsComponent } from '../solutions/solutions.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { TeamRiddle } from '../../../reference/types';
+import { SolutionsComponent } from '../solutions/solutions.component';
 
 @Component({
-  selector: 'app-riddle',
+  selector: 'app-admin-riddle',
   standalone: true,
   imports: [
     CommonModule,

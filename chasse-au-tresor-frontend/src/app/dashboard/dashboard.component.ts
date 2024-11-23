@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, RiddleComponent],
+  imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent],
 })
 export class DashboardComponent implements OnInit {
   player: Player | undefined;

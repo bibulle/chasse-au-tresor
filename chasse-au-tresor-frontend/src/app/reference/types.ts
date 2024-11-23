@@ -4,6 +4,7 @@ export class Player {
   latitude = 0;
   longitude = 0;
   team: Team | undefined;
+  isAdmin?: boolean;
 }
 
 export class Team {

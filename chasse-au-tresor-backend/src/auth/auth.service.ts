@@ -62,6 +62,17 @@ export class AuthService implements OnModuleInit {
     throw new UnauthorizedException('Invalid credentials');
   }
 
+  async isAdmin(username: string): Promise<boolean> {
+    const admin = await this.adminModel
+      .findOne({ username: `/^${username}$/i` })
+      .exec();
+    if (admin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async login(admin: any) {
     const payload = { username: admin.username, sub: admin._id };
     return {

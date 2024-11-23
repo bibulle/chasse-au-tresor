@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhotoViewerComponent } from './photo-viewer/photo-viewer.component';
 
 @Component({
-  selector: 'app-solutions',
+  selector: 'app-admin-solutions',
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule],
   templateUrl: './solutions.component.html',
