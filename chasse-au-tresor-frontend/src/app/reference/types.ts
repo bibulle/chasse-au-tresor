@@ -39,5 +39,12 @@ export class Solution {
   player: Player | undefined;
   photo: string = '';
   text: string = '';
-  validated:boolean | undefined;
+  validated: boolean | undefined;
+}
+
+export class Version {
+  version = '';
+  github_url = '';
+  name = '';
+  copyright = '';
 }
