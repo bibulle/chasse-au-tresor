@@ -1,5 +1,8 @@
 <div *ngIf="player">
-        <div class="username">{{player.username}}</div>
+        <div class="username">
+                {{player.username}}
+                <mat-chip (click)="goToAdmin()"><mat-icon matChipAvatar>admin_panel_settings</mat-icon>Admin</mat-chip>
+        </div>
         <div class="team-name" *ngIf="!player.team">Attente d'assignation dans une equipe...</div>
         <div class="team-name" *ngIf="player.team" class="team-name">{{player.team?.name}}</div>
         <div class="score">{{player.team?.score}}</div>

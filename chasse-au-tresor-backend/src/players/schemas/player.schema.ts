@@ -14,6 +14,9 @@ export class Player extends Document {
 
   @Prop({ type: Number, default: 0 })
   longitude: number;
+
+  @Prop({ type: Boolean })
+  isAdmin: boolean;
 }
 
 export const PlayerSchema = SchemaFactory.createForClass(Player);

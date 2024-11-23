@@ -9,7 +9,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { RiddleComponent } from '../riddle/riddle.component';
 
 @Component({
-  selector: 'app-team',
+  selector: 'app-admin-team',
   standalone: true,
   imports: [
     CommonModule,

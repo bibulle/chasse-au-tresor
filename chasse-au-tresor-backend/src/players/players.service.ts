@@ -4,6 +4,7 @@ import { Model, Types } from 'mongoose';
 import { Player } from './schemas/player.schema';
 import { PositionsGateway } from 'src/positions/positions.gateway';
 import { TeamsService } from 'src/teams/teams.service';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class PlayersService {
@@ -11,6 +12,7 @@ export class PlayersService {
     @InjectModel(Player.name) private playerModel: Model<Player>,
     private positionsGateway: PositionsGateway,
     private teamsService: TeamsService,
+    private authService: AuthService,
   ) {}
 
   async createPlayer(username: string): Promise<Player> {
@@ -47,7 +49,16 @@ export class PlayersService {
       .findOne({ username })
       .populate({ path: 'team', model: 'Team' })
       .exec();
-    // if (!player) throw new Error('Player not found');
+
+    //if player, add if it's an admin
+    if (player) {
+      if (this.authService.isAdmin(username)) {
+        player.isAdmin = true;
+      } else {
+        player.isAdmin = undefined;
+      }
+    }
+
     return player;
   }
 

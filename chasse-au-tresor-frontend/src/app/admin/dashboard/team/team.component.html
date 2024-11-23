@@ -23,7 +23,7 @@
     *ngIf="riddles && riddles.length > 0; else noRiddles"
   >
     <div *ngFor="let teamRiddle of riddles">
-      <app-riddle [teamRiddle]="teamRiddle"></app-riddle>
+      <app-admin-riddle [teamRiddle]="teamRiddle"></app-admin-riddle>
     </div>
   </div>
 

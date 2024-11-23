@@ -1,3 +1,4 @@
+<app-admin-header></app-admin-header>
 <div class="dashboard-container">
   <!-- Section d'affectation -->
   <div class="card unassigned-player" *ngIf="unassignedPlayer().length > 0">
@@ -44,7 +45,7 @@
   <mat-card class="teams">
     <mat-card-content>
       <mat-accordion>
-        <app-team *ngFor="let team of teams" [team]="team"></app-team>
+        <app-admin-team *ngFor="let team of teams" [team]="team"></app-admin-team>
       </mat-accordion>
     </mat-card-content>
   </mat-card>

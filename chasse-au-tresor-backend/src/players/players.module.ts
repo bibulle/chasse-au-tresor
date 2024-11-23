@@ -6,6 +6,7 @@ import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
 import { Player, PlayerSchema } from './schemas/player.schema';
 import { Team, TeamSchema } from 'src/teams/schemas/team.schema';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { Team, TeamSchema } from 'src/teams/schemas/team.schema';
     MongooseModule.forFeature([{ name: Team.name, schema: TeamSchema }]),
     PositionsModule,
     TeamsModule,
+    AuthModule,
   ],
   controllers: [PlayersController],
   providers: [PlayersService],

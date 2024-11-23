@@ -10,7 +10,9 @@
     flex: 0 0%;
     align-items: center;
 
-    // flex-grow: 1;
+    mat-chip {
+      margin-left: 16px
+    }
   }
   .team-name {
     display: flex;
