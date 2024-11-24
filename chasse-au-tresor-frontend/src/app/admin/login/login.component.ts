@@ -1,22 +1,41 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { MatOption } from '@angular/material/core';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { UserNotificationsService } from '../../core/user-notifications.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [MatFormField, MatLabel, MatError, ReactiveFormsModule, CommonModule, MatInputModule],
+  imports: [
+    MatFormField,
+    MatLabel,
+    MatError,
+    ReactiveFormsModule,
+    CommonModule,
+    MatInputModule,
+  ],
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private userNotificationsService: UserNotificationsService
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required],
@@ -31,9 +50,9 @@ export class LoginComponent {
           this.router.navigate(['/admin']); // Redirection après login
         },
         error: (err) => {
-          console.error('Erreur de connexion :', err);
+          this.userNotificationsService.error('Erreur de connexion :', err);
         },
       });
     }
-    }
+  }
 }

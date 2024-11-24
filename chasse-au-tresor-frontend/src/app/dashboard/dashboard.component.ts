@@ -9,6 +9,7 @@ import { RiddleComponent } from './riddle/riddle.component';
 import { Player, PlayerPosition, TeamRiddle } from '../reference/types';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom, Subscription } from 'rxjs';
+import { UserNotificationsService } from '../core/user-notifications.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,7 +34,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private riddleService: RiddleService,
     private notificationsService: NotificationsService,
     private router: Router,
-    private userService: PlayerService
+    private userService: PlayerService,
+    private userNotificationsService: UserNotificationsService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -71,6 +73,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // S'abonner aux données de l'utilisateur
     this.userSubscription = this.userService.user$.subscribe((user) => {
       if (user) {
+        if (this.player?.team?._id !== user.team?._id && user.team?.name) {
+          this.userNotificationsService.success(`Bienvenu dans l'équipe <b>${user.team?.name}</b>`)
+        } else if (this.player?.team?._id !== user.team?._id && !user.team?.name) {
+          this.userNotificationsService.success(`Changement d'équipe`)
+        }
         this.player = user;
         this.trackPosition(this.player.username);
         this.subscribeTeamRiddle(this.player);
@@ -193,7 +200,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      alert('La géolocalisation n’est pas supportée par ce navigateur.');
+      this.userNotificationsService.error('La géolocalisation n’est pas supportée par ce navigateur.');
     }
   }
 }

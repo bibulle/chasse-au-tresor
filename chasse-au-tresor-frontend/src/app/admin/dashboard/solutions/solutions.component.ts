@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AdminService } from '../../../core/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoViewerComponent } from './photo-viewer/photo-viewer.component';
+import { UserNotificationsService } from '../../../core/user-notifications.service';
 
 @Component({
   selector: 'app-admin-solutions',
@@ -24,7 +25,7 @@ export class SolutionsComponent {
   hoveredPhoto: string | null = null; // Stocke l'URL de la photo survolée
   popupPosition = { x: 0, y: 0 }; // Position du popup
 
-  constructor(private readonly adminService: AdminService, private readonly dialog: MatDialog) {};
+  constructor(private readonly adminService: AdminService, private readonly dialog: MatDialog, private readonly userNotificationsService: UserNotificationsService) {};
 
   openPhotoClick(photoUrl: string) {
     this.dialog.open(PhotoViewerComponent, {
@@ -45,11 +46,11 @@ export class SolutionsComponent {
     // Mise à jour du statut dans le backend
     this.adminService.updateSolutionStatus(solution).subscribe({
       next: () => {
-        console.log(`Statut mis à jour : ${solution.validated}`);
+        this.userNotificationsService.success(`Statut mis à jour : ${solution.validated}`);
       },
       error: (err: any) => {
         console.error('Erreur lors de la mise à jour du statut:', err);
-        alert('Une erreur est survenue lors de la mise à jour du statut.');
+        this.userNotificationsService.error('Une erreur est survenue lors de la mise à jour du statut.');
       },
     });
     }
