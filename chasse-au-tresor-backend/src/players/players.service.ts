@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { AuthService } from 'src/auth/auth.service';
@@ -8,6 +8,8 @@ import { Player } from './schemas/player.schema';
 
 @Injectable()
 export class PlayersService implements OnModuleInit {
+  private logger = new Logger(PlayersService.name);
+
   constructor(
     @InjectModel(Player.name) private playerModel: Model<Player>,
     private teamsService: TeamsService,
@@ -54,6 +56,7 @@ export class PlayersService implements OnModuleInit {
     // if (!player) throw new Error('Player not found');
     return player;
   }
+
   async getPlayerByName(username: string): Promise<Player> {
     const player = await this.playerModel
       .findOne({ username })
@@ -62,7 +65,7 @@ export class PlayersService implements OnModuleInit {
 
     //if player, add if it's an admin
     if (player) {
-      if (this.authService.isAdmin(username)) {
+      if (await this.authService.isAdmin(username)) {
         player.isAdmin = true;
       } else {
         player.isAdmin = undefined;

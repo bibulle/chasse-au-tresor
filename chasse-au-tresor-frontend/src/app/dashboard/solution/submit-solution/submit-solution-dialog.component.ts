@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SolutionsService } from '../../../core/solutions.service';
+import { UserNotificationsService } from '../../../core/user-notifications.service';
 
 @Component({
   selector: 'app-submit-solution-dialog',
@@ -29,13 +30,14 @@ export class SubmitSolutionDialogComponent {
 
   constructor(
     private solutionsService: SolutionsService,
+    private userNotificationsService: UserNotificationsService,
     private dialogRef: MatDialogRef<SubmitSolutionDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { playerId: string; teamRiddleId: string }
   ) {}
 
   onFileSelected(event: Event): void {
-    console.log(`onFileSelected()`);
+    // console.log(`onFileSelected()`);
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
@@ -48,8 +50,8 @@ export class SubmitSolutionDialogComponent {
   }
 
   submitSolution(): void {
-    console.log(`submitSolution()`);
-    console.log(this.data);
+    // console.log(`submitSolution()`);
+    // console.log(this.data);
     if (this.solutionText && this.selectedFile) {
       this.solutionsService
         .submitSolution(
@@ -60,13 +62,21 @@ export class SubmitSolutionDialogComponent {
         )
         .subscribe({
           next: () => {
-            alert('Solution soumise avec succès !');
+            this.userNotificationsService.success(
+              'Solution soumise avec succès !! En attente de validation.'
+            );
             this.closeDialog();
           },
-          error: (err) => console.error('Erreur lors de la soumission :', err),
+          error: (err) =>
+            this.userNotificationsService.error(
+              'Erreur lors de la soumission :',
+              err
+            ),
         });
     } else {
-      alert('Veuillez remplir le texte et ajouter une photo.');
+      this.userNotificationsService.error(
+        'Veuillez remplir le texte et ajouter une photo.'
+      );
     }
   }
 

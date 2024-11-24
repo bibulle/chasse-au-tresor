@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportConfirmationDialogComponent } from './import-confirmation-dialog/import-confirmation-dialog.component';
+import { UserNotificationsService } from '../../core/user-notifications.service';
 
 @Component({
   selector: 'app-database-file-manager',
@@ -17,7 +18,8 @@ import { ImportConfirmationDialogComponent } from './import-confirmation-dialog/
 export class DatabaseFileManagerComponent {
   constructor(
     private dialog: MatDialog,
-    private databaseFileService: DatabaseFileService
+    private databaseFileService: DatabaseFileService,
+    private userNotificationsService: UserNotificationsService
   ) {}
 
   // Gestion de l'importation
@@ -25,7 +27,7 @@ export class DatabaseFileManagerComponent {
     const file = (event.target as HTMLInputElement).files?.[0];
 
     if (!file) {
-      alert('Veuillez sélectionner un fichier.');
+      this.userNotificationsService.error('Veuillez sélectionner un fichier.');
       return;
     }
 
@@ -45,11 +47,13 @@ export class DatabaseFileManagerComponent {
         if (confirmed) {
           this.uploadFile(jsonData);
         } else {
-          alert('Importation annulée.');
+          this.userNotificationsService.info('Importation annulée.');
         }
       });
     } catch (error) {
-      alert(`Erreur lors de la lecture du fichier : ${error}`);
+      this.userNotificationsService.error(
+        `Erreur lors de la lecture du fichier : ${error}`
+      );
     } finally {
       // Réinitialiser la valeur du champ input pour permettre de ré-sélectionner le même fichier
       fileInput.value = '';
@@ -69,8 +73,14 @@ export class DatabaseFileManagerComponent {
     this.databaseFileService
       .importFile(new File([cleanedBlob], 'cleaned-data.json'))
       .subscribe({
-        next: () => alert('Fichier importé avec succès !'),
-        error: () => alert("Erreur lors de l'importation du fichier."),
+        next: () =>
+          this.userNotificationsService.success(
+            'Fichier importé avec succès !'
+          ),
+        error: () =>
+          this.userNotificationsService.error(
+            "Erreur lors de l'importation du fichier."
+          ),
       });
   }
 
@@ -85,7 +95,10 @@ export class DatabaseFileManagerComponent {
         a.click();
         window.URL.revokeObjectURL(url);
       },
-      error: () => alert("Erreur lors de l'exportation du fichier."),
+      error: () =>
+        this.userNotificationsService.error(
+          "Erreur lors de l'exportation du fichier."
+        ),
     });
   }
 }

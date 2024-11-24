@@ -21,6 +21,7 @@ import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
 import { TeamComponent } from './team/team.component';
 import { HeaderComponent } from '../header/header.component';
 import { firstValueFrom } from 'rxjs';
+import { UserNotificationsService } from '../../core/user-notifications.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -61,7 +62,8 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private userService: PlayerService
+    private userService: PlayerService,
+    private userNotificationsService:UserNotificationsService
   ) {
     this.assignmentForm = this.fb.group({
       playerId: [''],
@@ -85,7 +87,7 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.getTeams().subscribe({
       next: (teams) => (this.teams = teams),
       error: (err) =>
-        console.error('Erreur lors du chargement des équipes :', err),
+        this.userNotificationsService.error('Erreur lors du chargement des équipes :', err),
     });
   }
 
@@ -110,7 +112,7 @@ export class AdminDashboardComponent implements OnInit {
 
   onRiddleSubmit(formData: FormData): void {
     this.adminService.createRiddle(formData).subscribe(() => {
-      console.log('onRiddleSubmit done');
+      this.userNotificationsService.success('Énigme sauvegardée');
     });
   }
 }

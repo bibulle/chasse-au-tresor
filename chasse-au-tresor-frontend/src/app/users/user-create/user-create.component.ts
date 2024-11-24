@@ -11,6 +11,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PlayerService } from '../../core/player.service';
 import { Router } from '@angular/router';
+import { UserNotificationsService } from '../../core/user-notifications.service';
 
 @Component({
   selector: 'app-user-create',
@@ -31,9 +32,14 @@ export class UserCreateComponent implements OnInit {
   userForm: FormGroup;
 
   // isUserCreated = false;
-  createdUser: { username: String; } | undefined;
+  createdUser: { username: String } | undefined;
 
-  constructor(private fb: FormBuilder, private userService: PlayerService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: PlayerService,
+    private router: Router,
+    private userNotificationsService: UserNotificationsService
+  ) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
     });
@@ -54,13 +60,15 @@ export class UserCreateComponent implements OnInit {
       const userData = this.userForm.value;
       this.userService.createPlayer(userData).subscribe({
         next: () => {
-          alert('Utilisateur créé avec succès !');
+          this.userNotificationsService.success(
+            'Utilisateur créé avec succès ! En attente d\'assignation a une équipe'
+          );
           // this.isUserCreated = true;
           localStorage.setItem('createdUser', JSON.stringify(userData)); // Stocker l'utilisateur
           this.router.navigate(['/dashboard']); // Redirection vers un tableau de bord ou une autre page
         },
         error: (err) => {
-          console.error('Erreur lors de la création de l’utilisateur :', err);
+          this.userNotificationsService.error('Erreur lors de la création de l’utilisateur :', err);
         },
       });
     }
@@ -76,7 +84,7 @@ export class UserCreateComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.error('Erreur lors de la vérification du nom unique :', err);
+          this.userNotificationsService.error('Erreur lors de la vérification du nom unique :', err);
         },
       });
     }

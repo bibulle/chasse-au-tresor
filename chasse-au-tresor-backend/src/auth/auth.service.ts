@@ -63,14 +63,10 @@ export class AuthService implements OnModuleInit {
   }
 
   async isAdmin(username: string): Promise<boolean> {
-    const admin = await this.adminModel
-      .findOne({ username: `/^${username}$/i` })
-      .exec();
-    if (admin) {
-      return true;
-    } else {
-      return false;
-    }
+    const regex = new RegExp(`^${username}$`, 'ig');
+    const admin = await this.adminModel.findOne({ username: regex }).exec();
+
+    return admin !== null;
   }
 
   async login(admin: any) {

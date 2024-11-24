@@ -47,7 +47,7 @@ export class RiddleService {
 
   // Écouter les notifications de mise à jour pour toutes les teams
   listenForRiddlesUpdates(teamId: string): void {
-    console.log(`listenForRiddlesUpdates(${teamId})`);
+    // console.log(`listenForRiddlesUpdates(${teamId})`);
     if (!this.riddlesSubject[teamId] || !this.riddle$[teamId]) {
       this.riddlesSubject[teamId] = new BehaviorSubject<TeamRiddle[] | null>(null);
       this.riddle$[teamId] = this.riddlesSubject[teamId].asObservable();

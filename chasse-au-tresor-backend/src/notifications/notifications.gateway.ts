@@ -39,7 +39,7 @@ export class NotificationsGateway {
     client: any,
     data: { playerId: string; latitude: number; longitude: number },
   ) {
-    this.logger.log(`handleUpdatePosition(${data})`);
+    // this.logger.log(`handleUpdatePosition(${data})`);
 
     // on cherche le joueur pour le mettre a jour
     const player = await this.playersService?.findByName(data.playerId);
@@ -51,20 +51,22 @@ export class NotificationsGateway {
     // this.logger.log(JSON.stringify(player, null, 2));
 
     // on recherche tous les joueur de l'équipe
-    const team = await this.teamsService?.getTeamById(player.team._id);
-    // this.logger.log(JSON.stringify(team, null, 2));
-    const payload = [];
-    if (team) {
-      team.players.forEach((p) => {
-        const player = p as unknown as Player;
-        payload.push({
-          playerId: player.username,
-          latitude: player.latitude,
-          longitude: player.longitude,
+    if (player.team?._id) {
+      const team = await this.teamsService?.getTeamById(player.team._id);
+      // this.logger.log(JSON.stringify(team, null, 2));
+      const payload = [];
+      if (team) {
+        team.players.forEach((p) => {
+          const player = p as unknown as Player;
+          payload.push({
+            playerId: player.username,
+            latitude: player.latitude,
+            longitude: player.longitude,
+          });
         });
-      });
-      // Diffuser les nouvelles positions à tous les clients de la meme equipe
-      this.server.emit('positionUpdated', payload);
+        // Diffuser les nouvelles positions à tous les clients de la meme equipe
+        this.server.emit('positionUpdated', payload);
+      }
     }
   }
 
