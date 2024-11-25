@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.0...v0.6.1) (2024-11-25)
+
+
+### Features
+
+* remove initial riddle form ([3ddc522](https://github.com/bibulle/chasse-au-tresor/commit/3ddc522f6ea11869caf10aca84be9b2504d80bd5))
+
 ## [0.6.0](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.11...v0.6.0) (2024-11-25)
 
 ### [0.5.11](https://github.com/bibulle/chasse-au-tresor/compare/v0.5.10...v0.5.11) (2024-11-23)
