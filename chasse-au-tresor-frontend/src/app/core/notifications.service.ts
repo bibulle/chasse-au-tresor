@@ -13,6 +13,7 @@ export class NotificationsService {
 
   // Écouter un événement WebSocket (une seule fois par événement)
   listen(event: string): Observable<any> {
+    console.log(`listen(${event})`);
     if (!this.eventSubjects.has(event)) {
       const subject = new ReplaySubject<any>(1);
       this.socket.fromEvent(event).subscribe((data) => subject.next(data));

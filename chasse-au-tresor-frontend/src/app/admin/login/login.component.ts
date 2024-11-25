@@ -8,23 +8,32 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { MatOption } from '@angular/material/core';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatError,
+  MatFormField,
+  MatFormFieldModule,
+  MatLabel,
+} from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { UserNotificationsService } from '../../core/user-notifications.service';
+import { MatButtonModule } from '@angular/material/button';
+import { PlayerService } from '../../core/player.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
   standalone: true,
   imports: [
-    MatFormField,
-    MatLabel,
-    MatError,
+    MatFormFieldModule,
     ReactiveFormsModule,
+    MatButtonModule,
     CommonModule,
     MatInputModule,
+    MatToolbarModule
   ],
 })
 export class LoginComponent {
@@ -34,7 +43,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    private playerService: PlayerService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -42,11 +52,25 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
+      let username = this.loginForm.value.username;
+      username = username.charAt(0).toUpperCase() + username.slice(1);
+
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.token);
+          this.playerService
+            .alreadyExists(username)
+            .subscribe((alreadyExists) => {
+              if (!alreadyExists) {
+                this.playerService
+                  .createPlayer({ username: username })
+                  .subscribe();
+              }
+            });
+
+          localStorage.setItem('createdUser', `{"username": "${username}"}`);
+          localStorage.setItem('token', response.access_token);
           this.router.navigate(['/admin']); // Redirection après login
         },
         error: (err) => {

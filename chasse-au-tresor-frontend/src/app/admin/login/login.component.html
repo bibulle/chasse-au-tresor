@@ -1,5 +1,7 @@
-<h2>Connexion Administrateur</h2>
-<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+<mat-toolbar>
+  <span class="title">Chasse au trésor</span>
+</mat-toolbar>
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="user-form">
   <mat-form-field>
     <mat-label>Username</mat-label>
     <input matInput formControlName="username" />
@@ -17,4 +19,5 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">Se connecter</button>
+  ·
 </form>

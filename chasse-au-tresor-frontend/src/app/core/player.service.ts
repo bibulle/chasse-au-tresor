@@ -70,10 +70,14 @@ export class PlayerService {
   createPlayer(userData: { username: string }): Observable<Player> {
     return this.http.post<Player>(this.apiUrl, userData);
   }
+  removePlayerFromTheGame(playerId: string): Observable<void> {
+    return this.http.delete<void>(`/api/players/${playerId}`);
+  }
 
-  isUsernameUnique(username: string): Observable<boolean> {
+
+  alreadyExists(username: string): Observable<boolean> {
     return this.http.get<boolean>(
-      `${this.apiUrl}/is-unique?username=${username}`
+      `${this.apiUrl}/already-exists?username=${username}`
     );
   }
 }

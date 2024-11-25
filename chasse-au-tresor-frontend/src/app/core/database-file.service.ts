@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DatabaseFileService {
-  private readonly apiUrl = '/api/files';
+  private readonly apiUrl = '/api/db';
 
   constructor(private http: HttpClient) {}
 

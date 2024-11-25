@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { RiddleService } from '../core/riddle.service';
+import { TeamRiddlesService } from '../core/team-riddles.service';
 import { NotificationsService } from '../core/notifications.service';
 import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private markers: Map<string, L.Marker> = new Map();
 
   constructor(
-    private riddleService: RiddleService,
+    private riddleService: TeamRiddlesService,
     private notificationsService: NotificationsService,
     private router: Router,
     private userService: PlayerService,
@@ -74,13 +74,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.user$.subscribe((user) => {
       if (user) {
         if (this.player?.team?._id !== user.team?._id && user.team?.name) {
-          this.userNotificationsService.success(`Bienvenu dans l'équipe <b>${user.team?.name}</b>`)
-        } else if (this.player?.team?._id !== user.team?._id && !user.team?.name) {
-          this.userNotificationsService.success(`Changement d'équipe`)
+          this.userNotificationsService.success(
+            `Bienvenu dans l'équipe <b>${user.team?.name}</b>`
+          );
+        } else if (
+          this.player?.team?._id !== user.team?._id &&
+          !user.team?.name
+        ) {
+          this.userNotificationsService.success(`Changement d'équipe`);
         }
         this.player = user;
         this.trackPosition(this.player.username);
         this.subscribeTeamRiddle(this.player);
+      } else {
+        window.location.reload();
       }
     });
   }
@@ -94,10 +101,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       this.teamId = player.team?._id;
       this.currentTeamRiddle = await firstValueFrom(
-        this.riddleService.loadCurrentRiddle(this.teamId)
+        this.riddleService.loadCurrentTeamRiddle(this.teamId)
       );
-      this.riddleService.listenCurrentForRiddleUpdates(this.teamId);
-      this.riddleSubscription = this.riddleService.currentRiddle$.subscribe(
+      this.riddleService.listenForCurrentTeamRiddleUpdates(this.teamId);
+      this.riddleSubscription = this.riddleService.currentTeamRiddle$.subscribe(
         (teamRiddle) => {
           this.currentTeamRiddle = teamRiddle;
         }
@@ -149,8 +156,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.notificationsService
       .onPositionUpdated()
       .subscribe((data: PlayerPosition[]) => {
-          // Ajouter ou mettre à jour les marqueurs sur la carte
-          data.forEach((p) => {
+        // Ajouter ou mettre à jour les marqueurs sur la carte
+        data.forEach((p) => {
           if (this.markers.has(p.playerId)) {
             const marker = this.markers.get(p.playerId);
             marker?.setLatLng([p.latitude, p.longitude]);
@@ -164,11 +171,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
         // Supprimer ou mettre à jour les marqueurs sur la carte
         this.markers.forEach((marker, playerId) => {
-          if (!data.find(d => d.playerId === playerId)) {
+          if (!data.find((d) => d.playerId === playerId)) {
             this.map.removeLayer(marker);
           }
         });
-
       });
   }
 
@@ -200,7 +206,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.userNotificationsService.error('La géolocalisation n’est pas supportée par ce navigateur.');
+      this.userNotificationsService.error(
+        'La géolocalisation n’est pas supportée par ce navigateur.'
+      );
     }
   }
 }

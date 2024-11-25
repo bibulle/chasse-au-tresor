@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Actions pour {{ data.player.username }}</h1>
+<div mat-dialog-content>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-button color="primary" (click)="onKick()">Virer de l'équipe</button>
+  <button mat-button color="warn" (click)="onDelete()">Supprimer définitivement</button>
+</div>

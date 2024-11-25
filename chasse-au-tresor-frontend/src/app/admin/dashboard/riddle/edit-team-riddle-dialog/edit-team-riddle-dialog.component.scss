@@ -1,0 +1,37 @@
+.full-width {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.photo-fieldset, .teams-fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.photo-fieldset legend, .teams-fieldset legend {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 0 4px;
+}
+
+.photo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.photo-preview {
+  max-width: 150px;
+  max-height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+

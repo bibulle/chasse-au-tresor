@@ -42,7 +42,7 @@ export class NotificationsGateway {
     // this.logger.log(`handleUpdatePosition(${data})`);
 
     // on cherche le joueur pour le mettre a jour
-    const player = await this.playersService?.findByName(data.playerId);
+    const player = await this.playersService?.getPlayerByName(data.playerId);
     if (player) {
       player.latitude = data.latitude;
       player.longitude = data.longitude;
@@ -78,6 +78,11 @@ export class NotificationsGateway {
   // Émettre une notification lorsqu'un utilisateur est mis à jour
   notifyPlayerUpdate(username: string): void {
     this.server.emit('playerUpdated', { username });
+  }
+
+  // Émettre une notification lorsqu'une équipe est mis à jour
+  notifyTeamUpdate(teamId: string): void {
+    this.server.emit('teamUpdated', { teamId });
   }
 
   // Émettre une notification lorsqu'une énigme est mis à jour

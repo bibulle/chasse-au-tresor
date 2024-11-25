@@ -1,26 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { DatabaseFileService } from '../../core/database-file.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialog } from '@angular/material/dialog';
-import { ImportConfirmationDialogComponent } from './import-confirmation-dialog/import-confirmation-dialog.component';
+import { Component, Inject } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { UserNotificationsService } from '../../core/user-notifications.service';
+import { DatabaseFileService } from '../../core/database-file.service';
+import { ImportConfirmationDialogComponent } from './import-confirmation-dialog/import-confirmation-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-database-file-manager',
+  selector: 'app-import-export-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatCardModule],
-  templateUrl: './database-file-manager.component.html',
-  styleUrl: './database-file-manager.component.scss',
+  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  templateUrl: './import-export-dialog.component.html',
+  styleUrl: './import-export-dialog.component.scss',
 })
-export class DatabaseFileManagerComponent {
+export class ImportExportDialogComponent {
   constructor(
     private dialog: MatDialog,
     private databaseFileService: DatabaseFileService,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    public dialogRef: MatDialogRef<ImportExportDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  onCancel(): void {
+    this.dialogRef.close(null);
+  }
 
   // Gestion de l'importation
   async onImportFile(event: Event, fileInput: HTMLInputElement) {
@@ -55,6 +64,7 @@ export class DatabaseFileManagerComponent {
         `Erreur lors de la lecture du fichier : ${error}`
       );
     } finally {
+      this.dialogRef.close(null);
       // Réinitialiser la valeur du champ input pour permettre de ré-sélectionner le même fichier
       fileInput.value = '';
     }
@@ -94,11 +104,14 @@ export class DatabaseFileManagerComponent {
         a.download = 'treasure_hunt_data.json';
         a.click();
         window.URL.revokeObjectURL(url);
+        this.dialogRef.close(null);
       },
-      error: () =>
+      error: () => {
         this.userNotificationsService.error(
           "Erreur lors de l'exportation du fichier."
-        ),
+        );
+        this.dialogRef.close(null);
+      },
     });
   }
 }

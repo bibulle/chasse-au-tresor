@@ -111,6 +111,25 @@ export class SolutionsService {
     return solution;
   }
 
+  async removeOrphanSolutions(): Promise<number> {
+    // Step 1: Find all solution IDs referenced in TeamRiddle
+    const referencedSolutions =
+      await this.teamRiddleModel.distinct('solutions');
+
+    // Step 2: Find orphan solutions (not in referencedSolutions)
+    const orphanSolutions = await this.solutionModel.find({
+      _id: { $nin: referencedSolutions },
+    });
+
+    // Step 3: Delete orphan solutions
+    const deleteResult = await this.solutionModel.deleteMany({
+      _id: { $in: orphanSolutions.map((sol) => sol._id) },
+    });
+
+    // Return the number of deleted solutions
+    return deleteResult.deletedCount;
+  }
+
   private validatePhotoPath(photoPath: string): string {
     const basePath = this.configService.get<string>('BASE_PATH');
     if (!basePath) {

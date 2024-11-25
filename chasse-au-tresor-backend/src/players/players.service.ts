@@ -32,9 +32,27 @@ export class PlayersService implements OnModuleInit {
     return newPlayer;
   }
 
-  async isUsernameUnique(username: string): Promise<boolean> {
+  async deletePlayer(playerId: string): Promise<void> {
+    const player = await this.playerModel
+      .findOne({ _id: playerId })
+      .populate({ path: 'team', model: 'Team' })
+      .exec();
+
+    if (player) {
+      const username = player.username;
+      const teamId = player.team?._id;
+      if (teamId) {
+        this.notificationsGateway.notifyTeamUpdate('' + teamId);
+      }
+      this.playerModel.deleteOne({ _id: playerId }).exec();
+      this.notificationsGateway.notifyPlayerUpdate(username);
+      this.logger.warn(`Player ${player.username} supprimé`);
+    }
+  }
+
+  async alreadyExists(username: string): Promise<boolean> {
     const player = await this.playerModel.findOne({ username }).exec();
-    return !player; // Retourne `true` si le nom est unique
+    return !!player; // Retourne `true` si le nom n'existe pas
   }
 
   // async findById(playerId: string): Promise<Player> {
@@ -47,15 +65,15 @@ export class PlayersService implements OnModuleInit {
   //   return player;
   // }
 
-  async findByName(username: string): Promise<Player> {
-    const player = await this.playerModel
-      .findOne({ username })
-      .populate({ path: 'team', model: 'Team' })
-      .exec();
+  // async findByName(username: string): Promise<Player> {
+  //   const player = await this.playerModel
+  //     .findOne({ username })
+  //     .populate({ path: 'team', model: 'Team' })
+  //     .exec();
 
-    // if (!player) throw new Error('Player not found');
-    return player;
-  }
+  //   // if (!player) throw new Error('Player not found');
+  //   return player;
+  // }
 
   async getPlayerByName(username: string): Promise<Player> {
     const player = await this.playerModel
