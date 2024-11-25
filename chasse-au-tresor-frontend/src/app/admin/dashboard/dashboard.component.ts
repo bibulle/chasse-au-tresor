@@ -21,7 +21,6 @@ import { TeamsService } from '../../core/teams.service';
 import { UserNotificationsService } from '../../core/user-notifications.service';
 import { Player, Riddle, Team } from '../../reference/types';
 import { HeaderComponent } from '../header/header.component';
-import { RiddleFormComponent } from '../riddle-form/riddle-form.component';
 import { EditTeamRiddleDialogComponent } from './riddle/edit-team-riddle-dialog/edit-team-riddle-dialog.component';
 import { TeamComponent } from './team/team.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -50,7 +49,6 @@ import { RiddleComponent } from './riddle/riddle.component';
     MatTooltipModule,
     MatChipsModule,
     MatCheckboxModule,
-    RiddleFormComponent,
     TeamComponent,
     HeaderComponent,
     RiddleComponent
