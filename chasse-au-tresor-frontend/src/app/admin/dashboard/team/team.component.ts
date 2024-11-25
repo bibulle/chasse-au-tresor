@@ -2,13 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Team, TeamRiddle } from '../../../reference/types';
+import { Player, Team, TeamRiddle } from '../../../reference/types';
 import { AdminService } from '../../../core/admin.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { RiddleComponent } from '../riddle/riddle.component';
 import { firstValueFrom, Subscription } from 'rxjs';
-import { RiddleService } from '../../../core/riddle.service';
+import { TeamRiddlesService } from '../../../core/team-riddles.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PlayerActionDialogComponent } from './player-action-dialog/player-action-dialog.component';
+import { PlayerService } from '../../../core/player.service';
+import { TeamsService } from '../../../core/teams.service';
 
 @Component({
   selector: 'app-admin-team',
@@ -32,7 +36,10 @@ export class TeamComponent implements OnDestroy {
 
   constructor(
     private readonly adminService: AdminService,
-    private readonly riddleService: RiddleService
+    private readonly riddleService: TeamRiddlesService,
+    private readonly playerService: PlayerService,
+    private readonly teamsService: TeamsService,
+    private dialog: MatDialog
   ) {}
 
   ngOnDestroy(): void {
@@ -44,10 +51,10 @@ export class TeamComponent implements OnDestroy {
   async loadRiddlesForTeam(): Promise<void> {
     if (this.team && !this.teamRiddleSubscription) {
       this.updateTeamRiddles(
-        await firstValueFrom(this.riddleService.loadRiddles(this.team._id))
+        await firstValueFrom(this.riddleService.loadTeamRiddles(this.team._id))
       );
-      this.riddleService.listenForRiddlesUpdates(this.team._id);
-      this.teamRiddleSubscription = this.riddleService.riddle$[
+      this.riddleService.listenForTeamRiddlesUpdates(this.team._id);
+      this.teamRiddleSubscription = this.riddleService.teamRiddle$[
         this.team._id
       ].subscribe((teamRiddles) => {
         this.updateTeamRiddles(teamRiddles);
@@ -72,6 +79,8 @@ export class TeamComponent implements OnDestroy {
     });
   }
   updateTeamRiddle(teamRiddle: TeamRiddle) {
+    // console.log(`updateTeamRiddle()`)
+    // console.log(teamRiddle)
     const oldTR = this.teamRiddles.find((tr) => tr._id === teamRiddle._id);
 
     if (!oldTR) {
@@ -84,4 +93,39 @@ export class TeamComponent implements OnDestroy {
       oldTR.team = teamRiddle.team;
     }
   }
+
+  openPlayerActionDialog(player: any): void {
+    const dialogRef = this.dialog.open(PlayerActionDialogComponent, {
+      maxWidth: '600px', // Limite la largeur maximale
+      width: '90%', // Adapte à l'écran
+      data: { player },
+    });
+
+    dialogRef.afterClosed().subscribe((action) => {
+      if (action === 'kick') {
+        this.kickPlayer(player);
+      } else if (action === 'delete') {
+        this.deletePlayer(player);
+      }
+    });
+  }
+
+  kickPlayer(player: any): void {
+    this.teamsService.removePlayerFromTeam(player._id, player.teamId).subscribe(() => {
+      // this.loadTeams();
+      //this.loadPlayers();
+    });
+    console.log(`Player ${player.username} kicked from the team.`);
+  }
+
+  deletePlayer(player: Player): void {
+    this.playerService.removePlayerFromTheGame(player._id).subscribe(() => {
+      // this.loadTeams();
+      //this.loadPlayers();
+    });
+
+    console.log(`Player ${player.username} deleted.`);
+  }
+
+
 }

@@ -1,0 +1,19 @@
+.mat-mdc-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Espace entre les boutons */
+  flex-wrap: nowrap; /* Empêche les boutons de passer à la ligne */
+  button {
+    flex: 1; /* Ajuste la taille des boutons pour qu'ils soient uniformes */
+  }
+}
+
+@media (max-width: 350px) {
+  .mat-mdc-dialog-actions {
+    flex-wrap: wrap; /* Permet de passer les boutons sur deux lignes si nécessaire */
+    gap: 5px;
+    button {
+      flex: auto; /* Adapte la taille des boutons */
+    }
+  }
+}

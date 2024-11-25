@@ -10,7 +10,7 @@
     <div class="card-content">
       <img *ngIf="teamRiddle?.riddle?.photo"
         mat-card-md-image
-        src="/assets/{{teamRiddle?.riddle?.photo}}"
+        src="/api/files{{teamRiddle?.riddle?.photo}}"
       />
       <div>{{ teamRiddle?.riddle?.text }}</div>
     </div>

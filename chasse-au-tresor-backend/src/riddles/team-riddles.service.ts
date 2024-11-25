@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { Riddle } from './schemas/riddle.schema';
 import { TeamRiddle } from './schemas/team-riddle.schema';
 
 @Injectable()
@@ -10,6 +11,8 @@ export class TeamRiddlesService {
   constructor(
     @InjectModel(TeamRiddle.name)
     private readonly teamRiddleModel: Model<TeamRiddle>,
+    @InjectModel(Riddle.name)
+    private readonly riddleModel: Model<Riddle>,
   ) {}
 
   async getTeamRiddles(teamId: string): Promise<TeamRiddle[]> {

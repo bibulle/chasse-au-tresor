@@ -9,7 +9,7 @@ export class Riddle extends Document {
   @Prop({ type: Number, default: 0 })
   gain: number;
 
-  @Prop({ type: String, default: 0 })
+  @Prop({ type: String })
   photo: string;
 }
 

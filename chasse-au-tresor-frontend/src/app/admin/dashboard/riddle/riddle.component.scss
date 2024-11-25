@@ -1,15 +1,28 @@
+.mat-content {
+  align-items: center;
+}
+
 .riddle-text {
-    font-size: large;
-  }
-  
-  .icon-not-resolved {
+  font-size: large;
+}
+
+button {
+  margin-right: 16px;
+  align-self: center;
+}
+
+mat-icon {
+  align-self: center;
+}
+
+.icon-not-resolved {
   color: grey;
   padding-right: 16px;
 }
 .icon-resolved {
-    color: green;
-    display: none;
-    padding-right: 16px;
+  color: green;
+  display: none;
+  padding-right: 16px;
 }
 .resolved {
   background-color: lightgray;
@@ -22,11 +35,40 @@
 }
 
 .icon-action-needed {
-    color: red; 
-    padding-right: 16px;
-    display: none;
+  color: red;
+  padding-right: 16px;
+  opacity: 0;
+  // display: none;
 }
 .action-needed .icon-action-needed {
-    display: block;
+  opacity: 1;
 }
 
+.riddle-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.riddle-photo {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    flex-direction: row;   
+    .name {
+      flex: 1
+    }   
+    .order {
+        width: 7em;
+        padding-left: 1em;    
+    }
+  }
+}

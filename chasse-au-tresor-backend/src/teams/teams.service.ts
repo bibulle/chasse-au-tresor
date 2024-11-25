@@ -66,6 +66,7 @@ export class TeamsService implements OnModuleInit {
       console.log(
         `Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`,
       );
+      this.notificationsGateway.notifyTeamUpdate('' + currentTeam._id);
     }
 
     if (currentPlayer) {
@@ -110,6 +111,8 @@ export class TeamsService implements OnModuleInit {
       console.log(
         `Le joueur ${playerId} a été ajouté à l'équipe ${newTeam.name}`,
       );
+      this.notificationsGateway.notifyTeamUpdate('' + newTeam._id);
+
       currentPlayer.team = new Types.ObjectId('' + newTeam._id);
       await currentPlayer.save();
     }

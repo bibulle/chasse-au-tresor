@@ -1,7 +1,40 @@
-<div>
-  <div class="username">
-    <mat-chip (click)="goToDashboard()"
-      ><mat-icon matChipAvatar>home</mat-icon>Dashboard</mat-chip
-    >
-  </div>
-</div>
+<mat-toolbar>
+  <span class="title">Chasse au trésor</span>
+  <button
+    mat-stroked-button
+    class="example-icon"
+    aria-label="Dashboard"
+    (click)="goToDashboard()"
+  >
+    <mat-icon>home</mat-icon>
+    <span>Dashboard</span>
+  </button>
+  <span class="spacer"></span>
+  <button
+    mat-stroked-button
+    class="new-riddle-icon"
+    aria-label="nouvelle énigme"
+    (click)="newRiddle()"
+  >
+    <mat-icon>add</mat-icon>
+    <span>Énigme</span>
+  </button>
+  <button
+    mat-stroked-button
+    class="import-export-icon"
+    aria-label="Import/Export"
+    (click)="importExport()"
+  >
+    <mat-icon>save</mat-icon>
+    <span>Import/Export</span>
+  </button>
+  <button
+    mat-stroked-button
+    class="logout-icon"
+    aria-label="Logout"
+    (click)="logout()"
+  >
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-toolbar>

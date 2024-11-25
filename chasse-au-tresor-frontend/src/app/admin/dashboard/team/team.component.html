@@ -11,9 +11,11 @@
   <div class="team-players">
     <mat-label class="titre">Joueurs :</mat-label>
     <mat-chip-set>
-      <mat-chip *ngFor="let player of team.players">{{
-        player.username
-      }}</mat-chip>
+      <mat-chip
+        *ngFor="let player of team.players"
+        (click)="openPlayerActionDialog(player)"
+        >{{ player.username }}</mat-chip
+      >
     </mat-chip-set>
   </div>
 

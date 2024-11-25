@@ -11,7 +11,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { FilesService } from './files.service';
 
-@Controller('files')
+@Controller('db')
 export class FilesController {
   readonly logger = new Logger(FilesController.name);
 
@@ -29,6 +29,7 @@ export class FilesController {
 
   @Get('export')
   async exportFile(@Res() res: Response) {
+    console.log('export');
     const file = await this.filesService.handleExport();
     res.set({
       'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -17,12 +18,18 @@ export class PlayersController {
 
   @Post()
   async createPlayer(@Body() body: CreatePlayerDto) {
-    const isUnique = await this.playersService.isUsernameUnique(body.username);
-    if (!isUnique) {
+    const alreadyExists = await this.playersService.alreadyExists(
+      body.username,
+    );
+    if (alreadyExists) {
       throw new BadRequestException('Le nom du joueur est déjà pris.');
     }
 
     return this.playersService.createPlayer(body.username);
+  }
+  @Delete(':playerId')
+  async deletePlayer(@Param('playerId') playerId) {
+    return this.playersService.deletePlayer(playerId);
   }
 
   @Get('')
@@ -30,11 +37,9 @@ export class PlayersController {
     return this.playersService.getAllPlayers();
   }
 
-  @Get('is-unique')
-  async isUsernameUnique(
-    @Query('username') username: string,
-  ): Promise<boolean> {
-    return this.playersService.isUsernameUnique(username);
+  @Get('already-exists')
+  async alreadyExists(@Query('username') username: string): Promise<boolean> {
+    return this.playersService.alreadyExists(username);
   }
 
   @Get(':username')

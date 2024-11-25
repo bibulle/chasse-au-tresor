@@ -1,10 +1,12 @@
+<mat-toolbar>
+  <span class="title">Chasse au trésor</span>
+</mat-toolbar>
 <div *ngIf="createdUser; else form">
   <h2>Utilisateur déjà créé ({{createdUser.username}})</h2>
   <p>Vous ne pouvez pas changer d'utilisateur.</p>
 </div>
 
 <ng-template #form>
-  <h2>Créer un utilisateur</h2>
   <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="user-form">
     <mat-form-field>
       <mat-label>Nom du joueur</mat-label>

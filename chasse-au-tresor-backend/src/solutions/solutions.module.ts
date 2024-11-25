@@ -32,5 +32,6 @@ import { SolutionsService } from './solutions.service';
   ],
   controllers: [SolutionsController],
   providers: [SolutionsService],
+  exports: [SolutionsService],
 })
 export class SolutionsModule {}

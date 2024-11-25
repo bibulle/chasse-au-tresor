@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { PlayerService } from '../../core/player.service';
 import { Router } from '@angular/router';
 import { UserNotificationsService } from '../../core/user-notifications.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-user-create',
@@ -23,6 +25,8 @@ import { UserNotificationsService } from '../../core/user-notifications.service'
     MatError,
     MatInputModule,
     MatFormField,
+    MatToolbarModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -61,14 +65,17 @@ export class UserCreateComponent implements OnInit {
       this.userService.createPlayer(userData).subscribe({
         next: () => {
           this.userNotificationsService.success(
-            'Utilisateur créé avec succès ! En attente d\'assignation a une équipe'
+            "Utilisateur créé avec succès ! En attente d'assignation a une équipe"
           );
           // this.isUserCreated = true;
           localStorage.setItem('createdUser', JSON.stringify(userData)); // Stocker l'utilisateur
           this.router.navigate(['/dashboard']); // Redirection vers un tableau de bord ou une autre page
         },
         error: (err) => {
-          this.userNotificationsService.error('Erreur lors de la création de l’utilisateur :', err);
+          this.userNotificationsService.error(
+            'Erreur lors de la création de l’utilisateur :',
+            err
+          );
         },
       });
     }
@@ -77,14 +84,17 @@ export class UserCreateComponent implements OnInit {
   checkUniqueUsername() {
     const username = this.userForm.get('username')?.value;
     if (username) {
-      this.userService.isUsernameUnique(username).subscribe({
-        next: (isUnique) => {
-          if (!isUnique) {
+      this.userService.alreadyExists(username).subscribe({
+        next: (alreadyExists) => {
+          if (alreadyExists) {
             this.userForm.get('username')?.setErrors({ notUnique: true });
           }
         },
         error: (err) => {
-          this.userNotificationsService.error('Erreur lors de la vérification du nom unique :', err);
+          this.userNotificationsService.error(
+            'Erreur lors de la vérification du nom unique :',
+            err
+          );
         },
       });
     }
