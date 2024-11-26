@@ -84,6 +84,7 @@ export class MapService {
   }
 
   updateMarkerTeamRiddles(teamRiddles: TeamRiddle[], removeOld = true, color = 'grey') {
+    console.log(`updateMarkerTeamRiddles(${color}`);
     const positions: ItemPosition[] = teamRiddles.map((tr) => {
       return {
         itemId: tr.riddle?.text ? tr.riddle?.text : '',
@@ -93,15 +94,15 @@ export class MapService {
     });
     this.updateMakers(ICON_TYPE.Riddle, positions, removeOld, color);
 
-    if (this.polylines.has(color)) {
-      this.polylines.get(color)?.setLatLngs(this.connectTeamRiddle(teamRiddles));
-    } else {
-      const pathLine = L.polyline(this.connectTeamRiddle(teamRiddles));
-      pathLine.setStyle({ color: color });
-      this.map?.addLayer(pathLine);
-
-      this.polylines.set(color, pathLine);
+    const poly = this.polylines.get(color);
+    if (poly) {
+      this.map?.removeLayer(poly);
     }
+    const pathLine = L.polyline(this.connectTeamRiddle(teamRiddles));
+    pathLine.setStyle({ color: color });
+    this.map?.addLayer(pathLine);
+
+    this.polylines.set(color, pathLine);
   }
 
   updateMarkerPlayers(positions: ItemPosition[], removeOld = true, color = 'grey') {
