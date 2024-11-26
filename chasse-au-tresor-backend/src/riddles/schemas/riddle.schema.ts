@@ -11,6 +11,12 @@ export class Riddle extends Document {
 
   @Prop({ type: String })
   photo: string;
+
+  @Prop({ type: Number, default: 43.604429 })
+  latitude: number;
+
+  @Prop({ type: Number, default: 1.443812 })
+  longitude: number;
 }
 
 export const RiddleSchema = SchemaFactory.createForClass(Riddle);

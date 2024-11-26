@@ -28,6 +28,30 @@
     <mat-error *ngIf="gainInput.invalid">Le gain est obligatoire.</mat-error>
   </mat-form-field>
 
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Latitude</mat-label>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="data.riddle.latitude"
+      required
+      #latitudeInput="ngModel"
+    />
+    <mat-error *ngIf="latitudeInput.invalid">La latitude est obligatoire.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Longitude</mat-label>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="data.riddle.longitude"
+      required
+      #longitudeInput="ngModel"
+    />
+    <mat-error *ngIf="longitudeInput.invalid">La longitude est obligatoire.</mat-error>
+  </mat-form-field>
+
   <fieldset class="photo-fieldset">
     <legend>Photo</legend>
     <div class="photo-container">

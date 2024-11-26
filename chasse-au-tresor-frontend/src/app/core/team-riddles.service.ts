@@ -1,13 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  filter,
-  map,
-  Observable,
-  of,
-  ReplaySubject,
-} from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, of, ReplaySubject } from 'rxjs';
 import { Riddle, TeamRiddle } from '../reference/types';
 import { NotificationsService } from './notifications.service';
 
@@ -24,24 +17,18 @@ export class TeamRiddlesService {
   } = {};
   teamRiddle$: { [id: string]: Observable<TeamRiddle[] | null> } = {};
 
-  private currentTeamRiddleSubject = new BehaviorSubject<TeamRiddle | null>(
-    null
-  );
-  currentTeamRiddle$: Observable<TeamRiddle | null> =
-    this.currentTeamRiddleSubject.asObservable();
+  private currentTeamRiddleSubject = new BehaviorSubject<TeamRiddle | null>(null);
+  currentTeamRiddle$: Observable<TeamRiddle | null> = this.currentTeamRiddleSubject.asObservable();
+  private resolvedTeamRiddleSubject = new BehaviorSubject<TeamRiddle[]>([]);
+  resolvedTeamRiddleSubject$: Observable<TeamRiddle[] | null> = this.resolvedTeamRiddleSubject.asObservable();
 
   // private pollingSubscription: Subscription | undefined;
 
-  constructor(
-    private notificationsService: NotificationsService,
-    private http: HttpClient
-  ) {
-    this.notificationsService
-      .listen('riddleUpdated')
-      .subscribe((update: { teamId: string }) => {
-        // console.log(update);
-        this.updateNotifier$.next(update.teamId);
-      });
+  constructor(private notificationsService: NotificationsService, private http: HttpClient) {
+    this.notificationsService.listen('riddleUpdated').subscribe((update: { teamId: string }) => {
+      // console.log(update);
+      this.updateNotifier$.next(update.teamId);
+    });
 
     // this.startPolling();
   }
@@ -50,9 +37,7 @@ export class TeamRiddlesService {
   listenForTeamRiddlesUpdates(teamId: string): void {
     console.log(`listenForTeamRiddlesUpdates(${teamId})`);
     if (!this.teamRiddlesSubject[teamId] || !this.teamRiddle$[teamId]) {
-      this.teamRiddlesSubject[teamId] = new BehaviorSubject<
-        TeamRiddle[] | null
-      >(null);
+      this.teamRiddlesSubject[teamId] = new BehaviorSubject<TeamRiddle[] | null>(null);
       this.teamRiddle$[teamId] = this.teamRiddlesSubject[teamId].asObservable();
     }
 
@@ -68,9 +53,7 @@ export class TeamRiddlesService {
         })
       ) // Filtrer les notifications pour cette team
       .subscribe(() => {
-        console.log(
-          `Mise à jour détectée via WebSocket. Rechargement des teams riddles pour ${teamId}...`
-        );
+        console.log(`Mise à jour détectée via WebSocket. Rechargement des teams riddles pour ${teamId}...`);
         this.loadTeamRiddles(teamId).subscribe(); // Recharge les données à jour
       });
   }
@@ -78,9 +61,7 @@ export class TeamRiddlesService {
   loadTeamRiddles(teamId: string): Observable<TeamRiddle[] | null> {
     console.log(`loadTeamRiddles(${teamId})`);
     if (!this.teamRiddlesSubject[teamId] || !this.teamRiddle$[teamId]) {
-      this.teamRiddlesSubject[teamId] = new BehaviorSubject<
-        TeamRiddle[] | null
-      >(null);
+      this.teamRiddlesSubject[teamId] = new BehaviorSubject<TeamRiddle[] | null>(null);
       this.teamRiddle$[teamId] = this.teamRiddlesSubject[teamId].asObservable();
     }
 
@@ -98,10 +79,10 @@ export class TeamRiddlesService {
     this.updateNotifier$
       .pipe(filter((notifiedTeam) => notifiedTeam === teamId)) // Filtrer les notifications pour cette team
       .subscribe(() => {
-        console.log(
-          'Mise à jour détectée via WebSocket. Rechargement des team riddle...'
-        );
-        this.loadCurrentTeamRiddle(teamId).subscribe(); // Recharge les données à jour
+        console.log('Mise à jour détectée via WebSocket. Rechargement des team riddle...');
+        // Recharge les données à jour
+        this.loadCurrentTeamRiddle(teamId).subscribe();
+        this.loadResolvedTeamRiddle(teamId).subscribe();
       });
   }
   // Charger l'énigme courante connecté depuis le backend
@@ -113,6 +94,19 @@ export class TeamRiddlesService {
     return this.http.get<TeamRiddle | null>(url).pipe(
       map((p) => {
         this.currentTeamRiddleSubject.next(p);
+        return p;
+      })
+    );
+  }
+  // Charger l'énigme courante connecté depuis le backend
+  loadResolvedTeamRiddle(teamId: string): Observable<TeamRiddle[]> {
+    if (!teamId) {
+      return of([]);
+    }
+    const url = `${this.apiUrl}/finished/${encodeURIComponent(teamId)}`;
+    return this.http.get<TeamRiddle[]>(url).pipe(
+      map((p) => {
+        this.resolvedTeamRiddleSubject.next(p);
         return p;
       })
     );

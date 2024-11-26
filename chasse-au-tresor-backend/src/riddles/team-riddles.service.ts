@@ -51,4 +51,21 @@ export class TeamRiddlesService {
     // 2. Retourner l'énigme courante
     return teamRiddle as unknown as TeamRiddle;
   }
+
+  async getFinishedTeamRiddle(teamId: string): Promise<TeamRiddle[]> {
+    // 1. Trouver les énigmes associées à l'équipe
+    const teamRiddles = await this.teamRiddleModel
+      .find({ team: new Types.ObjectId(teamId), resolved: true }) // Non résolue
+      .sort({ order: 1 }) // Trier par ordre croissant
+      .populate('riddle') // Charger les détails de l'énigme
+      .exec();
+
+    if (!teamRiddles) {
+      this.logger.log(`No finished riddle found for team "${teamId}".`);
+      return [];
+    }
+
+    // 2. Retourner l'énigme courante
+    return teamRiddles;
+  }
 }

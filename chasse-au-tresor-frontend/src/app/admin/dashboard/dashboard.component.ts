@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,14 +19,15 @@ import { PlayerService } from '../../core/player.service';
 import { RiddlesService } from '../../core/riddles.service';
 import { TeamsService } from '../../core/teams.service';
 import { UserNotificationsService } from '../../core/user-notifications.service';
-import { Player, Riddle, Team } from '../../reference/types';
+import { ICON_TYPE, Player, ItemPosition as ItemPosition, Riddle, Team } from '../../reference/types';
 import { HeaderComponent } from '../header/header.component';
 import { EditTeamRiddleDialogComponent } from './riddle/edit-team-riddle-dialog/edit-team-riddle-dialog.component';
 import { TeamComponent } from './team/team.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RiddleComponent } from './riddle/riddle.component';
-import { SplitScreenComponent } from "../../split-screen/split-screen.component";
-import { MapComponent } from "../../map/map.component";
+import { SplitScreenComponent } from '../../split-screen/split-screen.component';
+import { MapComponent } from '../../map/map.component';
+import { MapService } from '../../core/map.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -55,8 +56,8 @@ import { MapComponent } from "../../map/map.component";
     HeaderComponent,
     RiddleComponent,
     SplitScreenComponent,
-    MapComponent
-],
+    MapComponent,
+  ],
 })
 export class AdminDashboardComponent implements OnInit {
   @ViewChild(MapComponent) mapComponent!: MapComponent;
@@ -74,9 +75,9 @@ export class AdminDashboardComponent implements OnInit {
     private playerService: PlayerService,
     private teamsService: TeamsService,
     private riddlesService: RiddlesService,
+    private mapService: MapService,
     private userNotificationsService: UserNotificationsService,
-    private dialog: MatDialog,
-
+    private dialog: MatDialog
   ) {
     this.assignmentForm = this.fb.group({
       playerId: [''],
@@ -103,6 +104,7 @@ export class AdminDashboardComponent implements OnInit {
 
     const temp = await firstValueFrom(this.riddlesService.loadUnassignedRiddles());
     this.unassignedRiddles = temp ? temp : [];
+    this.updateUnassignedRiddle();
     // console.log(this.unassignedRiddles);
     this.riddlesService.listenForUnassignedRiddlesUpdates();
     this.riddlesService.unassignedRiddle$.subscribe((riddles) => {
@@ -111,6 +113,10 @@ export class AdminDashboardComponent implements OnInit {
         // console.log(this.unassignedRiddles);
       }
     });
+  }
+
+  updateUnassignedRiddle(): void {
+    this.mapService.updateMarkerRiddles(this.unassignedRiddles, true);
   }
 
   unassignedPlayer() {
@@ -132,7 +138,7 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  onEditRiddle(riddle:Riddle, event: any) {
+  onEditRiddle(riddle: Riddle, event: any) {
     event.stopPropagation();
 
     console.log(riddle);
@@ -156,10 +162,7 @@ export class AdminDashboardComponent implements OnInit {
           },
           error: (err) => {
             console.log(err);
-            this.userNotificationsService.error(
-              'Erreur lors de la sauvegarde :',
-              err.message
-            );
+            this.userNotificationsService.error('Erreur lors de la sauvegarde :', err.message);
           },
         });
       }
@@ -171,5 +174,4 @@ export class AdminDashboardComponent implements OnInit {
       this.mapComponent.invalidateMapSize();
     }
   }
-
 }
