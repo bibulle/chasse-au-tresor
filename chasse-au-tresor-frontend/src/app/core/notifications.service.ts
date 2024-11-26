@@ -36,6 +36,7 @@ export class NotificationsService {
 
   // Envoyer une mise à jour de position
   updatePosition(playerId: string, latitude: number, longitude: number): void {
+    console.log(`updatePosition(${playerId}, ${latitude}, ${longitude})`)
     this.socket.emit('updatePosition', { playerId, latitude, longitude });
   }
 }

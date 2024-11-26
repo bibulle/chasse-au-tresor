@@ -10,13 +10,14 @@ import { Player, PlayerPosition, TeamRiddle } from '../reference/types';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { UserNotificationsService } from '../core/user-notifications.service';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent, MapComponent],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   player: Player | null = null;
@@ -26,15 +27,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userSubscription: Subscription | undefined;
   riddleSubscription: Subscription | undefined;
   geoLocalisationId: number | null = null;
+  private geoLocalisationUser = '';
 
-  private map: any;
-  private markers: Map<string, L.Marker> = new Map();
+
 
   constructor(
     private riddleService: TeamRiddlesService,
     private notificationsService: NotificationsService,
     private router: Router,
-    private userService: PlayerService,
+    private playerService: PlayerService,
     private userNotificationsService: UserNotificationsService
   ) {}
 
@@ -48,8 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.initPlayer(player.username);
 
-    this.initMap();
-    this.listenForPositionUpdates();
   }
 
   async ngOnDestroy(): Promise<void> {
@@ -61,17 +60,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
   async initPlayer(username: string) {
-    this.player = await firstValueFrom(this.userService.loadUser(username));
+    this.player = await firstValueFrom(this.playerService.loadUser(username));
     if (!this.player) {
       localStorage.removeItem('createdUser');
       this.router.navigate(['/create-user']);
       return;
     }
 
-    this.userService.listenForUserUpdates(username);
+    this.playerService.listenForUserUpdates(username);
 
     // S'abonner aux données de l'utilisateur
-    this.userSubscription = this.userService.user$.subscribe((user) => {
+    this.userSubscription = this.playerService.user$.subscribe((user) => {
       if (user) {
         if (this.player?.team?._id !== user.team?._id && user.team?.name) {
           this.userNotificationsService.success(
@@ -84,6 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.userNotificationsService.success(`Changement d'équipe`);
         }
         this.player = user;
+        console.log(this.player);
         this.trackPosition(this.player.username);
         this.subscribeTeamRiddle(this.player);
       } else {
@@ -112,86 +112,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  initMap() {
-    L.Icon.Default.imagePath = 'assets/leaflet/';
-
-    this.map = L.map('map').setView([43.6045, 1.4442], 13); // Position Toulouse
-    var Stadia_OSMBright = L.tileLayer(
-      'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-      {
-        minZoom: 0,
-        maxZoom: 20,
-        attribution:
-          '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        // ext: 'png',
-      }
-    );
-    var Stadia_AlidadeSatellite = L.tileLayer(
-      'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
-      {
-        minZoom: 0,
-        maxZoom: 20,
-        attribution:
-          '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        // ext: 'jpg'
-      }
-    );
-    var OpenStreetMap_France = L.tileLayer(
-      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
-      {
-        maxZoom: 20,
-        attribution:
-          '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }
-    );
-
-    Stadia_OSMBright.addTo(this.map);
-    //Stadia_AlidadeSatellite.addTo(this.map);
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //   // attribution: '© OpenStreetMap contributors',
-    // }).addTo(this.map);
-  }
-
-  listenForPositionUpdates() {
-    this.notificationsService
-      .onPositionUpdated()
-      .subscribe((data: PlayerPosition[]) => {
-        // Ajouter ou mettre à jour les marqueurs sur la carte
-        data.forEach((p) => {
-          if (this.markers.has(p.playerId)) {
-            const marker = this.markers.get(p.playerId);
-            marker?.setLatLng([p.latitude, p.longitude]);
-          } else {
-            const newMarker = L.marker([p.latitude, p.longitude]);
-            this.map.addLayer(newMarker);
-            newMarker.bindPopup(`${p.playerId}`);
-
-            this.markers.set(p.playerId, newMarker);
-          }
-        });
-        // Supprimer ou mettre à jour les marqueurs sur la carte
-        this.markers.forEach((marker, playerId) => {
-          if (!data.find((d) => d.playerId === playerId)) {
-            this.map.removeLayer(marker);
-          }
-        });
-      });
-  }
-
-  simulatePositionUpdate() {
-    const playerId = 'player-1'; // Remplacez par l'ID réel du joueur
-    const latitude = 43.6045 + Math.random() * 0.01; // Simulez des coordonnées
-    const longitude = 1.4442 + Math.random() * 0.01;
-
-    this.notificationsService.updatePosition(playerId, latitude, longitude);
-  }
 
   trackPosition(playerId: string) {
     if (navigator.geolocation) {
       if (this.geoLocalisationId !== null) {
+        if (this.geoLocalisationUser === playerId) {
+          return;
+        }
         navigator.geolocation.clearWatch(this.geoLocalisationId);
       }
 
+      this.geoLocalisationUser = playerId;
       this.geoLocalisationId = navigator.geolocation.watchPosition(
         (position) => {
           const latitude = position.coords.latitude;

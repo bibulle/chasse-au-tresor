@@ -1,9 +1,6 @@
 <app-header></app-header>
 <div class="dashboard">
   <app-header [player]="player"></app-header>
-  <div class="map">
-    <div id="map"></div>
-  </div>
-
+  <app-map [player]="player"></app-map>
   <app-riddle *ngIf="currentTeamRiddle" [teamRiddle]="currentTeamRiddle" [player]="player"></app-riddle>
 </div>

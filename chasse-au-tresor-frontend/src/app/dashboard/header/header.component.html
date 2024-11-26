@@ -1,9 +1,11 @@
 <div *ngIf="player">
         <div class="username">
                 {{player.username}}
+                <button class="center-button" color="primary" mat-mini-fab *ngIf="player.team" (click)="centerUser()"><mat-icon matChipAvatar>my_location</mat-icon></button>
                 <mat-chip *ngIf="player.isAdmin" (click)="goToAdmin()"><mat-icon matChipAvatar>admin_panel_settings</mat-icon>Admin</mat-chip>
+                <mat-chip *ngIf="player.isAdmin" (click)="simulatePositionUpdate()"><mat-icon matChipAvatar>explore</mat-icon>Fake mouvement</mat-chip>
         </div>
         <div class="team-name" *ngIf="!player.team">Attente d'assignation dans une equipe...</div>
-        <div class="team-name" *ngIf="player.team" class="team-name">{{player.team?.name}}</div>
+        <div class="team-name" *ngIf="player.team" class="team-name">{{player.team.name}}</div>
         <div class="score">{{player.team?.score}}</div>
 </div>
