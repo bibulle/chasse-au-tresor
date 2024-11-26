@@ -39,14 +39,20 @@ export class NotificationsGateway {
     client: any,
     data: { playerId: string; latitude: number; longitude: number },
   ) {
-    // this.logger.log(`handleUpdatePosition(${data})`);
+    this.logger.log(
+      `handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`,
+    );
 
     // on cherche le joueur pour le mettre a jour
     const player = await this.playersService?.getPlayerByName(data.playerId);
-    if (player) {
+    if (
+      player &&
+      (player.latitude !== data.latitude || player.longitude !== data.longitude)
+    ) {
       player.latitude = data.latitude;
       player.longitude = data.longitude;
-      player.save();
+      await player.save();
+      this.notifyPlayerUpdate(data.playerId);
     }
     // this.logger.log(JSON.stringify(player, null, 2));
 
