@@ -69,13 +69,13 @@ export class SubmitSolutionDialogComponent {
           },
           error: (err) =>
             this.userNotificationsService.error(
-              'Erreur lors de la soumission :',
+              'Erreur lors de la soumission',
               err
             ),
         });
     } else {
       this.userNotificationsService.error(
-        'Veuillez remplir le texte et ajouter une photo.'
+        'Veuillez remplir le texte et ajouter une photo.', null
       );
     }
   }

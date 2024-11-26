@@ -36,7 +36,10 @@ export class ImportExportDialogComponent {
     const file = (event.target as HTMLInputElement).files?.[0];
 
     if (!file) {
-      this.userNotificationsService.error('Veuillez sélectionner un fichier.');
+      this.userNotificationsService.error(
+        'Veuillez sélectionner un fichier.',
+        null
+      );
       return;
     }
 
@@ -61,7 +64,8 @@ export class ImportExportDialogComponent {
       });
     } catch (error) {
       this.userNotificationsService.error(
-        `Erreur lors de la lecture du fichier : ${error}`
+        `Erreur lors de la lecture du fichier`,
+        error as Error
       );
     } finally {
       this.dialogRef.close(null);
@@ -87,9 +91,9 @@ export class ImportExportDialogComponent {
           this.userNotificationsService.success(
             'Fichier importé avec succès !'
           ),
-        error: () =>
+        error: (err) =>
           this.userNotificationsService.error(
-            "Erreur lors de l'importation du fichier."
+            "Erreur lors de l'importation du fichier.", err as Error
           ),
       });
   }
@@ -106,9 +110,9 @@ export class ImportExportDialogComponent {
         window.URL.revokeObjectURL(url);
         this.dialogRef.close(null);
       },
-      error: () => {
+      error: (err) => {
         this.userNotificationsService.error(
-          "Erreur lors de l'exportation du fichier."
+          "Erreur lors de l'exportation du fichier.", err
         );
         this.dialogRef.close(null);
       },

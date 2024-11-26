@@ -10,8 +10,13 @@ export class UserNotificationsService {
     this.toastr.success(message, title);
   }
 
-  error(message: string, title?: string): void {
+  error(message: string, error: any|null, title?: string): void {
+    console.error(error);
     console.log(`error(${message}, ${title})`);
+
+    if (error?.error?.message?.message) {
+        message+=`<p><small>${error?.error?.message?.message}</small></p>`;
+    } 
     this.toastr.error(message, title);
   }
 

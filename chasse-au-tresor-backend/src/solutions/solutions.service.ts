@@ -27,10 +27,14 @@ export class SolutionsService {
 
   async createSolution(
     playerId: string,
-    riddleId: string,
+    teamRiddleId: string,
     text: string,
     photoPath: string,
   ): Promise<Solution> {
+    this.logger.log(
+      `createSolution(${playerId}, ${teamRiddleId}, ${text}, ${photoPath})`,
+    );
+
     // Validation du chemin de la photo
     photoPath = this.validatePhotoPath(photoPath);
 
@@ -41,19 +45,15 @@ export class SolutionsService {
     }
 
     // Trouver le TeamRiddle correspondant
-    const teamRiddle = await this.teamRiddleModel
-      .findOne({ team: player.team, riddle: new Types.ObjectId(riddleId) })
-      .exec();
+    const teamRiddle = await this.teamRiddleModel.findById(teamRiddleId).exec();
     if (!teamRiddle) {
-      throw new NotFoundException(
-        `TeamRiddle introuvable pour l'équipe ${player.team} et l'énigme ${riddleId}`,
-      );
+      throw new NotFoundException(`TeamRiddle introuvable !!`);
     }
 
     // Créer une nouvelle solution
     const solution = new this.solutionModel({
       player: playerId,
-      riddle: riddleId,
+      riddle: teamRiddle.riddle,
       text,
       photo: photoPath,
     });

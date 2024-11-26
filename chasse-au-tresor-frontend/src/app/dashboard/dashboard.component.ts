@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       );
     } else {
       this.userNotificationsService.error(
-        'La géolocalisation n’est pas supportée par ce navigateur.'
+        'La géolocalisation n’est pas supportée par ce navigateur.', null
       );
     }
   }
