@@ -3,7 +3,7 @@
         {
             "_id": "64b2f9c2d5a29e3c3e5a6e01",
             "name": "Explorateurs du Capitole",
-            "color": "#FF5733",
+            "color": "red",
             "players": [
                 "64b2f9c2d5a29e3c3e5a6f01",
                 "64b2f9c2d5a29e3c3e5a6f02"
@@ -17,7 +17,7 @@
         {
             "_id": "64b2f9c2d5a29e3c3e5a6e02",
             "name": "Aventuriers de la Garonne",
-            "color": "#33FF57",
+            "color": "blue",
             "players": [
                 "64b2f9c2d5a29e3c3e5a6f03",
                 "64b2f9c2d5a29e3c3e5a6f04"
