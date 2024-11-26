@@ -36,6 +36,7 @@ export class TeamsController {
     @Param('teamId') teamId: string,
     @Body() body: { playerId: string },
   ) {
+    // console.log(`removePlayerToTeam(${teamId}, ${body.playerId})`);
     return this.teamsService.removePlayerFromTeam(teamId, body.playerId);
   }
 }

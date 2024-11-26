@@ -1,10 +1,13 @@
 <mat-expansion-panel *ngIf="team" (opened)="loadRiddlesForTeam()">
   <mat-expansion-panel-header>
-    <mat-panel-title class="team-name">{{ team.name }}</mat-panel-title>
-    <mat-panel-description>
-      <span [style.background-color]="team.color" class="color-box"></span>
-      Score : {{ team.score }}
-    </mat-panel-description>
+    <mat-panel-title class="team-name">
+      <img
+        class="color-box"
+        src="/assets/leaflet/marker-icon-2x-{{ team.color }}.png"
+      />
+      {{ team.name }}</mat-panel-title
+    >
+    <mat-panel-description> Score : {{ team.score }} </mat-panel-description>
   </mat-expansion-panel-header>
 
   <!-- Liste des joueurs -->

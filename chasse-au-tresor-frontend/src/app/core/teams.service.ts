@@ -52,7 +52,10 @@ export class TeamsService {
       playerId,
     });
   }
-  removePlayerFromTeam(playerId: string, teamId: string): Observable<Team> {
+  removePlayerFromTeam(
+    playerId: string,
+    teamId: string | undefined
+  ): Observable<Team> {
     return this.http.patch<Team>(`/api/teams/${teamId}/remove-player`, {
       playerId,
     });
