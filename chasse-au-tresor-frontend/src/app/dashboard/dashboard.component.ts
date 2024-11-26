@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.userNotificationsService.success(`Changement d'équipe`);
         }
         this.player = user;
-        console.log(this.player);
+        // console.log(this.player);
         this.trackPosition(this.player.username);
         this.subscribeTeamRiddle(this.player);
       } else {

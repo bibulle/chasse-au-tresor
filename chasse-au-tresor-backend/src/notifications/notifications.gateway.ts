@@ -60,11 +60,11 @@ export class NotificationsGateway {
     if (player.team?._id) {
       const team = await this.teamsService?.getTeamById(player.team._id);
       // this.logger.log(JSON.stringify(team, null, 2));
-      const payload = [];
+      const payload = { team: player.team?._id, positions: [] };
       if (team) {
         team.players.forEach((p) => {
           const player = p as unknown as Player;
-          payload.push({
+          payload.positions.push({
             playerId: player.username,
             latitude: player.latitude,
             longitude: player.longitude,

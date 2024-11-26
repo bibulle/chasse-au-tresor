@@ -1,0 +1,10 @@
+<div class="split-container">
+    <div class="pane left-pane" #leftPane>
+      <ng-content select="[left]"></ng-content>
+    </div>
+    <div class="resizer" (mousedown)="onMouseDown($event)"></div>
+    <div class="pane right-pane" #rightPane>
+      <ng-content select="[right]"></ng-content>
+    </div>
+  </div>
+  

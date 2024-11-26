@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { NotificationsService } from './notifications.service';
 import { Map } from 'leaflet';
-import { Player } from '../reference/types';
+import {
+  BehaviorSubject,
+  filter,
+  Observable,
+  ReplaySubject,
+  Subscription,
+} from 'rxjs';
+import { Player, PlayerPosition } from '../reference/types';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +16,23 @@ import { Player } from '../reference/types';
 export class MapService {
   map: Map | undefined;
 
-  constructor(private notificationsService: NotificationsService) {}
+  private updateNotifier$ = new ReplaySubject<{
+    team: string;
+    positions: PlayerPosition[];
+  }>();
+
+  private positionsSubject = new BehaviorSubject<PlayerPosition[] | null>(null);
+  positions$: Observable<PlayerPosition[] | null> =
+    this.positionsSubject.asObservable();
+  positionsSubscription: Subscription | undefined;
+
+  constructor(private notificationsService: NotificationsService) {
+    this.notificationsService
+      .listen('positionUpdated')
+      .subscribe((update: { team: string; positions: PlayerPosition[] }) => {
+        this.updateNotifier$.next(update);
+      });
+  }
 
   setMap(map: Map) {
     this.map = map;
@@ -25,9 +48,30 @@ export class MapService {
   }
 
   centerUser(player: Player) {
-    console.log(`centerUser(${player?.latitude}, ${player?.longitude})`)
+    console.log(`centerUser(${player?.latitude}, ${player?.longitude})`);
     if (this.map && player && player.latitude != 0 && player.longitude != 0) {
       this.map.setView([player.latitude, player.longitude]);
     }
+  }
+
+  // Écouter les notifications de mise à jour pour cet utilisateur
+  listenForPositionUpdates(teamId: string): void {
+    console.log(`listenForPositionUpdates(${teamId})`);
+    if (this.positionsSubscription) {
+      this.positionsSubscription.unsubscribe();
+    }
+    this.positionsSubscription = this.updateNotifier$
+      .pipe(
+        filter((payload) => {
+          // console.log(payload);
+          return (teamId === 'all' || payload.team === teamId);
+        })
+      ) // Filtrer les notifications pour cet team
+      .subscribe((payload) => {
+        console.log(
+          'Mise à jour détectée via WebSocket. Déplacement des users...'
+        );
+        this.positionsSubject.next(payload.positions);
+      });
   }
 }

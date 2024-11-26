@@ -1,5 +1,9 @@
 <app-admin-header></app-admin-header>
-<div class="dashboard-container">
+<app-split-screen (resized)="onSplitResize()">
+<div left class="dashboard-map">
+  <app-map [allTeams]="true"></app-map>
+</div>
+<div right class="dashboard-container">
   <!-- Section d'affectation -->
   <div class="card unassigned-player" *ngIf="unassignedPlayer().length > 0">
     <mat-card>
@@ -68,3 +72,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+</app-split-screen>

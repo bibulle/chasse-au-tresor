@@ -1,0 +1,32 @@
+.split-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  
+  .pane {
+    // flex: 1;
+    overflow: auto;
+  }
+  
+  .left-pane {
+    flex: 0 0 25%; /* Taille initiale : 50% */
+    background-color: #f0f0f0;
+  }
+  
+  .right-pane {
+    flex: 1; /* Le reste de l'espace */
+    background-color: #ffffff;
+  }
+  
+  .resizer {
+    width: 5px;
+    min-width: 5px;
+    background-color: #cccccc;
+    cursor: col-resize;
+    position: relative;
+    z-index: 1; /* Toujours visible */
+
+  }
+  
