@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FilesModule } from './admin/files/files.module';
@@ -11,6 +11,7 @@ import { RiddleModule } from './riddles/riddle.module';
 import { SolutionsModule } from './solutions/solutions.module';
 import { TeamsModule } from './teams/teams.module';
 import { FilesController } from './files/files.controller';
+import { RequestLoggerMiddleware } from './request-logger/request-logger.middleware';
 
 @Module({
   imports: [
@@ -36,7 +37,11 @@ import { FilesController } from './files/files.controller';
   controllers: [AppController, FilesController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(RequestLoggerMiddleware).forRoutes('*');
+  }
+}
 
 // famillemartin
 // VEJn3wSol1sHYE5T

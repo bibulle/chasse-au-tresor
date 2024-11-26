@@ -49,8 +49,9 @@ export class SolutionsComponent {
         this.userNotificationsService.success(`Statut mis à jour : ${solution.validated}`);
       },
       error: (err: any) => {
-        console.error('Erreur lors de la mise à jour du statut:', err);
-        this.userNotificationsService.error('Une erreur est survenue lors de la mise à jour du statut.');
+        console.error('Erreur lors de la mise à jour du statut:');
+        console.error(err);
+        this.userNotificationsService.error('Une erreur est survenue lors de la mise à jour du statut.', err);
       },
     });
     }
