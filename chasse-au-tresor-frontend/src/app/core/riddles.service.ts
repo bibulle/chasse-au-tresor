@@ -63,6 +63,8 @@ export class RiddlesService {
     const formData = new FormData();
     if (data.riddle._id) formData.append('_id', data.riddle._id);
     if (data.riddle.gain) formData.append('gain', data.riddle.gain);
+    if (data.riddle.text) formData.append('latitude', data.riddle.latitude);
+    if (data.riddle.text) formData.append('longitude', data.riddle.longitude);
     if (data.riddle.photo) formData.append('photo', data.riddle.photo);
     if (data.riddle.text) formData.append('text', data.riddle.text);
     if (data.selectedFile) formData.append('file', data.selectedFile);

@@ -43,6 +43,8 @@ export class RiddleController {
   async saveRiddle(
     @Body('_id') riddleId: string,
     @Body('gain') gain: number,
+    @Body('latitude') latitude: number,
+    @Body('longitude') longitude: number,
     @Body('photo') photo: string,
     @Body('text') text: string,
     @Body('teams') teamsS: string,
@@ -58,6 +60,8 @@ export class RiddleController {
     return this.riddleService.saveRiddle(
       riddleId,
       gain,
+      latitude,
+      longitude,
       text,
       photo,
       photoPath,

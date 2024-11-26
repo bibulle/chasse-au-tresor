@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -20,6 +14,7 @@ import { EditTeamRiddleDialogComponent } from './edit-team-riddle-dialog/edit-te
 import { Observable } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MapService } from '../../../core/map.service';
 
 @Component({
   selector: 'app-admin-riddle',
@@ -37,7 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './riddle.component.html',
   styleUrl: './riddle.component.scss',
 })
-export class RiddleComponent implements OnInit {
+export class RiddleComponent implements OnInit, OnChanges {
   updateOrder(arg0: any, arg1: any) {
     throw new Error('Method not implemented.');
   }
@@ -49,6 +44,7 @@ export class RiddleComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private riddleService: RiddlesService,
+    private mapService: MapService,
     private userNotificationsService: UserNotificationsService
   ) {}
 
@@ -62,18 +58,26 @@ export class RiddleComponent implements OnInit {
     // console.log(this.teamOrder)
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(changes);
+    if (changes['riddle'] && changes['riddle'].currentValue) {
+      const riddle: Riddle = changes['riddle'].currentValue;
+      this.mapService.updateMarkerRiddles([riddle], false);
+    }
+    // if (changes['teamRiddle'] && changes['teamRiddle'].currentValue) {
+    //   const teamRiddle: TeamRiddle = changes['teamRiddle'].currentValue;
+    //   if (teamRiddle.riddle) {
+    //     this.mapService.updateMarkerRiddles([teamRiddle.riddle], false, teamRiddle.team?.color);
+    //   }
+    // }
+  }
+
   loadTeamsOrder() {
-    const riddleId = this.teamRiddle
-      ? this.teamRiddle.riddle?._id
-      : this.riddle?._id;
+    const riddleId = this.teamRiddle ? this.teamRiddle.riddle?._id : this.riddle?._id;
     this.riddleService.getRiddleTeamOrder(riddleId).subscribe((teamOrder) => {
       this.teamOrder = teamOrder;
     });
   }
-
-  // async getRiddleTeamOrder() : {team: Team, order: number}[]> {
-  //   return this.riddleService.getRiddleTeamOrder(this.teamRiddle ? this.teamRiddle.riddle?._id : this.riddle?._id);
-  // }
 
   actionNeeded() {
     //console.log('actionNeeded');
@@ -117,10 +121,7 @@ export class RiddleComponent implements OnInit {
           },
           error: (err) => {
             console.log(err);
-            this.userNotificationsService.error(
-              'Erreur lors de la sauvegarde :',
-              err.message
-            );
+            this.userNotificationsService.error('Erreur lors de la sauvegarde :', err.message);
           },
         });
       } else if (result && result.action === 'delete') {
@@ -130,10 +131,7 @@ export class RiddleComponent implements OnInit {
           },
           error: (err) => {
             console.log(err);
-            this.userNotificationsService.error(
-              'Erreur lors de la suppression :',
-              err.message
-            );
+            this.userNotificationsService.error('Erreur lors de la suppression :', err.message);
           },
         });
       }

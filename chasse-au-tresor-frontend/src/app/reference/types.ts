@@ -25,6 +25,8 @@ export class Riddle {
   text = '';
   gain = 0;
   photo?: string;
+  latitude = 43.604429;
+  longitude = 1.443812;
 }
 
 export class TeamRiddle {
@@ -53,10 +55,15 @@ export class Version {
 export class PlayerPositionsUpdate {
   team = '';
   color = '';
-  positions: PlayerPosition[] = [];
+  positions: ItemPosition[] = [];
 }
-export class PlayerPosition {
-  playerId = '';
+export class ItemPosition {
+  itemId = '';
   latitude = 0;
   longitude = 0;
+}
+
+export enum ICON_TYPE {
+  Player,
+  Riddle,
 }

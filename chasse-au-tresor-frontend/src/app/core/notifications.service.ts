@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable, ReplaySubject } from 'rxjs';
-import { PlayerPosition, Position } from '../reference/types';
+import { ItemPosition, Position } from '../reference/types';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class NotificationsService {
 
   // Envoyer une mise à jour de position
   updatePosition(playerId: string, latitude: number, longitude: number): void {
-    console.log(`updatePosition(${playerId}, ${latitude}, ${longitude})`)
+    console.log(`updatePosition(${playerId}, ${latitude}, ${longitude})`);
     this.socket.emit('updatePosition', { playerId, latitude, longitude });
   }
 }

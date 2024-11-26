@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { Router } from '@angular/router';
 import { PlayerService } from '../core/player.service';
 import { RiddleComponent } from './riddle/riddle.component';
-import { Player, PlayerPosition, TeamRiddle } from '../reference/types';
+import { Player, ItemPosition, TeamRiddle } from '../reference/types';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { UserNotificationsService } from '../core/user-notifications.service';
@@ -22,14 +22,14 @@ import { MapComponent } from '../map/map.component';
 export class DashboardComponent implements OnInit, OnDestroy {
   player: Player | null = null;
   teamId: string | undefined;
+
   currentTeamRiddle: TeamRiddle | null = null;
+  resolvedTeamRiddles: TeamRiddle[] = [];
 
   userSubscription: Subscription | undefined;
   riddleSubscription: Subscription | undefined;
   geoLocalisationId: number | null = null;
   private geoLocalisationUser = '';
-
-
 
   constructor(
     private riddleService: TeamRiddlesService,
@@ -48,7 +48,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     this.initPlayer(player.username);
-
   }
 
   async ngOnDestroy(): Promise<void> {
@@ -73,13 +72,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userSubscription = this.playerService.user$.subscribe((user) => {
       if (user) {
         if (this.player?.team?._id !== user.team?._id && user.team?.name) {
-          this.userNotificationsService.success(
-            `Bienvenu dans l'équipe <b>${user.team?.name}</b>`
-          );
-        } else if (
-          this.player?.team?._id !== user.team?._id &&
-          !user.team?.name
-        ) {
+          this.userNotificationsService.success(`Bienvenu dans l'équipe <b>${user.team?.name}</b>`);
+        } else if (this.player?.team?._id !== user.team?._id && !user.team?.name) {
           this.userNotificationsService.success(`Changement d'équipe`);
         }
         this.player = user;
@@ -100,18 +94,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       this.teamId = player.team?._id;
-      this.currentTeamRiddle = await firstValueFrom(
-        this.riddleService.loadCurrentTeamRiddle(this.teamId)
-      );
+      this.currentTeamRiddle = await firstValueFrom(this.riddleService.loadCurrentTeamRiddle(this.teamId));
+      this.resolvedTeamRiddles = await firstValueFrom(this.riddleService.loadResolvedTeamRiddle(this.teamId));
       this.riddleService.listenForCurrentTeamRiddleUpdates(this.teamId);
-      this.riddleSubscription = this.riddleService.currentTeamRiddle$.subscribe(
-        (teamRiddle) => {
-          this.currentTeamRiddle = teamRiddle;
-        }
-      );
+      this.riddleSubscription = this.riddleService.currentTeamRiddle$.subscribe((teamRiddle) => {
+        this.currentTeamRiddle = teamRiddle;
+      });
     }
   }
-
 
   trackPosition(playerId: string) {
     if (navigator.geolocation) {
@@ -123,23 +113,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       this.geoLocalisationUser = playerId;
-      this.geoLocalisationId = navigator.geolocation.watchPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
+      this.geoLocalisationId = navigator.geolocation.watchPosition((position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
 
-          // Envoyer la position au backend
-          this.notificationsService.updatePosition(
-            playerId,
-            latitude,
-            longitude
-          );
-        }
-      );
+        // Envoyer la position au backend
+        this.notificationsService.updatePosition(playerId, latitude, longitude);
+      });
     } else {
-      this.userNotificationsService.error(
-        'La géolocalisation n’est pas supportée par ce navigateur.', null
-      );
+      this.userNotificationsService.error('La géolocalisation n’est pas supportée par ce navigateur.', null);
     }
   }
 }

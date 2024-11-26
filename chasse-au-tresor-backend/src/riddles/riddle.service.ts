@@ -34,13 +34,15 @@ export class RiddleService {
   async saveRiddle(
     riddleId: string | undefined,
     gain: number,
+    latitude: number,
+    longitude: number,
     text: string,
     photo: string,
     photoPath: string,
     teamOrders: { team: Team; order: number }[],
   ) {
     this.logger.log(
-      `saveRiddle(${riddleId}, ${gain}, ${text}, ${photo}, ${photoPath}, ${teamOrders?.length})`,
+      `saveRiddle(${riddleId}, ${gain}, ${latitude}, ${longitude}, ${text}, ${photo}, ${photoPath}, ${teamOrders?.length})`,
     );
 
     // Validation du chemin de la photo
@@ -55,6 +57,8 @@ export class RiddleService {
       // Créer la riddle
       const riddle = new this.riddleModel({
         gain: gain,
+        latitude: latitude,
+        longitude: longitude,
         text: text,
         photo: photo,
       });
@@ -73,6 +77,8 @@ export class RiddleService {
       }
 
       oldRiddle.gain = gain;
+      oldRiddle.latitude = latitude;
+      oldRiddle.longitude = longitude;
       oldRiddle.text = text;
       oldRiddle.photo = photo;
 

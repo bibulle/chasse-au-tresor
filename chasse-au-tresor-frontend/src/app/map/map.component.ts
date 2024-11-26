@@ -1,11 +1,5 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { Player, PlayerPosition } from '../reference/types';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ICON_TYPE, Player, ItemPosition, TeamRiddle } from '../reference/types';
 import { NotificationsService } from '../core/notifications.service';
 import L from 'leaflet';
 import { MapService } from '../core/map.service';
@@ -18,22 +12,17 @@ import { Subscription } from 'rxjs';
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit, OnChanges, OnDestroy {
   @Input() player: Player | null = null;
   @Input() allTeams: boolean = false;
+  @Input() resolvedTeamRiddles: TeamRiddle[] = [];
 
   private map: L.Map | undefined;
-  private markers: Map<string, L.Marker> = new Map();
 
   positionSubscription: Subscription | undefined;
   positionSubscriptionTeamId: string | undefined;
 
-  icons: { [id: string]: L.Icon } = {};
-
-  constructor(
-    private notificationsService: NotificationsService,
-    private mapService: MapService
-  ) {}
+  constructor(private notificationsService: NotificationsService, private mapService: MapService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['player'] && changes['player'].currentValue) {
@@ -50,6 +39,13 @@ export class MapComponent implements OnInit, OnChanges {
         this.listenForPositionUpdates(newTeamId);
       }
     }
+    if (changes['resolvedTeamRiddles'] && changes['resolvedTeamRiddles'].currentValue) {
+      const teamRiddles: TeamRiddle[] = changes['resolvedTeamRiddles'].currentValue;
+
+      this.mapService.updateMarkerTeamRiddles(teamRiddles, true);
+
+      // console.log(teamRiddles);
+    }
     // console.log(`ngOnChanges(${JSON.stringify(changes, null, 2)})`);
   }
 
@@ -57,20 +53,30 @@ export class MapComponent implements OnInit, OnChanges {
     this.initMap();
   }
 
+  async ngOnDestroy(): Promise<void> {
+    console.log('destroyMap');
+
+    this.positionSubscription?.unsubscribe();
+    await this.map?.off();
+    await this.map?.remove();
+    console.log('destroyMap done');
+  }
+
   initMap() {
+    console.log('initMap');
     L.Icon.Default.imagePath = 'assets/leaflet/';
 
     this.map = L.map('map').setView([43.6045, 1.4442], 13); // Position Toulouse
-    var Stadia_OSMBright = L.tileLayer(
-      'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-      {
-        minZoom: 0,
-        maxZoom: 20,
-        attribution:
-          '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        // ext: 'png',
-      }
-    );
+    // console.log(this.map);
+
+    var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+      minZoom: 0,
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      // ext: 'png',
+    });
+
     var Stadia_AlidadeSatellite = L.tileLayer(
       'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
       {
@@ -81,14 +87,11 @@ export class MapComponent implements OnInit, OnChanges {
         // ext: 'jpg'
       }
     );
-    var OpenStreetMap_France = L.tileLayer(
-      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
-      {
-        maxZoom: 20,
-        attribution:
-          '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }
-    );
+    var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution:
+        '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    });
 
     this.mapService.setMap(this.map);
 
@@ -104,26 +107,8 @@ export class MapComponent implements OnInit, OnChanges {
       console.log('playerPositionUpdated');
       // console.log(data);
       // Ajouter ou mettre à jour les marqueurs sur la carte
-      data?.positions.forEach((p) => {
-        if (this.markers.has(p.playerId)) {
-          const marker = this.markers.get(p.playerId);
-          marker?.setLatLng([p.latitude, p.longitude]);
-          marker?.setIcon(this.getIcon(data.color));
-        } else {
-          const newMarker = L.marker([p.latitude, p.longitude], {icon: this.getIcon(data.color)});
-          this.map?.addLayer(newMarker);
-          newMarker.bindPopup(`${p.playerId}`);
-
-          this.markers.set(p.playerId, newMarker);
-        }
-      });
-      // Supprimer ou mettre à jour les marqueurs sur la carte
-      if (newTeamId != 'all') {
-        this.markers.forEach((marker, playerId) => {
-          if (!data?.positions.find((d) => d.playerId === playerId)) {
-            this.map?.removeLayer(marker);
-          }
-        });
+      if (data?.positions) {
+        this.mapService.updateMarkerPlayers(data?.positions, newTeamId != 'all', data?.color);
       }
     });
   }
@@ -132,22 +117,5 @@ export class MapComponent implements OnInit, OnChanges {
     if (this.map) {
       this.map.invalidateSize();
     }
-  }
-
-  getIcon(color: string): L.Icon {
-    if (this.icons[color]) {
-      return this.icons[color];
-    }
-
-    const icon = new L.Icon({
-      iconUrl: `/assets/leaflet/marker-icon-2x-${color}.png`,
-      shadowUrl: `/assets/leaflet/marker-shadow.png`,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-    this.icons[color] = icon;
-    return icon;
   }
 }

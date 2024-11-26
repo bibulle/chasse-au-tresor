@@ -12,9 +12,12 @@ export class TeamRiddlesController {
   }
 
   @Get('current/:teamId')
-  async getCurrentTeamRiddle(
-    @Param('teamId') teamId: string,
-  ): Promise<TeamRiddle> {
+  async getCurrentTeamRiddle(@Param('teamId') teamId: string): Promise<TeamRiddle> {
     return this.teamRiddleService.getCurrentTeamRiddle(teamId);
+  }
+
+  @Get('finished/:teamId')
+  async getFinishedTeamRiddle(@Param('teamId') teamId: string): Promise<TeamRiddle[]> {
+    return this.teamRiddleService.getFinishedTeamRiddle(teamId);
   }
 }

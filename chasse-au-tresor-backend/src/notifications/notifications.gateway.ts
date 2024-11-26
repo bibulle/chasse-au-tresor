@@ -1,10 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import {
-  SubscribeMessage,
-  WebSocketGateway,
-  WebSocketServer,
-} from '@nestjs/websockets';
+import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 import { PlayersService } from 'src/players/players.service';
 import { Player } from 'src/players/schemas/player.schema';
@@ -35,20 +31,12 @@ export class NotificationsGateway {
 
   // Exemple de méthode pour mettre à jour la position
   @SubscribeMessage('updatePosition')
-  async handleUpdatePosition(
-    client: any,
-    data: { playerId: string; latitude: number; longitude: number },
-  ) {
-    // this.logger.log(
-    //   `handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`,
-    // );
+  async handleUpdatePosition(client: any, data: { playerId: string; latitude: number; longitude: number }) {
+    this.logger.log(`handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`);
 
     // on cherche le joueur pour le mettre a jour
     const player = await this.playersService?.getPlayerByName(data.playerId);
-    if (
-      player &&
-      (player.latitude !== data.latitude || player.longitude !== data.longitude)
-    ) {
+    if (player && (player.latitude !== data.latitude || player.longitude !== data.longitude)) {
       player.latitude = data.latitude;
       player.longitude = data.longitude;
       await player.save();
@@ -69,7 +57,7 @@ export class NotificationsGateway {
         team.players.forEach((p) => {
           const player = p as unknown as Player;
           payload.positions.push({
-            playerId: player.username,
+            itemId: player.username,
             latitude: player.latitude,
             longitude: player.longitude,
           });

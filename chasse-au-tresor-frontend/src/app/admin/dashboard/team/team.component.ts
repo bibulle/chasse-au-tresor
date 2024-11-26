@@ -1,46 +1,43 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { Player, Team, TeamRiddle } from '../../../reference/types';
-import { AdminService } from '../../../core/admin.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
-import { RiddleComponent } from '../riddle/riddle.component';
-import { firstValueFrom, Subscription } from 'rxjs';
-import { TeamRiddlesService } from '../../../core/team-riddles.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PlayerActionDialogComponent } from './player-action-dialog/player-action-dialog.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { firstValueFrom, Subscription } from 'rxjs';
+import { MapService } from '../../../core/map.service';
 import { PlayerService } from '../../../core/player.service';
+import { TeamRiddlesService } from '../../../core/team-riddles.service';
 import { TeamsService } from '../../../core/teams.service';
+import { Player, Team, TeamRiddle } from '../../../reference/types';
+import { RiddleComponent } from '../riddle/riddle.component';
+import { PlayerActionDialogComponent } from './player-action-dialog/player-action-dialog.component';
 
 @Component({
   selector: 'app-admin-team',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatChipsModule,
-    RiddleComponent,
-  ],
+  imports: [CommonModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatChipsModule, RiddleComponent],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
-export class TeamComponent implements OnDestroy {
+export class TeamComponent implements OnInit, OnDestroy {
   @Input() team: Team | undefined;
 
   teamRiddles: TeamRiddle[] = [];
   teamRiddleSubscription: Subscription | undefined;
 
   constructor(
-    private readonly adminService: AdminService,
     private readonly riddleService: TeamRiddlesService,
     private readonly playerService: PlayerService,
     private readonly teamsService: TeamsService,
+    private readonly mapService: MapService,
     private dialog: MatDialog
   ) {}
+
+  ngOnInit(): void {
+    this.loadRiddlesForTeam();
+  }
 
   ngOnDestroy(): void {
     if (this.teamRiddleSubscription) {
@@ -50,13 +47,9 @@ export class TeamComponent implements OnDestroy {
 
   async loadRiddlesForTeam(): Promise<void> {
     if (this.team && !this.teamRiddleSubscription) {
-      this.updateTeamRiddles(
-        await firstValueFrom(this.riddleService.loadTeamRiddles(this.team._id))
-      );
+      this.updateTeamRiddles(await firstValueFrom(this.riddleService.loadTeamRiddles(this.team._id)));
       this.riddleService.listenForTeamRiddlesUpdates(this.team._id);
-      this.teamRiddleSubscription = this.riddleService.teamRiddle$[
-        this.team._id
-      ].subscribe((teamRiddles) => {
+      this.teamRiddleSubscription = this.riddleService.teamRiddle$[this.team._id].subscribe((teamRiddles) => {
         this.updateTeamRiddles(teamRiddles);
       });
     }
@@ -77,6 +70,8 @@ export class TeamComponent implements OnDestroy {
         this.teamRiddles.splice(index, 1);
       }
     });
+
+    this.mapService.updateMarkerTeamRiddles(this.teamRiddles, false, this.team?.color);
   }
   updateTeamRiddle(teamRiddle: TeamRiddle) {
     // console.log(`updateTeamRiddle()`)
@@ -127,6 +122,4 @@ export class TeamComponent implements OnDestroy {
 
     console.log(`Player ${player.username} deleted.`);
   }
-
-
 }
