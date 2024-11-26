@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,6 +25,8 @@ import { EditTeamRiddleDialogComponent } from './riddle/edit-team-riddle-dialog/
 import { TeamComponent } from './team/team.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RiddleComponent } from './riddle/riddle.component';
+import { SplitScreenComponent } from "../../split-screen/split-screen.component";
+import { MapComponent } from "../../map/map.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -51,10 +53,14 @@ import { RiddleComponent } from './riddle/riddle.component';
     MatCheckboxModule,
     TeamComponent,
     HeaderComponent,
-    RiddleComponent
-  ],
+    RiddleComponent,
+    SplitScreenComponent,
+    MapComponent
+],
 })
 export class AdminDashboardComponent implements OnInit {
+  @ViewChild(MapComponent) mapComponent!: MapComponent;
+
   players: Player[] = [];
   teams: Team[] = [];
   unassignedRiddles: Riddle[] = [];
@@ -158,6 +164,12 @@ export class AdminDashboardComponent implements OnInit {
         });
       }
     });
+  }
+
+  onSplitResize(): void {
+    if (this.mapComponent) {
+      this.mapComponent.invalidateMapSize();
+    }
   }
 
 }

@@ -1,3 +1,8 @@
+.dashboard-map {
+  display: flex;
+  height: 100%;
+}
+
 .dashboard-container {
   display: flex;
   flex-wrap: wrap;
@@ -5,47 +10,19 @@
   padding: 16px;
   align-items: stretch;
 
+  .unassigned-player {
+    width: 100%;
+    mat-form-field {
+      padding-right: 16px;
+    }
+  }
+
   .teams {
     width: 100%;
+
+    .team-name {
+      font-size: large;
+      font-weight: bold;
+    }
   }
-}
-
-.card {
-}
-
-.unassigned-player {
-  width: 100%;
-  mat-form-field {
-    padding-right: 16px;
-  }
-}
-
-.team {
-  flex: 1 0 auto;
-}
-
-.team-name {
-  font-size: large;
-  font-weight: bold;
-}
-
-mat-card {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  height: 100%;
-}
-
-.player-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-button[mat-icon-button] {
-  margin-left: 8px; /* Optionnel : espace entre le texte et le bouton */
-}
-
-.solution-photo {
-  max-width: 50px;
-  max-height: 50px;
-  border-radius: 4px;
 }

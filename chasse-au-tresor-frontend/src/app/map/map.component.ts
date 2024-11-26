@@ -1,8 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Player, PlayerPosition } from '../reference/types';
 import { NotificationsService } from '../core/notifications.service';
 import L from 'leaflet';
 import { MapService } from '../core/map.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -11,17 +18,41 @@ import { MapService } from '../core/map.service';
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   @Input() player: Player | null = null;
+  @Input() allTeams: boolean = false;
 
   private map: L.Map | undefined;
   private markers: Map<string, L.Marker> = new Map();
 
-  constructor(private notificationsService: NotificationsService, private mapService: MapService) {}
+  positionSubscription: Subscription | undefined;
+  positionSubscriptionTeamId: string | undefined;
+
+  constructor(
+    private notificationsService: NotificationsService,
+    private mapService: MapService
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['player'] && changes['player'].currentValue) {
+      const newTeamId = (changes['player'].currentValue as Player).team?._id;
+      if (newTeamId && this.positionSubscriptionTeamId !== newTeamId) {
+        this.positionSubscriptionTeamId = newTeamId;
+        this.listenForPositionUpdates(newTeamId);
+      }
+    }
+    if (changes['allTeams'] && changes['allTeams'].currentValue) {
+      const newTeamId = 'all';
+      if (newTeamId && this.positionSubscriptionTeamId !== newTeamId) {
+        this.positionSubscriptionTeamId = newTeamId;
+        this.listenForPositionUpdates(newTeamId);
+      }
+    }
+    // console.log(`ngOnChanges(${JSON.stringify(changes, null, 2)})`);
+  }
 
   ngOnInit(): void {
     this.initMap();
-    this.listenForPositionUpdates();
   }
 
   initMap() {
@@ -64,31 +95,39 @@ export class MapComponent implements OnInit {
     OpenStreetMap_France.addTo(this.map);
   }
 
-  listenForPositionUpdates() {
-    this.notificationsService
-      .onPositionUpdated()
-      .subscribe((data: PlayerPosition[]) => {
-        console.log('playerPositionUpdated');
-        // Ajouter ou mettre à jour les marqueurs sur la carte
-        console.log(data);
-        data.forEach((p) => {
-          if (this.markers.has(p.playerId)) {
-            const marker = this.markers.get(p.playerId);
-            marker?.setLatLng([p.latitude, p.longitude]);
-          } else {
-            const newMarker = L.marker([p.latitude, p.longitude]);
-            this.map?.addLayer(newMarker);
-            newMarker.bindPopup(`${p.playerId}`);
+  listenForPositionUpdates(newTeamId: string) {
+    this.mapService.listenForPositionUpdates(newTeamId);
 
-            this.markers.set(p.playerId, newMarker);
-          }
-        });
-        // Supprimer ou mettre à jour les marqueurs sur la carte
+    this.positionSubscription = this.mapService.positions$.subscribe((data) => {
+      console.log('playerPositionUpdated');
+      // console.log(data);
+      // Ajouter ou mettre à jour les marqueurs sur la carte
+      data?.forEach((p) => {
+        if (this.markers.has(p.playerId)) {
+          const marker = this.markers.get(p.playerId);
+          marker?.setLatLng([p.latitude, p.longitude]);
+        } else {
+          const newMarker = L.marker([p.latitude, p.longitude]);
+          this.map?.addLayer(newMarker);
+          newMarker.bindPopup(`${p.playerId}`);
+
+          this.markers.set(p.playerId, newMarker);
+        }
+      });
+      // Supprimer ou mettre à jour les marqueurs sur la carte
+      if (newTeamId != 'all') {
         this.markers.forEach((marker, playerId) => {
-          if (!data.find((d) => d.playerId === playerId)) {
+          if (!data?.find((d) => d.playerId === playerId)) {
             this.map?.removeLayer(marker);
           }
         });
-      });
+      }
+    });
+  }
+
+  invalidateMapSize(): void {
+    if (this.map) {
+      this.map.invalidateSize();
+    }
   }
 }

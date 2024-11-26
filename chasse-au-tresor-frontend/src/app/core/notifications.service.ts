@@ -30,9 +30,9 @@ export class NotificationsService {
   }
 
   // Écouter les mises à jour des positions
-  onPositionUpdated(): Observable<PlayerPosition[]> {
-    return this.socket.fromEvent('positionUpdated');
-  }
+  // onPositionUpdated(): Observable<PlayerPosition[]> {
+  //   return this.socket.fromEvent('positionUpdated');
+  // }
 
   // Envoyer une mise à jour de position
   updatePosition(playerId: string, latitude: number, longitude: number): void {
