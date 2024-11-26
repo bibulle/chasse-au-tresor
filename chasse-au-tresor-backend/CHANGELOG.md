@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.2...v0.6.3) (2024-11-26)
+
+
+### Features
+
+* add lines between riddles ([0b0b3c3](https://github.com/bibulle/chasse-au-tresor/commit/0b0b3c36854899ff9b67f75e0762d78301d89d87))
+* add navigation button on login pages ([3f96f0b](https://github.com/bibulle/chasse-au-tresor/commit/3f96f0b5a7feaf52a475e40f0f2f8aa4673d30a4))
+
+
+### Bug Fixes
+
+* fix solutions creation (and add trace on backend) ([a7d3b4a](https://github.com/bibulle/chasse-au-tresor/commit/a7d3b4a5b9467de3fe16445fd9bc9651c6c5e628))
+* polyline update work now ([8540bb7](https://github.com/bibulle/chasse-au-tresor/commit/8540bb7ceb10f6d899bede071083c694e1d79c9d))
+* set color to names ([d6128f5](https://github.com/bibulle/chasse-au-tresor/commit/d6128f50cc21ba898499ff35dd83785218e5085f))
+
 ### [0.6.2](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.1...v0.6.2) (2024-11-26)
 
 ### [0.6.1](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.0...v0.6.1) (2024-11-25)
