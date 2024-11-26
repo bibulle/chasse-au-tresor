@@ -100,6 +100,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.riddleSubscription = this.riddleService.currentTeamRiddle$.subscribe((teamRiddle) => {
         this.currentTeamRiddle = teamRiddle;
       });
+      this.riddleSubscription = this.riddleService.resolvedTeamRiddleSubject$.subscribe((teamRiddle) => {
+        this.resolvedTeamRiddles = teamRiddle ? teamRiddle : [];
+      });
     }
   }
 

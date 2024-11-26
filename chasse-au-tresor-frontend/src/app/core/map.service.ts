@@ -21,6 +21,7 @@ export class MapService {
     0: new Map(),
     1: new Map(),
   };
+  private polylines: Map<string, L.Polyline<any>> = new Map();
 
   private positionsSubject = new BehaviorSubject<PlayerPositionsUpdate | null>(null);
   positions$: Observable<PlayerPositionsUpdate | null> = this.positionsSubject.asObservable();
@@ -91,6 +92,16 @@ export class MapService {
       };
     });
     this.updateMakers(ICON_TYPE.Riddle, positions, removeOld, color);
+
+    if (this.polylines.has(color)) {
+      this.polylines.get(color)?.setLatLngs(this.connectTeamRiddle(teamRiddles));
+    } else {
+      const pathLine = L.polyline(this.connectTeamRiddle(teamRiddles));
+      pathLine.setStyle({ color: color });
+      this.map?.addLayer(pathLine);
+
+      this.polylines.set(color, pathLine);
+    }
   }
 
   updateMarkerPlayers(positions: ItemPosition[], removeOld = true, color = 'grey') {
@@ -149,5 +160,17 @@ export class MapService {
     this.icons[type][color] = icon;
     // console.log(`${type} ${color} -> ${icon}`);
     return icon;
+  }
+
+  private connectTeamRiddle(teamRiddles: TeamRiddle[]): L.LatLngExpression[] {
+    const c = [];
+    for (let i in teamRiddles) {
+      if (teamRiddles[i].riddle) {
+        const x = teamRiddles[i].riddle.latitude;
+        const y = teamRiddles[i].riddle.longitude;
+        c.push([x, y] as L.LatLngTuple);
+      }
+    }
+    return c;
   }
 }
