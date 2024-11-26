@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { UserNotificationsService } from '../../core/user-notifications.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-user-create',
@@ -24,9 +26,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatLabel,
     MatError,
     MatInputModule,
+    MatIconModule,
     MatFormField,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -57,6 +61,10 @@ export class UserCreateComponent implements OnInit {
       // this.isUserCreated = true;
       this.router.navigate(['/dashboard']); // Redirection vers un tableau de bord ou une autre page
     }
+  }
+
+  goToAdmin() {
+    this.router.navigate(['/admin']);
   }
 
   onSubmit() {

@@ -1,5 +1,6 @@
 <mat-toolbar>
   <span class="title">Chasse au trésor</span>
+  <mat-chip (click)="goToAdmin()"><mat-icon matChipAvatar>admin_panel_settings</mat-icon>Admin</mat-chip>
 </mat-toolbar>
 <div *ngIf="createdUser; else form">
   <h2>Utilisateur déjà créé ({{createdUser.username}})</h2>

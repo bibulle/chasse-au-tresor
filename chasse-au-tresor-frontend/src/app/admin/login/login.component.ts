@@ -21,6 +21,8 @@ import { UserNotificationsService } from '../../core/user-notifications.service'
 import { MatButtonModule } from '@angular/material/button';
 import { PlayerService } from '../../core/player.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +33,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatChipsModule,
     CommonModule,
     MatInputModule,
+    MatIconModule,
     MatToolbarModule
   ],
 })
@@ -51,6 +55,10 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
+
+  goToDashboard() {
+    this.router.navigate(['/']);
+  } 
 
   async onSubmit() {
     if (this.loginForm.valid) {

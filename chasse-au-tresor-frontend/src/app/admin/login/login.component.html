@@ -1,5 +1,6 @@
 <mat-toolbar>
   <span class="title">Chasse au trésor</span>
+  <mat-chip (click)="goToDashboard()"><mat-icon matChipAvatar>home</mat-icon>DashBoard</mat-chip>
 </mat-toolbar>
 <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="user-form">
   <mat-form-field>
