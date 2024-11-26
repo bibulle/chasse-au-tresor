@@ -55,7 +55,7 @@ export class TeamsService implements OnModuleInit {
   async removePlayerFromTeam(teamId: string, playerId: string): Promise<Team> {
     // this.logger.log(`removePlayerFromTeam(${teamId}, ${playerId})`);
 
-    const currentTeam = await this.teamModel.findOne({ players: playerId });
+    const currentTeam = await this.teamModel.findOne({ _id: teamId });
     const currentPlayer = await this.playerModel.findOne({ _id: playerId });
 
     if (currentTeam) {
@@ -63,7 +63,7 @@ export class TeamsService implements OnModuleInit {
         (player) => player.toString() !== playerId,
       );
       await currentTeam.save();
-      console.log(
+      this.logger.log(
         `Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`,
       );
       this.notificationsGateway.notifyTeamUpdate('' + currentTeam._id);
@@ -72,7 +72,7 @@ export class TeamsService implements OnModuleInit {
     if (currentPlayer) {
       currentPlayer.team = null;
       await currentPlayer.save();
-      console.log(`Le joueur ${playerId} n'est plus dans une équipe`);
+      this.logger.log(`Le joueur ${playerId} n'est plus dans une équipe`);
     }
 
     // Notifier via WebSocket que le joueur a été mis à jour
@@ -94,7 +94,7 @@ export class TeamsService implements OnModuleInit {
         (player) => player.toString() !== playerId,
       );
       await currentTeam.save();
-      console.log(
+      this.logger.log(
         `Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`,
       );
     }
@@ -108,7 +108,7 @@ export class TeamsService implements OnModuleInit {
     if (!newTeam.players.includes(playerId as unknown as Types.ObjectId)) {
       newTeam.players.push(playerId as unknown as Types.ObjectId);
       await newTeam.save();
-      console.log(
+      this.logger.log(
         `Le joueur ${playerId} a été ajouté à l'équipe ${newTeam.name}`,
       );
       this.notificationsGateway.notifyTeamUpdate('' + newTeam._id);

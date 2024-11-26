@@ -39,9 +39,9 @@ export class NotificationsGateway {
     client: any,
     data: { playerId: string; latitude: number; longitude: number },
   ) {
-    this.logger.log(
-      `handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`,
-    );
+    // this.logger.log(
+    //   `handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`,
+    // );
 
     // on cherche le joueur pour le mettre a jour
     const player = await this.playersService?.getPlayerByName(data.playerId);
@@ -60,7 +60,11 @@ export class NotificationsGateway {
     if (player.team?._id) {
       const team = await this.teamsService?.getTeamById(player.team._id);
       // this.logger.log(JSON.stringify(team, null, 2));
-      const payload = { team: player.team?._id, positions: [] };
+      const payload = {
+        team: team._id,
+        color: team.color,
+        positions: [],
+      };
       if (team) {
         team.players.forEach((p) => {
           const player = p as unknown as Player;

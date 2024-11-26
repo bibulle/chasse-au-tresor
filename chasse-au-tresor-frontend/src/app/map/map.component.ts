@@ -28,6 +28,8 @@ export class MapComponent implements OnInit, OnChanges {
   positionSubscription: Subscription | undefined;
   positionSubscriptionTeamId: string | undefined;
 
+  icons: { [id: string]: L.Icon } = {};
+
   constructor(
     private notificationsService: NotificationsService,
     private mapService: MapService
@@ -102,12 +104,13 @@ export class MapComponent implements OnInit, OnChanges {
       console.log('playerPositionUpdated');
       // console.log(data);
       // Ajouter ou mettre à jour les marqueurs sur la carte
-      data?.forEach((p) => {
+      data?.positions.forEach((p) => {
         if (this.markers.has(p.playerId)) {
           const marker = this.markers.get(p.playerId);
           marker?.setLatLng([p.latitude, p.longitude]);
+          marker?.setIcon(this.getIcon(data.color));
         } else {
-          const newMarker = L.marker([p.latitude, p.longitude]);
+          const newMarker = L.marker([p.latitude, p.longitude], {icon: this.getIcon(data.color)});
           this.map?.addLayer(newMarker);
           newMarker.bindPopup(`${p.playerId}`);
 
@@ -117,7 +120,7 @@ export class MapComponent implements OnInit, OnChanges {
       // Supprimer ou mettre à jour les marqueurs sur la carte
       if (newTeamId != 'all') {
         this.markers.forEach((marker, playerId) => {
-          if (!data?.find((d) => d.playerId === playerId)) {
+          if (!data?.positions.find((d) => d.playerId === playerId)) {
             this.map?.removeLayer(marker);
           }
         });
@@ -129,5 +132,22 @@ export class MapComponent implements OnInit, OnChanges {
     if (this.map) {
       this.map.invalidateSize();
     }
+  }
+
+  getIcon(color: string): L.Icon {
+    if (this.icons[color]) {
+      return this.icons[color];
+    }
+
+    const icon = new L.Icon({
+      iconUrl: `/assets/leaflet/marker-icon-2x-${color}.png`,
+      shadowUrl: `/assets/leaflet/marker-shadow.png`,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+    this.icons[color] = icon;
+    return icon;
   }
 }

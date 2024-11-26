@@ -50,6 +50,11 @@ export class Version {
   copyright = '';
 }
 
+export class PlayerPositionsUpdate {
+  team = '';
+  color = '';
+  positions: PlayerPosition[] = [];
+}
 export class PlayerPosition {
   playerId = '';
   latitude = 0;

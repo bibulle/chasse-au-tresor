@@ -7,7 +7,11 @@ import {
   ReplaySubject,
   Subscription,
 } from 'rxjs';
-import { Player, PlayerPosition } from '../reference/types';
+import {
+  Player,
+  PlayerPosition,
+  PlayerPositionsUpdate,
+} from '../reference/types';
 import { NotificationsService } from './notifications.service';
 
 @Injectable({
@@ -16,20 +20,19 @@ import { NotificationsService } from './notifications.service';
 export class MapService {
   map: Map | undefined;
 
-  private updateNotifier$ = new ReplaySubject<{
-    team: string;
-    positions: PlayerPosition[];
-  }>();
+  private updateNotifier$ = new ReplaySubject<PlayerPositionsUpdate>();
 
-  private positionsSubject = new BehaviorSubject<PlayerPosition[] | null>(null);
-  positions$: Observable<PlayerPosition[] | null> =
+  private positionsSubject = new BehaviorSubject<PlayerPositionsUpdate | null>(
+    null
+  );
+  positions$: Observable<PlayerPositionsUpdate | null> =
     this.positionsSubject.asObservable();
   positionsSubscription: Subscription | undefined;
 
   constructor(private notificationsService: NotificationsService) {
     this.notificationsService
       .listen('positionUpdated')
-      .subscribe((update: { team: string; positions: PlayerPosition[] }) => {
+      .subscribe((update: PlayerPositionsUpdate) => {
         this.updateNotifier$.next(update);
       });
   }
@@ -64,14 +67,14 @@ export class MapService {
       .pipe(
         filter((payload) => {
           // console.log(payload);
-          return (teamId === 'all' || payload.team === teamId);
+          return teamId === 'all' || payload.team === teamId;
         })
       ) // Filtrer les notifications pour cet team
       .subscribe((payload) => {
         console.log(
           'Mise à jour détectée via WebSocket. Déplacement des users...'
         );
-        this.positionsSubject.next(payload.positions);
+        this.positionsSubject.next(payload);
       });
   }
 }

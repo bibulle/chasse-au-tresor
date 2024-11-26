@@ -111,7 +111,8 @@ export class TeamComponent implements OnDestroy {
   }
 
   kickPlayer(player: any): void {
-    this.teamsService.removePlayerFromTeam(player._id, player.teamId).subscribe(() => {
+    console.log(player);
+    this.teamsService.removePlayerFromTeam(player._id, player.team).subscribe(() => {
       // this.loadTeams();
       //this.loadPlayers();
     });
