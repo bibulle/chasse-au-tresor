@@ -41,7 +41,10 @@ export class TeamRiddlesService {
       .findOne({ team: new Types.ObjectId(teamId), resolved: false }) // Non résolue
       .sort({ order: 1 }) // Trier par ordre croissant
       .populate('riddle') // Charger les détails de l'énigme
+      .populate({ path: 'hints', model: 'Hint' }) // Charger les détails de l'énigme
       .exec();
+
+    this.logger.debug(teamRiddle);
 
     if (!teamRiddle || !teamRiddle.riddle) {
       this.logger.log(`No current riddle found for team "${teamId}".`);

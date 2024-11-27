@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Logger,
-  Param,
-  Post,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 
 import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -32,12 +23,7 @@ export class SolutionsController {
     @UploadedFile() photo: Express.Multer.File,
   ) {
     const photoPath = photo ? photo.path : null; // Chemin de la photo sauvegardée
-    return this.solutionsService.createSolution(
-      playerId,
-      riddleId,
-      text,
-      photoPath,
-    );
+    return this.solutionsService.createSolution(playerId, riddleId, text, photoPath);
   }
 
   @Get('toggle/:solutionId/:validated')
@@ -45,7 +31,7 @@ export class SolutionsController {
     @Param('solutionId') solutionId: string,
     @Param('validated') validatedS: string,
   ): Promise<Solution> {
-    let validated: boolean|undefined;
+    let validated: boolean | undefined;
     if (validatedS.toLocaleLowerCase() === 'true') {
       validated = true;
     } else if (validatedS.toLocaleLowerCase() === 'false') {

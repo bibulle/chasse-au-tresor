@@ -36,6 +36,7 @@ export class TeamRiddle {
   order = 0;
   resolved = false;
   solutions: Solution[] = [];
+  hints: Hint[] = [];
 }
 export class Solution {
   _id = '';
@@ -43,6 +44,13 @@ export class Solution {
   photo: string = '';
   text: string = '';
   validated: boolean | undefined;
+}
+export class Hint {
+  _id = '';
+  description = '';
+  cost = 0;
+  isPurchased = false;
+  order = 1;
 }
 
 export class Version {

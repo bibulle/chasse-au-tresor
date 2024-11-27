@@ -17,6 +17,9 @@ export class TeamRiddle extends Document {
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Solution' }] })
   solutions: Types.ObjectId[];
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Hint' }] })
+  hints: Types.ObjectId[];
 }
 
 export const TeamRiddleSchema = SchemaFactory.createForClass(TeamRiddle);

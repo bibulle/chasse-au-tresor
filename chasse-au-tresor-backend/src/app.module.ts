@@ -12,6 +12,7 @@ import { SolutionsModule } from './solutions/solutions.module';
 import { TeamsModule } from './teams/teams.module';
 import { FilesController } from './files/files.controller';
 import { RequestLoggerMiddleware } from './request-logger/request-logger.middleware';
+import { HintsModule } from './hints/hints.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { RequestLoggerMiddleware } from './request-logger/request-logger.middlew
     ConfigModule.forRoot(),
     SolutionsModule,
     FilesModule,
+    HintsModule,
   ],
   controllers: [AppController, FilesController],
   providers: [AppService],

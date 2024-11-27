@@ -1,0 +1,28 @@
+<mat-card *ngIf="hints && hints.length != 0" class="hint-card">
+  <mat-card-header>
+    <mat-card-title> Indices </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="hint" *ngFor="let hint of hintsPurchased()">
+      {{ hint.description }}
+      <span class="hint-cost">{{ hint.cost }}<mat-icon>star</mat-icon></span>
+    </div>
+    <div class="next-hint" *ngIf="nextHintToPurchase()"></div>
+  </mat-card-content>
+  <mat-card-footer class="card-footer">
+    <button
+      *ngIf="nextHintToPurchase()"
+      mat-stroked-button
+      color="secondary"
+      (click)="purchaseHint(nextHintToPurchase()?._id)"
+    >
+      <div class="button-text">
+        <span>Nouvel indice</span
+        ><span *ngIf="nextHintToPurchase()?.cost" class="hint-cost"
+          >{{ nextHintToPurchase()?.cost }}<mat-icon color="yellow">star</mat-icon></span
+        >
+        <span *ngIf="!nextHintToPurchase()?.cost" class="hint-cost"> gratuit</span>
+      </div>
+    </button>
+  </mat-card-footer>
+</mat-card>
