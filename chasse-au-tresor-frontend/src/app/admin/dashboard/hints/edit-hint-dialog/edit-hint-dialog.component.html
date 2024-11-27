@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Éditer un indice</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="data.hint.description" rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Coût (en points)</mat-label>
+    <input matInput type="number" [(ngModel)]="data.hint.cost" min="0" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Ordre</mat-label>
+    <input matInput type="number" [(ngModel)]="data.hint.order" min="1" />
+  </mat-form-field>
+
+  <fieldset class="fieldset-outline">
+    <legend>État de l'indice</legend>
+    <mat-checkbox [(ngModel)]="data.hint.isPurchased"> Indice déjà acheté </mat-checkbox>
+  </fieldset>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-button color="primary" (click)="onSave()">Sauvegarder</button>
+  <button *ngIf="data.hint._id" mat-button color="warn" (click)="onDelete()">Supprimer définitivement</button>
+</div>

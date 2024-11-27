@@ -3,12 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -62,7 +57,7 @@ export class EditTeamRiddleDialogComponent implements OnInit {
   }
 
   onSave(): void {
-    this.dialogRef.close({ action:'save', data: this.data}); // Retourne les modifications
+    this.dialogRef.close({ action: 'save', data: this.data }); // Retourne les modifications
   }
 
   onFileSelected(event: any): void {
@@ -86,15 +81,17 @@ export class EditTeamRiddleDialogComponent implements OnInit {
 
   onDelete(): void {
     const confirmDialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
-      width: '300px' // Ajustez si nécessaire
+      width: '300px',
+      data: {
+        message: 'Êtes-vous sûr de vouloir supprimer cette énigme définitivement ?',
+      },
     });
-  
-    confirmDialogRef.afterClosed().subscribe(result => {
+
+    confirmDialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Confirme la suppression
-        this.dialogRef.close({ action:'delete', data: this.data}); // Notifie le composant parent
+        this.dialogRef.close({ action: 'delete', data: this.data }); // Notifie le composant parent
       }
     });
-    }
-
+  }
 }

@@ -21,9 +21,8 @@ export class TeamRiddlesService {
       .find({ team: new Types.ObjectId(teamId) })
       .sort({ order: 1 }) // Trier par ordre croissant
       .populate('riddle') // Charger les détails de l'énigme
-      .populate({ path: 'solutions', model: 'Solution', populate: 'player' }) // Charger les détails de l'énigme
-      // .populate({ path: 'solutions', model: 'Solution' }) // Charger les détails de l'énigme
-      // .populate({ path: 'solutions.player', model: 'Player' }) // Charger les détails de l'énigme
+      .populate({ path: 'solutions', model: 'Solution', populate: 'player' })
+      .populate({ path: 'hints', model: 'Hint' })
       .exec();
 
     if (!teamRiddles) {
@@ -41,10 +40,8 @@ export class TeamRiddlesService {
       .findOne({ team: new Types.ObjectId(teamId), resolved: false }) // Non résolue
       .sort({ order: 1 }) // Trier par ordre croissant
       .populate('riddle') // Charger les détails de l'énigme
-      .populate({ path: 'hints', model: 'Hint' }) // Charger les détails de l'énigme
+      .populate({ path: 'hints', model: 'Hint' })
       .exec();
-
-    this.logger.debug(teamRiddle);
 
     if (!teamRiddle || !teamRiddle.riddle) {
       this.logger.log(`No current riddle found for team "${teamId}".`);

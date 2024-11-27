@@ -86,6 +86,7 @@ export class TeamComponent implements OnInit, OnDestroy {
       oldTR.riddle = teamRiddle.riddle;
       oldTR.solutions = teamRiddle.solutions;
       oldTR.team = teamRiddle.team;
+      oldTR.hints = teamRiddle.hints;
     }
   }
 

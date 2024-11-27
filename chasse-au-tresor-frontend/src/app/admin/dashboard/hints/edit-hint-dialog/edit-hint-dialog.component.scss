@@ -1,0 +1,24 @@
+.full-width {
+  width: 100%;
+}
+
+.warning {
+  color: red;
+  font-size: 0.9em;
+}
+
+.fieldset-outline {
+  border: 1px solid rgba(0, 0, 0, 0.23); /* Même style que les mat-form-field */
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.fieldset-outline legend {
+  font-size: 0.875rem; /* Taille similaire aux labels des mat-form-field */
+  padding: 0 8px; /* Espacement autour du texte */
+  color: rgba(0, 0, 0, 0.6); /* Couleur légèrement grisée */
+}
+
+.fieldset-outline mat-checkbox {
+  margin-left: -8px;
+}

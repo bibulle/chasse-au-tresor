@@ -28,14 +28,17 @@ export class PlayerActionDialogComponent {
 
   onDelete(): void {
     const confirmDialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
-      width: '300px' // Ajustez si nécessaire
+      width: '300px',
+      data: {
+        message: 'Êtes-vous sûr de vouloir supprimer ce joueur définitivement ?',
+      },
     });
-  
-    confirmDialogRef.afterClosed().subscribe(result => {
+
+    confirmDialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Confirme la suppression
         this.dialogRef.close('delete'); // Notifie le composant parent
       }
     });
-    }
+  }
 }

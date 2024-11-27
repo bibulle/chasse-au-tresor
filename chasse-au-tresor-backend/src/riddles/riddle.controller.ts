@@ -22,9 +22,7 @@ export class RiddleController {
   constructor(private readonly riddleService: RiddleService) {}
 
   @Get(':riddleId/teams')
-  async getTeams(
-    @Param('riddleId') riddleId: string,
-  ): Promise<{ team: Team; order: number }[]> {
+  async getTeams(@Param('riddleId') riddleId: string): Promise<{ team: Team; order: number }[]> {
     return this.riddleService.getTeams(riddleId);
   }
 
@@ -57,16 +55,7 @@ export class RiddleController {
     const photoPath = file ? file.path : null; // Chemin de la photo sauvegardée
     const teams = JSON.parse(teamsS);
 
-    return this.riddleService.saveRiddle(
-      riddleId,
-      gain,
-      latitude,
-      longitude,
-      text,
-      photo,
-      photoPath,
-      teams,
-    );
+    return this.riddleService.saveRiddle(riddleId, gain, latitude, longitude, text, photo, photoPath, teams);
   }
 
   @Delete(':riddleId')

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Hint } from '../../../../../reference/types';
 
 @Component({
   selector: 'app-delete-confirm-dialog',
@@ -11,7 +12,10 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './delete-confirm-dialog.component.scss',
 })
 export class DeleteConfirmDialogComponent {
-  constructor(public dialogRef: MatDialogRef<DeleteConfirmDialogComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DeleteConfirmDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { message: string }
+  ) {}
 
   onCancel(): void {
     this.dialogRef.close(false);

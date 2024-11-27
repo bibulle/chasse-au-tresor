@@ -3,18 +3,17 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MapService } from '../../../core/map.service';
 import { RiddlesService } from '../../../core/riddles.service';
-import { TeamRiddlesService } from '../../../core/team-riddles.service';
 import { UserNotificationsService } from '../../../core/user-notifications.service';
 import { Riddle, Team, TeamRiddle } from '../../../reference/types';
 import { SolutionsComponent } from '../solutions/solutions.component';
 import { EditTeamRiddleDialogComponent } from './edit-team-riddle-dialog/edit-team-riddle-dialog.component';
-import { Observable } from 'rxjs';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MapService } from '../../../core/map.service';
+import { HintsComponent } from '../hints/hints.component';
 
 @Component({
   selector: 'app-admin-riddle',
@@ -27,7 +26,9 @@ import { MapService } from '../../../core/map.service';
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
+    MatExpansionModule,
     SolutionsComponent,
+    HintsComponent,
   ],
   templateUrl: './riddle.component.html',
   styleUrl: './riddle.component.scss',
