@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -25,15 +20,8 @@ export class SolutionsService {
     private notificationsGateway: NotificationsGateway,
   ) {}
 
-  async createSolution(
-    playerId: string,
-    teamRiddleId: string,
-    text: string,
-    photoPath: string,
-  ): Promise<Solution> {
-    this.logger.log(
-      `createSolution(${playerId}, ${teamRiddleId}, ${text}, ${photoPath})`,
-    );
+  async createSolution(playerId: string, teamRiddleId: string, text: string, photoPath: string): Promise<Solution> {
+    this.logger.log(`createSolution(${playerId}, ${teamRiddleId}, ${text}, ${photoPath})`);
 
     // Validation du chemin de la photo
     photoPath = this.validatePhotoPath(photoPath);
@@ -73,10 +61,7 @@ export class SolutionsService {
     return savedSolution;
   }
 
-  async toggleValidated(
-    solutionId: string,
-    validated: boolean | undefined,
-  ): Promise<Solution> {
+  async toggleValidated(solutionId: string, validated: boolean | undefined): Promise<Solution> {
     // search solution
     let solution = await this.solutionModel.findOne({ _id: solutionId });
 
@@ -113,8 +98,7 @@ export class SolutionsService {
 
   async removeOrphanSolutions(): Promise<number> {
     // Step 1: Find all solution IDs referenced in TeamRiddle
-    const referencedSolutions =
-      await this.teamRiddleModel.distinct('solutions');
+    const referencedSolutions = await this.teamRiddleModel.distinct('solutions');
 
     // Step 2: Find orphan solutions (not in referencedSolutions)
     const orphanSolutions = await this.solutionModel.find({

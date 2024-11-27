@@ -1,0 +1,52 @@
+.hint-card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: absolute;
+  bottom: 10px;
+  left: 300px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  z-index: 1000;
+
+  .card-content {
+    display: flex;
+    gap: 5px;
+  }
+  .hint:not(:first-child) {
+    border-top: 1px solid lightblue;
+  }
+  .hint {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .hint-cost {
+      font-size: 0.8em;
+      padding-left: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+    mat-icon {
+      flex-shrink: 0;
+      color: gold;
+    }
+  }
+
+  mat-card-footer {
+    padding: 16px;
+    .button-text {
+      display: flex;
+      align-items: center;
+
+      .hint-cost {
+        font-size: 0.8em;
+        padding-left: 24px;
+        display: flex;
+        align-items: center;
+      }
+      mat-icon {
+        flex-shrink: 0;
+        color: gold;
+      }
+    }
+  }
+}

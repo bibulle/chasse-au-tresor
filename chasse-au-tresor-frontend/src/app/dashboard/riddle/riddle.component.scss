@@ -6,15 +6,33 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   width: 300px;
   z-index: 1000;
-}
 
-.card-content {
-  display: flex;
-  gap: 5px;
-}
-mat-card-footer {
-  padding: 16px;
-  button {
-    margin-right: 8px;
+  mat-card-header {
+    align-items: center;
+    padding-bottom: 8px;
+    .titre {
+      font-size: 1.4em;
+    }
+    .spacer {
+      flex: 1 1 auto;
+    }
+    .gain {
+      font-size: 0.8em;
+    }
+    mat-icon {
+      color: gold;
+    }
+  }
+  .card-content {
+    display: flex;
+    gap: 5px;
+  }
+
+  .card-footer {
+    display: flex;
+    padding: 16px;
+    .spacer {
+      flex: 1 1 auto;
+    }
   }
 }

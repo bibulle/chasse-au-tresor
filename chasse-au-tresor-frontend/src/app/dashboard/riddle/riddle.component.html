@@ -1,24 +1,24 @@
-
 <mat-card *ngIf="teamRiddle?.riddle" class="enigme-card">
   <mat-card-header>
-    <mat-card-title> Énigme en cours </mat-card-title>
-    <mat-card-subtitle>
-      pour {{ teamRiddle?.riddle?.gain }} points
-    </mat-card-subtitle>
+    <!-- <mat-card-title> -->
+    <span class="titre">Énigme en cours</span>
+    <span class="spacer"></span>
+    <span class="gain">{{ teamRiddle?.riddle?.gain }}</span
+    ><mat-icon color="yellow">star</mat-icon>
+    <!-- </mat-card-title> -->
+    <!-- <mat-card-subtitle> pour {{ teamRiddle?.riddle?.gain }} points </mat-card-subtitle> -->
   </mat-card-header>
   <mat-card-content>
     <div class="card-content">
-      <img *ngIf="teamRiddle?.riddle?.photo"
-        mat-card-md-image
-        src="/api/files{{teamRiddle?.riddle?.photo}}"
-      />
+      <img *ngIf="teamRiddle?.riddle?.photo" mat-card-md-image src="/api/files{{ teamRiddle?.riddle?.photo }}" />
       <div>{{ teamRiddle?.riddle?.text }}</div>
     </div>
   </mat-card-content>
   <mat-card-footer class="card-footer">
-    <button mat-mini-fab color="secondary" (click)="showHint()">
+    <button *ngIf="teamRiddle?.hints?.length" mat-mini-fab color="secondary" (click)="toggleHints.emit()">
       <mat-icon>help</mat-icon>
     </button>
+    <div class="spacer"></div>
     <button mat-mini-fab color="primary" (click)="openSubmitSolutionDialog()">
       <mat-icon>lightbulb</mat-icon>
     </button>

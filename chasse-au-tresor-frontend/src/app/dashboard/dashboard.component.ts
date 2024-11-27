@@ -11,17 +11,20 @@ import { CommonModule } from '@angular/common';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { UserNotificationsService } from '../core/user-notifications.service';
 import { MapComponent } from '../map/map.component';
+import { HintsComponent } from './hints/hints.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent, MapComponent],
+  imports: [CommonModule, HeaderComponent, RiddleComponent, HeaderComponent, MapComponent, HintsComponent],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   player: Player | null = null;
   teamId: string | undefined;
+
+  showHints = false;
 
   currentTeamRiddle: TeamRiddle | null = null;
   resolvedTeamRiddles: TeamRiddle[] = [];
@@ -104,6 +107,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.resolvedTeamRiddles = teamRiddle ? teamRiddle : [];
       });
     }
+  }
+
+  toggleHints() {
+    console.log(`toggleHints()`);
+    this.showHints = !this.showHints;
   }
 
   trackPosition(playerId: string) {
