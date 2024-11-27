@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.4](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.3...v0.6.4) (2024-11-27)
+
+
+### Features
+
+* ajouter les indices (par équipe/énigme)  pour player ([eaf018a](https://github.com/bibulle/chasse-au-tresor/commit/eaf018a1601484b8bda3f2923a948cfffc0e1f3f)), closes [#5](https://github.com/bibulle/chasse-au-tresor/issues/5)
+* ajouter les indices coté admin (par équipe/énigme) ([b5f542e](https://github.com/bibulle/chasse-au-tresor/commit/b5f542e1c0630eade069ad56f876a5789f30b210)), closes [#5](https://github.com/bibulle/chasse-au-tresor/issues/5)
+
 ### [0.6.3](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.2...v0.6.3) (2024-11-26)
 
 
