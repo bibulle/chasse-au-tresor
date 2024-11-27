@@ -1,0 +1,27 @@
+.mat-column-order,
+.mat-column-cost,
+.mat-column-status,
+.mat-column-edit {
+  justify-content: center;
+  flex: 1 1 10%;
+}
+.mat-column-text {
+  flex: 1 1 100%;
+}
+
+.hint-cost {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    color: gold;
+  }
+}
+.mat-green {
+  color: green;
+}
+.mat-red {
+  color: red;
+}
+.mat-grey {
+  color: lightgray;
+}

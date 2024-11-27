@@ -1,0 +1,50 @@
+<mat-table *ngIf="hints" [dataSource]="hints" class="mat-elevation-z8">
+  <ng-container matColumnDef="text">
+    <mat-header-cell *matHeaderCellDef> Texte </mat-header-cell>
+    <mat-cell *matCellDef="let hint">
+      {{ hint.description }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cost">
+    <mat-header-cell *matHeaderCellDef> Coût </mat-header-cell>
+    <mat-cell *matCellDef="let hint">
+      <span class="hint-cost">{{ hint.cost }}<mat-icon>star</mat-icon></span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="order">
+    <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
+    <mat-cell *matCellDef="let hint">
+      {{ hint.order }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> Acheté </mat-header-cell>
+    <mat-cell *matCellDef="let hint">
+      <!-- <button *ngIf="hint.isPurchased" mat-icon-button aria-label="Acheté" color="green"> -->
+      <mat-icon *ngIf="hint.isPurchased" color="green">check</mat-icon>
+      <!-- </button> -->
+      <!-- <button *ngIf="!hint.isPurchased" mat-icon-button aria-label="A acheter" color="grey"> -->
+      <mat-icon *ngIf="!hint.isPurchased" color="grey">close</mat-icon>
+      <!-- </button> -->
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button aria-label="Edit" (click)="onEdit($event)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let hint">
+      <button mat-icon-button aria-label="Edit" (click)="onEdit($event, hint)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

@@ -17,16 +17,8 @@
   <ng-container matColumnDef="photo">
     <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
     <mat-cell *matCellDef="let solution">
-      <div
-        class="image-container"
-        (click)="openPhotoClick(solution.photo)"
-      >
-        <img
-          *ngIf="solution.photo"
-          [src]="'/api/files' + solution.photo"
-          alt="Photo"
-          class="solution-photo"
-        />
+      <div class="image-container" (click)="openPhotoClick(solution.photo)">
+        <img *ngIf="solution.photo" [src]="'/api/files' + solution.photo" alt="Photo" class="solution-photo" />
       </div>
     </mat-cell>
   </ng-container>
@@ -68,11 +60,6 @@
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
 
-<div
-  class="image-popup"
-  *ngIf="isHovered"
-  [style.top.px]="popupPosition.y"
-  [style.left.px]="popupPosition.x"
->
+<div class="image-popup" *ngIf="isHovered" [style.top.px]="popupPosition.y" [style.left.px]="popupPosition.x">
   <img [src]="'/api/files' + hoveredPhoto" alt="Aperçu de la photo" />
 </div>

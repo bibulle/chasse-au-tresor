@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -93,9 +88,7 @@ export class RiddleService {
     teamOrders.forEach(async (to) => {
       // console.log(`--- ${to.team.name} --- ${to.order}`);
 
-      const oldTeamRiddle = oldTeamRiddles.find(
-        (tr) => tr.team.toString() === to.team._id,
-      );
+      const oldTeamRiddle = oldTeamRiddles.find((tr) => tr.team.toString() === to.team._id);
 
       // console.log(`oldTeamRiddle : ${oldTeamRiddle?._id}`);
       if (!oldTeamRiddle && to.order != 0) {
@@ -223,9 +216,7 @@ export class RiddleService {
     // 1. Trouver le joueur par username
     const player = await this.playerModel.findOne({ username }).exec();
     if (!player) {
-      throw new NotFoundException(
-        `Player with username "${username}" not found.`,
-      );
+      throw new NotFoundException(`Player with username "${username}" not found.`);
     }
 
     // 2. Trouver les énigmes associées à l'équipe du joueur
@@ -236,9 +227,7 @@ export class RiddleService {
       .exec();
 
     if (!teamRiddle || !teamRiddle.riddle) {
-      throw new NotFoundException(
-        `No current riddle found for player "${username}".`,
-      );
+      throw new NotFoundException(`No current riddle found for player "${username}".`);
     }
 
     // 3. Retourner l'énigme courante

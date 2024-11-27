@@ -7,10 +7,12 @@ import { Hint } from '../reference/types';
   providedIn: 'root',
 })
 export class HintsService {
+  private apiUrl = '/api/hints';
+
   constructor(private http: HttpClient) {}
 
   loadHints(teamRiddleId: string | null): Observable<Hint[]> {
-    return this.http.get<Hint[]>(`/api/hints/${teamRiddleId}`);
+    return this.http.get<Hint[]>(`${this.apiUrl}/${teamRiddleId}`);
   }
 
   purchaseHint(hintId: string | undefined): Observable<void> {
@@ -18,6 +20,14 @@ export class HintsService {
     if (!hintId) {
       of();
     }
-    return this.http.get<void>(`/api/hints/${hintId}/purchase`);
+    return this.http.get<void>(`${this.apiUrl}/${hintId}/purchase`);
+  }
+
+  saveHint(hint: Hint, teamRiddleId: string): Observable<Hint> {
+    return this.http.post<Hint>(`${this.apiUrl}`, { hint: hint, teamRiddleId: teamRiddleId });
+  }
+
+  deleteHint(hint: Hint): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${hint._id}`);
   }
 }
