@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.7](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.6...v0.6.7) (2024-11-28)
+
+
+### Features
+
+* action needed added to teams ([ff939b6](https://github.com/bibulle/chasse-au-tresor/commit/ff939b66be979deb1028d41c524661b28824bb05))
+
 ### [0.6.6](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.5...v0.6.6) (2024-11-28)
 
 
