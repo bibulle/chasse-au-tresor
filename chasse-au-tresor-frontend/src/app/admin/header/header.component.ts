@@ -73,16 +73,13 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.riddleService.saveRiddle(result).subscribe({
+        this.riddleService.saveRiddle(result.data).subscribe({
           next: () => {
             this.userNotificationsService.success('Énigme sauvegardée.');
           },
           error: (err) => {
             console.log(err);
-            this.userNotificationsService.error(
-              'Erreur lors de la sauvegarde :',
-              err.message
-            );
+            this.userNotificationsService.error('Erreur lors de la sauvegarde :', err.message);
           },
         });
       }
