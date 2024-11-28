@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { TeamRiddlesService } from '../core/team-riddles.service';
 import { NotificationsService } from '../core/notifications.service';
@@ -13,6 +13,8 @@ import { UserNotificationsService } from '../core/user-notifications.service';
 import { MapComponent } from '../map/map.component';
 import { HintsComponent } from './hints/hints.component';
 import { TeamsService } from '../core/teams.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SolutionPopupComponent } from './solution-popup/solution-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,6 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private riddleService: TeamRiddlesService,
     private notificationsService: NotificationsService,
     private router: Router,
+    private dialog: MatDialog,
     private playerService: PlayerService,
     private userNotificationsService: UserNotificationsService
   ) {}
@@ -71,6 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.teamSubscription.unsubscribe();
     }
   }
+
   async initPlayer(username: string) {
     this.player = await firstValueFrom(this.playerService.loadUser(username));
     if (!this.player) {
@@ -142,6 +146,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.resolvedTeamRiddles = await firstValueFrom(this.riddleService.loadResolvedTeamRiddle(this.teamId));
       this.riddleResolvedSubscription = this.riddleService.resolvedTeamRiddleSubject$.subscribe((teamRiddle) => {
         this.resolvedTeamRiddles = teamRiddle ? teamRiddle : [];
+        // check if new Resolved riddle
+        this.sendPopupIfNewResolvedRiddle(this.resolvedTeamRiddles);
       });
     }
   }
@@ -170,6 +176,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
     } else {
       this.userNotificationsService.error('La géolocalisation n’est pas supportée par ce navigateur.', null);
+    }
+  }
+
+  sendPopupIfNewResolvedRiddle(resolvedTeamRiddles: TeamRiddle[]) {
+    const lastResolved = resolvedTeamRiddles.sort((tr1, tr2) => tr1.order - tr2.order).at(-1);
+    if (!lastResolved) {
+      return;
+    }
+
+    const previousResolvedId = localStorage.getItem('lastResolvedRiddleId');
+
+    if (previousResolvedId !== lastResolved._id) {
+      localStorage.setItem('lastResolvedRiddleId', lastResolved._id);
+
+      const dialogRef = this.dialog.open(SolutionPopupComponent, {
+        //width: '400px',
+        data: {
+          lastResolved: lastResolved,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('Popup fermée.');
+      });
     }
   }
 }

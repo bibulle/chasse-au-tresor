@@ -33,11 +33,12 @@ export class RiddleService {
     longitude: number,
     text: string,
     photo: string,
+    trivia: string,
     photoPath: string,
     teamOrders: { team: Team; order: number }[],
   ) {
     this.logger.log(
-      `saveRiddle(${riddleId}, ${gain}, ${latitude}, ${longitude}, ${text}, ${photo}, ${photoPath}, ${teamOrders?.length})`,
+      `saveRiddle(${riddleId}, ${gain}, ${latitude}, ${longitude}, ${text}, ${photo}, ${trivia}, ${photoPath}, ${teamOrders?.length})`,
     );
 
     // Validation du chemin de la photo
@@ -56,6 +57,7 @@ export class RiddleService {
         longitude: longitude,
         text: text,
         photo: photo,
+        trivia: trivia,
       });
 
       // Sauvegarder la solution
@@ -76,6 +78,7 @@ export class RiddleService {
       oldRiddle.longitude = longitude;
       oldRiddle.text = text;
       oldRiddle.photo = photo;
+      oldRiddle.trivia = trivia;
 
       await oldRiddle.save();
     }

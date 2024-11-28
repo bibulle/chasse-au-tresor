@@ -58,6 +58,7 @@ export class TeamRiddlesService {
       .find({ team: new Types.ObjectId(teamId), resolved: true }) // Non résolue
       .sort({ order: 1 }) // Trier par ordre croissant
       .populate('riddle') // Charger les détails de l'énigme
+      .populate({ path: 'solutions', model: 'Solution', populate: 'player' }) // Charger les détails de l'énigme
       .exec();
 
     if (!teamRiddles) {

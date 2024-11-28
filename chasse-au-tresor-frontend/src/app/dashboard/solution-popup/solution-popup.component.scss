@@ -1,0 +1,46 @@
+.popup-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-title {
+  font-size: 1.8rem;
+  color: #4caf50;
+  margin-bottom: 16px;
+}
+
+.popup-message {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+.solution-photo {
+  max-width: 90%;
+}
+
+.popup-trivia {
+  flex: 1; /* Permet de s'étendre pour occuper l'espace disponible */
+  overflow-y: auto; /* Active le défilement vertical si nécessaire */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Ligne pour séparer */
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.popup-trivia h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #ff9800;
+}
+
+.popup-trivia p {
+  font-size: 1rem;
+  color: #666;
+}
+
+button {
+  margin-top: 16px;
+}
