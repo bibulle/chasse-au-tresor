@@ -4,7 +4,9 @@
     <span class="titre">Énigme en cours</span>
     <span class="spacer"></span>
     <span class="gain"
-      ><span class="gain-initial">{{ teamRiddle?.riddle?.gain }}</span
+      ><span *ngIf="teamRiddle?.riddle?.gain !== calculatedGain()" class="gain-initial">{{
+        teamRiddle?.riddle?.gain
+      }}</span
       ><span class="gain-calculated">{{ calculatedGain() }}</span></span
     ><mat-icon color="yellow">star</mat-icon>
     <!-- </mat-card-title> -->
