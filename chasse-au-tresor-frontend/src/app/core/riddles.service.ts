@@ -45,16 +45,17 @@ export class RiddlesService {
 
   saveRiddle(data: any) {
     console.log(data);
+    console.log(data.data.riddle);
     const formData = new FormData();
-    if (data.riddle._id) formData.append('_id', data.riddle._id);
-    if (data.riddle.gain) formData.append('gain', data.riddle.gain);
-    if (data.riddle.latitude) formData.append('latitude', data.riddle.latitude);
-    if (data.riddle.longitude) formData.append('longitude', data.riddle.longitude);
-    if (data.riddle.photo) formData.append('photo', data.riddle.photo);
-    if (data.riddle.trivia) formData.append('trivia', data.riddle.trivia);
-    if (data.riddle.text) formData.append('text', data.riddle.text);
-    if (data.selectedFile) formData.append('file', data.selectedFile);
-    if (data.teams) formData.append('teams', JSON.stringify(data.teams));
+    if (data.data.riddle._id) formData.append('_id', data.data.riddle._id);
+    if (data.data.riddle.gain) formData.append('gain', data.data.riddle.gain);
+    if (data.data.riddle.latitude) formData.append('latitude', data.data.riddle.latitude);
+    if (data.data.riddle.longitude) formData.append('longitude', data.data.riddle.longitude);
+    if (data.data.riddle.photo) formData.append('photo', data.data.riddle.photo);
+    if (data.data.riddle.trivia) formData.append('trivia', data.data.riddle.trivia);
+    if (data.data.riddle.text) formData.append('text', data.data.riddle.text);
+    if (data.data.selectedFile) formData.append('file', data.data.selectedFile);
+    if (data.data.teams) formData.append('teams', JSON.stringify(data.data.teams));
 
     return this.http.post('/api/riddles', formData);
   }
