@@ -32,7 +32,7 @@ export class NotificationsGateway {
   // Exemple de méthode pour mettre à jour la position
   @SubscribeMessage('updatePosition')
   async handleUpdatePosition(client: any, data: { playerId: string; latitude: number; longitude: number }) {
-    this.logger.log(`handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`);
+    // this.logger.log(`handleUpdatePosition(${data.playerId}, ${data.latitude}, ${data.longitude})`);
 
     // on cherche le joueur pour le mettre a jour
     const player = await this.playersService?.getPlayerByName(data.playerId);
