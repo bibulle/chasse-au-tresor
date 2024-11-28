@@ -52,6 +52,7 @@ export class HintsService {
     await teamRiddle.save();
 
     // reorder hints
+    await this.removeOrphanHints();
     await this.reorderHints(teamRiddle, hintId);
 
     this.notificationsGateway.notifyRiddleUpdate(teamRiddle.team.toString());
@@ -77,6 +78,7 @@ export class HintsService {
       const newHint = await oldHint.save();
 
       teamRiddle = await this.teamRiddleModel.findById(teamRiddleId).populate({ path: 'hints', model: 'Hint' });
+      await this.removeOrphanHints();
       await this.reorderHints(teamRiddle, newHint._id.toString());
 
       this.notificationsGateway.notifyRiddleUpdate(teamRiddle.team.toString());
@@ -94,6 +96,7 @@ export class HintsService {
       teamRiddle = await teamRiddle.save();
 
       teamRiddle = await this.teamRiddleModel.findById(teamRiddleId).populate({ path: 'hints', model: 'Hint' });
+      await this.removeOrphanHints();
       await this.reorderHints(teamRiddle, newHint._id.toString());
 
       this.notificationsGateway.notifyRiddleUpdate(teamRiddle.team.toString());
@@ -127,5 +130,23 @@ export class HintsService {
       }
     });
     await teamRiddle.save();
+  }
+
+  async removeOrphanHints(): Promise<number> {
+    // Step 1: Find all hint IDs referenced in TeamRiddle
+    const referencedHints = await this.teamRiddleModel.distinct('hints');
+
+    // Step 2: Find orphan hint (not in referencedSolutions)
+    const orphanHints = await this.hintModel.find({
+      _id: { $nin: referencedHints },
+    });
+
+    // Step 3: Delete orphan hints
+    const deleteResult = await this.hintModel.deleteMany({
+      _id: { $in: orphanHints.map((sol) => sol._id) },
+    });
+
+    // Return the number of deleted solutions
+    return deleteResult.deletedCount;
   }
 }
