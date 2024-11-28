@@ -31,4 +31,16 @@ export class RiddleComponent {
       },
     });
   }
+
+  calculatedGain(): number {
+    let calculated = this.teamRiddle?.riddle?.gain ? this.teamRiddle?.riddle?.gain : 0;
+
+    this.teamRiddle?.hints
+      .filter((h) => h.isPurchased)
+      .forEach((h) => {
+        calculated -= h.cost;
+      });
+
+    return calculated;
+  }
 }

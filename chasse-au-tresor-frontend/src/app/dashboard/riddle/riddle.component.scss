@@ -18,6 +18,14 @@
     }
     .gain {
       font-size: 0.8em;
+
+      .gain-initial {
+        text-decoration: line-through;
+        // text-decoration-color: grey;
+        text-decoration-style: solid;
+        text-decoration-thickness: 2px;
+        padding-right: 4px;
+      }
     }
     mat-icon {
       color: gold;

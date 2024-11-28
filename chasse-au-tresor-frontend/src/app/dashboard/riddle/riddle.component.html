@@ -3,7 +3,9 @@
     <!-- <mat-card-title> -->
     <span class="titre">Énigme en cours</span>
     <span class="spacer"></span>
-    <span class="gain">{{ teamRiddle?.riddle?.gain }}</span
+    <span class="gain"
+      ><span class="gain-initial">{{ teamRiddle?.riddle?.gain }}</span
+      ><span class="gain-calculated">{{ calculatedGain() }}</span></span
     ><mat-icon color="yellow">star</mat-icon>
     <!-- </mat-card-title> -->
     <!-- <mat-card-subtitle> pour {{ teamRiddle?.riddle?.gain }} points </mat-card-subtitle> -->
