@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -40,6 +40,9 @@ export class RiddleComponent implements OnInit, OnChanges {
   @Input() teamRiddle: TeamRiddle | undefined;
   @Input() riddle: Riddle | undefined;
 
+  @Output() actionNeeded = new EventEmitter<boolean>();
+  actionNeededState = false;
+
   teamOrder: { team: Team; order: number }[] = [];
 
   constructor(
@@ -73,26 +76,17 @@ export class RiddleComponent implements OnInit, OnChanges {
     // }
   }
 
+  actionNeededStateChange(state: boolean) {
+    console.log(`actionNeededStateChange(${state})`);
+    this.actionNeededState = state;
+    this.actionNeeded.emit(state);
+  }
+
   loadTeamsOrder() {
     const riddleId = this.teamRiddle ? this.teamRiddle.riddle?._id : this.riddle?._id;
     this.riddleService.getRiddleTeamOrder(riddleId).subscribe((teamOrder) => {
       this.teamOrder = teamOrder;
     });
-  }
-
-  actionNeeded() {
-    //console.log('actionNeeded');
-    if (!this.teamRiddle) {
-      return false;
-    }
-
-    let ret = false;
-    this.teamRiddle.solutions.forEach((sol) => {
-      if (sol.validated !== true && sol.validated !== false) {
-        ret = true;
-      }
-    });
-    return ret;
   }
 
   onEdit(event: any) {

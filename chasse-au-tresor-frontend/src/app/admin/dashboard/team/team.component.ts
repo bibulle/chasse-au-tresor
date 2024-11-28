@@ -13,16 +13,28 @@ import { TeamsService } from '../../../core/teams.service';
 import { Player, Team, TeamRiddle } from '../../../reference/types';
 import { RiddleComponent } from '../riddle/riddle.component';
 import { PlayerActionDialogComponent } from './player-action-dialog/player-action-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin-team',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatChipsModule, RiddleComponent],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatChipsModule,
+    RiddleComponent,
+  ],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
 })
 export class TeamComponent implements OnInit, OnDestroy {
   @Input() team: Team | undefined;
+
+  actionNeededStateGlobal = false;
+  actionNeededStateByRiddle: { [key: string]: boolean } = {};
 
   teamRiddles: TeamRiddle[] = [];
   teamRiddleSubscription: Subscription | undefined;
@@ -43,6 +55,12 @@ export class TeamComponent implements OnInit, OnDestroy {
     if (this.teamRiddleSubscription) {
       this.teamRiddleSubscription.unsubscribe();
     }
+  }
+
+  actionNeededStateChange(state: boolean, teamRiddleId: string) {
+    console.log(`actionNeededStateChange(${state}, ${teamRiddleId})`);
+    this.actionNeededStateByRiddle[teamRiddleId] = state;
+    this.actionNeededStateGlobal = Object.values(this.actionNeededStateByRiddle).some((b) => b);
   }
 
   async loadRiddlesForTeam(): Promise<void> {

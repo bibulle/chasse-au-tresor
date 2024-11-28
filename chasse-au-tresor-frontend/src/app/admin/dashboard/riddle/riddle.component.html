@@ -2,7 +2,7 @@
   *ngIf="teamRiddle?.riddle || riddle"
   [ngClass]="{
     resolved: teamRiddle ? teamRiddle.resolved : false,
-    'action-needed': actionNeeded()
+    'action-needed': actionNeededState
   }"
 >
   <mat-expansion-panel-header>
@@ -11,33 +11,44 @@
     <mat-icon class="icon-not-resolved" title="Non résolue">close</mat-icon>
     <mat-icon class="icon-action-needed" title="Action nécessaire">priority_high</mat-icon>
   </mat-expansion-panel-header>
-  <div class="riddle-description">
-    <img
-      *ngIf="teamRiddle ? teamRiddle.riddle?.photo : riddle?.photo"
-      [src]="'/api/files' + (teamRiddle ? teamRiddle.riddle?.photo : riddle?.photo)"
-      alt="Photo"
-      class="riddle-photo"
-    />
-    <span>Gain: {{ teamRiddle ? teamRiddle.riddle?.gain : riddle?.gain }}</span>
-
-    <div class="teams">
-      <div *ngFor="let item of teamOrder">
-        <span class="name">{{ item.team.name }} :</span>
-        <span *ngIf="item.order === 0" class="order"> </span>
-        <span *ngIf="item.order !== 0" class="order">{{ item.order }}</span>
-      </div>
-    </div>
-    <button mat-icon-button aria-label="Edit" (click)="onEdit($event)">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </div>
   <mat-accordion>
     <mat-expansion-panel
       ><mat-expansion-panel-header>
-        <mat-panel-title class="team-name">Solutions</mat-panel-title>
+        <mat-panel-title class="team-name">Detail</mat-panel-title>
         <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-admin-solutions *ngIf="teamRiddle" [solutions]="teamRiddle.solutions"></app-admin-solutions>
+      <div class="riddle-description">
+        <img
+          *ngIf="teamRiddle ? teamRiddle.riddle?.photo : riddle?.photo"
+          [src]="'/api/files' + (teamRiddle ? teamRiddle.riddle?.photo : riddle?.photo)"
+          alt="Photo"
+          class="riddle-photo"
+        />
+        <span>Gain: {{ teamRiddle ? teamRiddle.riddle?.gain : riddle?.gain }}</span>
+
+        <div class="teams">
+          <div *ngFor="let item of teamOrder">
+            <span class="name">{{ item.team.name }} :</span>
+            <span *ngIf="item.order === 0" class="order"> </span>
+            <span *ngIf="item.order !== 0" class="order">{{ item.order }}</span>
+          </div>
+        </div>
+        <button mat-icon-button aria-label="Edit" (click)="onEdit($event)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      ><mat-expansion-panel-header>
+        <mat-panel-title class="team-name">Solutions</mat-panel-title>
+        <mat-icon class="icon-action-needed" title="Action nécessaire">priority_high</mat-icon>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-admin-solutions
+        *ngIf="teamRiddle"
+        [solutions]="teamRiddle.solutions"
+        (actionNeeded)="actionNeededStateChange($event)"
+      ></app-admin-solutions>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>

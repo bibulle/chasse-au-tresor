@@ -21,3 +21,13 @@
 
 .team-riddles {
 }
+
+.icon-action-needed {
+  color: red;
+  padding-right: 16px;
+  opacity: 0;
+  // display: none;
+}
+.action-needed .icon-action-needed {
+  opacity: 1;
+}

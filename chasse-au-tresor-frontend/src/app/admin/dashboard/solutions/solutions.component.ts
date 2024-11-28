@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Solution } from '../../../reference/types';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,8 +16,11 @@ import { UserNotificationsService } from '../../../core/user-notifications.servi
   templateUrl: './solutions.component.html',
   styleUrl: './solutions.component.scss',
 })
-export class SolutionsComponent {
+export class SolutionsComponent implements OnChanges {
   @Input() solutions: Solution[] | undefined = [];
+
+  @Output() actionNeeded = new EventEmitter<boolean>();
+  actionNeededState: boolean = false;
 
   displayedColumns = ['player', 'text', 'photo', 'status'];
 
@@ -25,24 +28,39 @@ export class SolutionsComponent {
   hoveredPhoto: string | null = null; // Stocke l'URL de la photo survolée
   popupPosition = { x: 0, y: 0 }; // Position du popup
 
-  constructor(private readonly adminService: AdminService, private readonly dialog: MatDialog, private readonly userNotificationsService: UserNotificationsService) {};
+  constructor(
+    private readonly adminService: AdminService,
+    private readonly dialog: MatDialog,
+    private readonly userNotificationsService: UserNotificationsService
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['solutions']?.currentValue) {
+      this.calculateIfActionNeeded();
+    }
+  }
 
   openPhotoClick(photoUrl: string) {
     this.dialog.open(PhotoViewerComponent, {
       data: { photoUrl },
-      panelClass: 'custom-dialog-container', 
-      autoFocus: false 
-      });
+      panelClass: 'custom-dialog-container',
+      autoFocus: false,
+    });
+  }
+
+  calculateIfActionNeeded() {
+    const state = this.solutions?.some((s) => s.validated === undefined);
+    this.actionNeededState = state !== undefined ? state : false;
+    this.actionNeeded.emit(this.solutions?.some((s) => s.validated === undefined));
   }
 
   onStatusClick(solution: Solution, status: boolean) {
-
-    if ((solution.validated === false && status === true) ||  (solution.validated === true && status === false)) {
+    if ((solution.validated === false && status === true) || (solution.validated === true && status === false)) {
       solution.validated = undefined;
     } else {
       solution.validated = status;
     }
-   
+
     // Mise à jour du statut dans le backend
     this.adminService.updateSolutionStatus(solution).subscribe({
       next: () => {
@@ -54,6 +72,5 @@ export class SolutionsComponent {
         this.userNotificationsService.error('Une erreur est survenue lors de la mise à jour du statut.', err);
       },
     });
-    }
-    
+  }
 }
