@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.6](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.5...v0.6.6) (2024-11-28)
+
+
+### Bug Fixes
+
+* correct for small screens ([79ce036](https://github.com/bibulle/chasse-au-tresor/commit/79ce036430fc83f7f90f9659a7830004eeb220d1))
+* don't show gain if no hint are purchased ([d822df7](https://github.com/bibulle/chasse-au-tresor/commit/d822df76dbd917240c20d0ab4980a438d95d63f1))
+
 ### [0.6.5](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.3...v0.6.5) (2024-11-28)
 
 
