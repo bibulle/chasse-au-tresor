@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.5](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.3...v0.6.5) (2024-11-28)
+
+
+### Features
+
+* add a nice animation on score changed ([4f501dc](https://github.com/bibulle/chasse-au-tresor/commit/4f501dca9144bf044297832c70a273aebdfad27e))
+* add calculated gain for a riddle ([5395a79](https://github.com/bibulle/chasse-au-tresor/commit/5395a79ae2128a1e966c685042963a27df9b0f9d))
+* add remove orphan hints ([6bfe6cc](https://github.com/bibulle/chasse-au-tresor/commit/6bfe6cc54370f3ff6280f6711c15776de373b0d2))
+* add score calculation ([1a825a9](https://github.com/bibulle/chasse-au-tresor/commit/1a825a932adeb704219e94adae70d1f650821fdb))
+* ajouter les indices (par équipe/énigme)  pour player ([396be0f](https://github.com/bibulle/chasse-au-tresor/commit/396be0fd5620d56d0ec6c920e4dfe31767e5d515)), closes [#5](https://github.com/bibulle/chasse-au-tresor/issues/5)
+* ajouter les indices coté admin (par équipe/énigme) ([43c917b](https://github.com/bibulle/chasse-au-tresor/commit/43c917bf5375cba3558e17d5cc03401524530600)), closes [#5](https://github.com/bibulle/chasse-au-tresor/issues/5)
+
+
+### Bug Fixes
+
+* put player markers on top ([88d1684](https://github.com/bibulle/chasse-au-tresor/commit/88d168416d98e5a0104f8080a7a2edc9735fc5c7))
+
 ### [0.6.4](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.3...v0.6.4) (2024-11-27)
 
 
