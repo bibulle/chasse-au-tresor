@@ -27,6 +27,7 @@ export class Riddle {
   photo?: string;
   latitude = 43.604429;
   longitude = 1.443812;
+  trivia?: string;
 }
 
 export class TeamRiddle {

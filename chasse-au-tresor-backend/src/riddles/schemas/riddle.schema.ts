@@ -17,6 +17,9 @@ export class Riddle extends Document {
 
   @Prop({ type: Number, default: 1.443812 })
   longitude: number;
+
+  @Prop({ type: String })
+  trivia: string;
 }
 
 export const RiddleSchema = SchemaFactory.createForClass(Riddle);

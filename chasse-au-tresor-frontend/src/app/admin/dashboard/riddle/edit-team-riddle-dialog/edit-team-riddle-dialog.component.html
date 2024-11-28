@@ -4,98 +4,53 @@
 <div mat-dialog-content>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Texte de l'énigme</mat-label>
-    <textarea
-      matInput
-      [(ngModel)]="data.riddle.text"
-      rows="3"
-      required
-      #textInput="ngModel"
-    ></textarea>
-    <mat-error *ngIf="textInput.invalid"
-      >Le texte de l'énigme est obligatoire.</mat-error
-    >
+    <textarea matInput [(ngModel)]="data.riddle.text" rows="3" required #textInput="ngModel"></textarea>
+    <mat-error *ngIf="textInput.invalid">Le texte de l'énigme est obligatoire.</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Gain</mat-label>
-    <input
-      matInput
-      type="number"
-      [(ngModel)]="data.riddle.gain"
-      required
-      #gainInput="ngModel"
-    />
+    <input matInput type="number" [(ngModel)]="data.riddle.gain" required #gainInput="ngModel" />
     <mat-error *ngIf="gainInput.invalid">Le gain est obligatoire.</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Latitude</mat-label>
-    <input
-      matInput
-      type="number"
-      [(ngModel)]="data.riddle.latitude"
-      required
-      #latitudeInput="ngModel"
-    />
+    <input matInput type="number" [(ngModel)]="data.riddle.latitude" required #latitudeInput="ngModel" />
     <mat-error *ngIf="latitudeInput.invalid">La latitude est obligatoire.</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Longitude</mat-label>
-    <input
-      matInput
-      type="number"
-      [(ngModel)]="data.riddle.longitude"
-      required
-      #longitudeInput="ngModel"
-    />
+    <input matInput type="number" [(ngModel)]="data.riddle.longitude" required #longitudeInput="ngModel" />
     <mat-error *ngIf="longitudeInput.invalid">La longitude est obligatoire.</mat-error>
   </mat-form-field>
 
   <fieldset class="photo-fieldset">
     <legend>Photo</legend>
     <div class="photo-container">
-      <img
-        *ngIf="photoPreview"
-        [src]="photoPreview"
-        alt="Photo de l'énigme"
-        class="photo-preview"
-      />
+      <img *ngIf="photoPreview" [src]="photoPreview" alt="Photo de l'énigme" class="photo-preview" />
       <span class="spacer"></span>
-      <button
-        *ngIf="photoPreview"
-        mat-raised-button
-        color="secondary"
-        (click)="removePhoto()"
-      >
-        Supprimer
-      </button>
+      <button *ngIf="photoPreview" mat-raised-button color="secondary" (click)="removePhoto()">Supprimer</button>
       <button mat-raised-button color="primary" (click)="fileInput.click()">
         {{ data.riddle.photo ? "Changer" : "Ajouter" }}
       </button>
     </div>
-    <input
-      #fileInput
-      type="file"
-      accept="image/*"
-      (change)="onFileSelected($event)"
-      hidden
-    />
+    <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
   </fieldset>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Le saviez vous ?</mat-label>
+    <textarea matInput [(ngModel)]="data.riddle.trivia" rows="3" #textInput="ngModel"></textarea>
+  </mat-form-field>
+
   <fieldset class="teams-fieldset">
     <legend>Teams</legend>
     <div class="teams">
       <div *ngFor="let team of data.teams">
         <mat-form-field class="full-width">
-          <mat-label>Order : {{team.team.name}}</mat-label>
-          <input
-            matInput
-            type="number"
-            [(ngModel)]="team.order"
-            required
-            min="0"
-            #orderInput="ngModel"
-          />
+          <mat-label>Order : {{ team.team.name }}</mat-label>
+          <input matInput type="number" [(ngModel)]="team.order" required min="0" #orderInput="ngModel" />
         </mat-form-field>
       </div>
     </div>
@@ -103,14 +58,8 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Annuler</button>
-  <button
-    mat-button
-    color="primary"
-    [disabled]="textInput.invalid || gainInput.invalid"
-    (click)="onSave()"
-  >
+  <button mat-button color="primary" [disabled]="textInput.invalid || gainInput.invalid" (click)="onSave()">
     Enregistrer
   </button>
   <button *ngIf="data.riddle._id" mat-button color="warn" (click)="onDelete()">Supprimer définitivement</button>
-
 </div>

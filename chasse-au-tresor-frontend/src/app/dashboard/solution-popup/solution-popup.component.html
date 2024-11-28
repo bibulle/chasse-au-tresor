@@ -1,0 +1,16 @@
+<div class="popup-container">
+  <h1 class="popup-title">🎉&nbsp;Bravo, vous avez trouvé la solution&nbsp;!</h1>
+  <p class="popup-message" *ngIf="getSolution()?.player">
+    Merci à <strong>{{ getSolution()?.player?.username }}</strong> pour cette découverte incroyable !
+  </p>
+
+  <div class="popup-photo" *ngIf="!data.lastResolved.riddle?.trivia && getSolution()?.photo">
+    <img [src]="'/api/files' + getSolution()?.photo" alt="Photo" class="solution-photo" />
+  </div>
+  <div class="popup-trivia" *ngIf="data.lastResolved.riddle?.trivia">
+    <h2>Le saviez-vous ?</h2>
+    <p>{{ data.lastResolved.riddle?.trivia }}</p>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="closeDialog()">Fermer</button>
+</div>

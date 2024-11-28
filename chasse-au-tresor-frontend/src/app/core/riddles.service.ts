@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NotificationsService } from './notifications.service';
-import {
-  BehaviorSubject,
-  filter,
-  map,
-  Observable,
-  of,
-  ReplaySubject,
-} from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, of, ReplaySubject } from 'rxjs';
 import { Riddle, Team } from '../reference/types';
 
 @Injectable({
@@ -20,18 +13,12 @@ export class RiddlesService {
   private updateNotifier$ = new ReplaySubject<string>(1); // Flux partagé des notifications de mise à jour
 
   private unassignedRiddlesSubject = new BehaviorSubject<Riddle[] | null>(null);
-  unassignedRiddle$: Observable<Riddle[] | null> =
-    this.unassignedRiddlesSubject.asObservable();
+  unassignedRiddle$: Observable<Riddle[] | null> = this.unassignedRiddlesSubject.asObservable();
 
-  constructor(
-    private notificationsService: NotificationsService,
-    private http: HttpClient
-  ) {
-    this.notificationsService
-      .listen('riddleUpdated')
-      .subscribe((update: { teamId: string }) => {
-        this.updateNotifier$.next(update.teamId);
-      });
+  constructor(private notificationsService: NotificationsService, private http: HttpClient) {
+    this.notificationsService.listen('riddleUpdated').subscribe((update: { teamId: string }) => {
+      this.updateNotifier$.next(update.teamId);
+    });
 
     // this.startPolling();
   }
@@ -40,9 +27,7 @@ export class RiddlesService {
   listenForUnassignedRiddlesUpdates(): void {
     // console.log(`listenForUnassignedRiddlesUpdates(${teamId})`);
     this.updateNotifier$.subscribe(() => {
-      console.log(
-        `Mise à jour détectée via WebSocket. Rechargement des riddles...`
-      );
+      console.log(`Mise à jour détectée via WebSocket. Rechargement des riddles...`);
       this.loadUnassignedRiddles().subscribe(); // Recharge les données à jour
     });
   }
@@ -63,9 +48,10 @@ export class RiddlesService {
     const formData = new FormData();
     if (data.riddle._id) formData.append('_id', data.riddle._id);
     if (data.riddle.gain) formData.append('gain', data.riddle.gain);
-    if (data.riddle.text) formData.append('latitude', data.riddle.latitude);
-    if (data.riddle.text) formData.append('longitude', data.riddle.longitude);
+    if (data.riddle.latitude) formData.append('latitude', data.riddle.latitude);
+    if (data.riddle.longitude) formData.append('longitude', data.riddle.longitude);
     if (data.riddle.photo) formData.append('photo', data.riddle.photo);
+    if (data.riddle.trivia) formData.append('trivia', data.riddle.trivia);
     if (data.riddle.text) formData.append('text', data.riddle.text);
     if (data.selectedFile) formData.append('file', data.selectedFile);
     if (data.teams) formData.append('teams', JSON.stringify(data.teams));
