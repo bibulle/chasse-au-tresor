@@ -119,6 +119,9 @@ export class MapService {
         marker?.setIcon(this.getIcon(type, color));
       } else {
         const newMarker = L.marker([p.latitude, p.longitude], { icon: this.getIcon(type, color) });
+        if (type === ICON_TYPE.Player) {
+          newMarker.setZIndexOffset(650);
+        }
         this.map?.addLayer(newMarker);
         newMarker.bindPopup(`${p.itemId}`);
 
