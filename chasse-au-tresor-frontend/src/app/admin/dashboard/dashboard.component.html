@@ -1,75 +1,60 @@
 <app-admin-header></app-admin-header>
 <app-split-screen (resized)="onSplitResize()">
-<div left class="dashboard-map">
-  <app-map [allTeams]="true"></app-map>
-</div>
-<div right class="dashboard-container">
-  <!-- Section d'affectation -->
-  <div class="card unassigned-player" *ngIf="unassignedPlayer().length > 0">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Joueur à affecter à une équipe</mat-card-title>
-      </mat-card-header>
+  <div left class="dashboard-map">
+    <app-map [allTeams]="true"></app-map>
+  </div>
+  <div right class="dashboard-container">
+    <!-- Section d'affectation -->
+    <div class="card unassigned-player" *ngIf="unassignedPlayer().length > 0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Joueur à affecter à une équipe</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="assignmentForm" (ngSubmit)="assignPlayerToTeam()">
+            <mat-form-field appearance="outline">
+              <mat-label>Joueur</mat-label>
+              <mat-select formControlName="playerId">
+                <mat-option *ngFor="let player of unassignedPlayer()" [value]="player._id">
+                  {{ player.username }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Équipe</mat-label>
+              <mat-select formControlName="teamId">
+                <mat-option *ngFor="let team of teams" [value]="team._id">
+                  {{ team.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" type="submit" [disabled]="assignmentForm.invalid">Affecter</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card class="teams">
       <mat-card-content>
-        <form [formGroup]="assignmentForm" (ngSubmit)="assignPlayerToTeam()">
-          <mat-form-field appearance="outline">
-            <mat-label>Joueur</mat-label>
-            <mat-select formControlName="playerId">
-              <mat-option
-                *ngFor="let player of unassignedPlayer()"
-                [value]="player._id"
-              >
-                {{ player.username }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-accordion>
+          <app-admin-team *ngFor="let team of teams" [team]="team"></app-admin-team>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Équipe</mat-label>
-            <mat-select formControlName="teamId">
-              <mat-option *ngFor="let team of teams" [value]="team._id">
-                {{ team.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <!-- Ajout de énigmes non assignées -->
+          <mat-expansion-panel *ngIf="unassignedRiddles && unassignedRiddles.length > 0">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="team-name">Énigmes non assignées</mat-panel-title>
+              <mat-panel-description> </mat-panel-description>
+            </mat-expansion-panel-header>
 
-          <button
-            mat-raised-button
-            color="accent"
-            type="submit"
-            [disabled]="assignmentForm.invalid"
-          >
-            Affecter
-          </button>
-        </form>
+            <!-- Liste des énigmes -->
+            <div *ngFor="let riddle of unassignedRiddles">
+              <app-admin-riddle [riddle]="riddle"></app-admin-riddle>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </mat-card-content>
     </mat-card>
   </div>
-
-  <mat-card class="teams">
-    <mat-card-content>
-      <mat-accordion>
-        <app-admin-team
-          *ngFor="let team of teams"
-          [team]="team"
-        ></app-admin-team>
-
-        <!-- Ajout de énigmes non assignées -->
-        <mat-expansion-panel *ngIf="unassignedRiddles">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="team-name"
-              >Énigmes non assignées</mat-panel-title
-            >
-            <mat-panel-description> </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <!-- Liste des énigmes -->
-          <div *ngFor="let riddle of unassignedRiddles">
-            <app-admin-riddle [riddle]="riddle"></app-admin-riddle>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card-content>
-  </mat-card>
-</div>
 </app-split-screen>
