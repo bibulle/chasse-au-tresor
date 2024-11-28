@@ -11,21 +11,21 @@
     align-items: center;
 
     mat-chip {
-      margin-left: 16px
+      margin-left: 16px;
     }
 
     .center-button {
       margin-left: 16px;
       justify-content: center;
       align-items: center;
-      }
+    }
   }
   .team-name {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    line-height: 1.5;
+    line-height: 1;
   }
   .score {
     padding-left: 1em;
