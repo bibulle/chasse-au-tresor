@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.7...v0.7.1) (2024-11-28)
+
+
+### Features
+
+* ajouter le 'le saviez vous ?' après acceptation d'un solution ([706c78f](https://github.com/bibulle/chasse-au-tresor/commit/706c78fd77c84421b217d20ed648dee0cdcb9639)), closes [#11](https://github.com/bibulle/chasse-au-tresor/issues/11)
+
+
+### Bug Fixes
+
+* error on new riddle save ([dac78a1](https://github.com/bibulle/chasse-au-tresor/commit/dac78a14fb17689a458b814e6bcc9d6fc26655f3))
+* unassigned riddles header should not be display if not needed ([786fda7](https://github.com/bibulle/chasse-au-tresor/commit/786fda75da3db5116469d88750d55ca2bf2ea163))
+
 ## [0.7.0](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.7...v0.7.0) (2024-11-28)
 
 ### [0.6.7](https://github.com/bibulle/chasse-au-tresor/compare/v0.6.6...v0.6.7) (2024-11-28)
