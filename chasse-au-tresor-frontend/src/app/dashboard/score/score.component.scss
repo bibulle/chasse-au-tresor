@@ -1,0 +1,16 @@
+:host {
+  //   display: flex;
+  //   align-items: center;
+
+  .score-display {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #4caf50;
+    transition: color 0.3s;
+  }
+
+  .score-display.changed {
+    color: #ff9800; /* Change temporairement la couleur */
+  }
+}

@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../core/notifications.service';
 import { Player } from '../../reference/types';
 import { MapService } from '../../core/map.service';
+import { ScoreComponent } from '../score/score.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MatChipsModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatChipsModule, MatIconModule, MatButtonModule, ScoreComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
