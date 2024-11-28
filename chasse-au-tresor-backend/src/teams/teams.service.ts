@@ -1,4 +1,4 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -6,6 +6,9 @@ import { Team } from './schemas/team.schema';
 import { Player } from 'src/players/schemas/player.schema';
 import { TeamRiddle } from 'src/riddles/schemas/team-riddle.schema';
 import { NotificationsGateway } from 'src/notifications/notifications.gateway';
+import { Hint } from 'src/hints/schemas/hint.schema';
+import { Solution } from 'src/solutions/schemas/solution.schema';
+import { Riddle } from 'src/riddles/schemas/riddle.schema';
 
 @Injectable()
 export class TeamsService implements OnModuleInit {
@@ -59,13 +62,9 @@ export class TeamsService implements OnModuleInit {
     const currentPlayer = await this.playerModel.findOne({ _id: playerId });
 
     if (currentTeam) {
-      currentTeam.players = currentTeam.players.filter(
-        (player) => player.toString() !== playerId,
-      );
+      currentTeam.players = currentTeam.players.filter((player) => player.toString() !== playerId);
       await currentTeam.save();
-      this.logger.log(
-        `Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`,
-      );
+      this.logger.log(`Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`);
       this.notificationsGateway.notifyTeamUpdate('' + currentTeam._id);
     }
 
@@ -90,13 +89,9 @@ export class TeamsService implements OnModuleInit {
 
     if (currentTeam) {
       // Retirer le joueur de l'équipe actuelle
-      currentTeam.players = currentTeam.players.filter(
-        (player) => player.toString() !== playerId,
-      );
+      currentTeam.players = currentTeam.players.filter((player) => player.toString() !== playerId);
       await currentTeam.save();
-      this.logger.log(
-        `Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`,
-      );
+      this.logger.log(`Le joueur ${playerId} a été retiré de l'équipe ${currentTeam.name}`);
     }
 
     // Ajouter le joueur à la nouvelle équipe
@@ -108,9 +103,7 @@ export class TeamsService implements OnModuleInit {
     if (!newTeam.players.includes(playerId as unknown as Types.ObjectId)) {
       newTeam.players.push(playerId as unknown as Types.ObjectId);
       await newTeam.save();
-      this.logger.log(
-        `Le joueur ${playerId} a été ajouté à l'équipe ${newTeam.name}`,
-      );
+      this.logger.log(`Le joueur ${playerId} a été ajouté à l'équipe ${newTeam.name}`);
       this.notificationsGateway.notifyTeamUpdate('' + newTeam._id);
 
       currentPlayer.team = new Types.ObjectId('' + newTeam._id);
@@ -124,19 +117,13 @@ export class TeamsService implements OnModuleInit {
   }
 
   async getAllTeams(): Promise<Team[]> {
-    const teams = await this.teamModel
-      .find()
-      .populate({ path: 'players', model: 'Player' })
-      .exec(); // Inclure les joueurs
+    const teams = await this.teamModel.find().populate({ path: 'players', model: 'Player' }).exec(); // Inclure les joueurs
     // console.log(teams);
     return teams;
   }
 
   async getTeamById(teamId: Types.ObjectId): Promise<Team> {
-    const team = await this.teamModel
-      .findOne({ _id: teamId })
-      .populate({ path: 'players', model: 'Player' })
-      .exec();
+    const team = await this.teamModel.findOne({ _id: teamId }).populate({ path: 'players', model: 'Player' }).exec();
     return team;
   }
 
@@ -153,5 +140,42 @@ export class TeamsService implements OnModuleInit {
 
     // this.logger.log(teamRiddles);
     return teamRiddles;
+  }
+
+  async calculateScore(teamId: string) {
+    this.logger.log(`calculateScore(${teamId})`);
+
+    // recherche de l'équipe
+    const team = await this.teamModel.findById(teamId);
+    if (!team) {
+      throw new NotFoundException(`Équipe ${teamId} non trouvée`);
+    }
+
+    // recherche de toute les team-riddle de cette team
+    const teamRiddles = await this.teamRiddleModel
+      .find({ team: new Types.ObjectId(teamId) })
+      .populate('riddle')
+      .populate({ path: 'hints', model: 'Hint' })
+      .populate({ path: 'solutions', model: 'Solution' });
+
+    // calculate
+    const score = teamRiddles
+      .filter((teamRiddle) => teamRiddle.resolved)
+      .reduce((score, teamRiddle) => {
+        const hintCost = teamRiddle.hints
+          .filter((hint) => (hint as unknown as Hint).isPurchased)
+          .reduce((costSum, hint) => costSum + (hint as unknown as Hint).cost, 0);
+
+        return score + (teamRiddle.riddle as unknown as Riddle).gain - hintCost;
+      }, 0);
+
+    if (score != team.score) {
+      this.logger.log(`Score de "${team.name}" : ${score}`);
+
+      team.score = score;
+      await team.save();
+
+      this.notificationsGateway.notifyTeamUpdate('' + team._id);
+    }
   }
 }

@@ -76,6 +76,7 @@ export class TeamRiddlesService {
 
   // Écouter les notifications de mise à jour pour cette team
   listenForCurrentTeamRiddleUpdates(teamId: string): void {
+    console.log(`listenForCurrentTeamRiddleUpdates(${teamId})`);
     this.updateNotifier$
       .pipe(filter((notifiedTeam) => notifiedTeam === teamId)) // Filtrer les notifications pour cette team
       .subscribe(() => {

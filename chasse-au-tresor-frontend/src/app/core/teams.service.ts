@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, ReplaySubject } from 'rxjs';
 import { Team } from '../reference/types';
 import { HttpClient } from '@angular/common/http';
 import { NotificationsService } from './notifications.service';
@@ -15,25 +15,25 @@ export class TeamsService {
   private teamsSubject = new BehaviorSubject<Team[] | null>(null);
   teams$: Observable<Team[] | null> = this.teamsSubject.asObservable();
 
-  constructor(
-    private notificationsService: NotificationsService,
-    private http: HttpClient
-  ) {
-    this.notificationsService
-      .listen('teamUpdated')
-      .subscribe((update: { teamId: string }) => {
-        this.updateNotifier$.next(update.teamId);
-      });
+  constructor(private notificationsService: NotificationsService, private http: HttpClient) {
+    this.notificationsService.listen('teamUpdated').subscribe((update: { teamId: string }) => {
+      this.updateNotifier$.next(update.teamId);
+    });
   }
 
   // Écouter les notifications de mise à jour pour tous les utilisateurs
-  listenForTeamsUpdates(): void {
-    this.updateNotifier$.subscribe(() => {
-      console.log(
-        'Mise à jour détectée via WebSocket. Rechargement des teams...'
-      );
-      this.loadTeams().subscribe(); // Recharge les données à jour
-    });
+  listenForTeamsUpdates(teamId: string): void {
+    this.updateNotifier$
+      .pipe(
+        filter((payload: any) => {
+          // console.log(payload);
+          return teamId === 'all' || payload === teamId;
+        })
+      ) // Filtrer les notifications pour cet team
+      .subscribe(() => {
+        console.log('Mise à jour détectée via WebSocket. Rechargement des teams...');
+        this.loadTeams().subscribe(); // Recharge les données à jour
+      });
   }
   // Charger tous les teams depuis le backend
   loadTeams(): Observable<Team[]> {
@@ -52,10 +52,7 @@ export class TeamsService {
       playerId,
     });
   }
-  removePlayerFromTeam(
-    playerId: string,
-    teamId: string | undefined
-  ): Observable<Team> {
+  removePlayerFromTeam(playerId: string, teamId: string | undefined): Observable<Team> {
     return this.http.patch<Team>(`/api/teams/${teamId}/remove-player`, {
       playerId,
     });

@@ -6,6 +6,7 @@ import { Player } from 'src/players/schemas/player.schema';
 import { TeamRiddle } from 'src/riddles/schemas/team-riddle.schema';
 import { Solution } from './schemas/solution.schema';
 import { NotificationsGateway } from 'src/notifications/notifications.gateway';
+import { TeamsService } from 'src/teams/teams.service';
 
 @Injectable()
 export class SolutionsService {
@@ -18,6 +19,7 @@ export class SolutionsService {
     @InjectModel(Player.name) private readonly playerModel: Model<Player>,
     private readonly configService: ConfigService,
     private notificationsGateway: NotificationsGateway,
+    private teamsService: TeamsService,
   ) {}
 
   async createSolution(playerId: string, teamRiddleId: string, text: string, photoPath: string): Promise<Solution> {
@@ -89,6 +91,8 @@ export class SolutionsService {
     });
     teamRiddle.resolved = resolved;
     await teamRiddle.save();
+
+    await this.teamsService.calculateScore('' + teamRiddle.team);
 
     // Notifier via WebSocket que l'énigme a été mis à jour
     this.notificationsGateway.notifyRiddleUpdate('' + teamRiddle.team);

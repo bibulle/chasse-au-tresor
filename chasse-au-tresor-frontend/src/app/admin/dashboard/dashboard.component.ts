@@ -95,7 +95,7 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     this.teams = await firstValueFrom(this.teamsService.loadTeams());
-    this.teamsService.listenForTeamsUpdates();
+    this.teamsService.listenForTeamsUpdates('all');
     this.teamsService.teams$.subscribe((teams) => {
       if (teams) {
         this.teams = teams;

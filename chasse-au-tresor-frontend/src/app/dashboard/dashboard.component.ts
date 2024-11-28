@@ -12,6 +12,7 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { UserNotificationsService } from '../core/user-notifications.service';
 import { MapComponent } from '../map/map.component';
 import { HintsComponent } from './hints/hints.component';
+import { TeamsService } from '../core/teams.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,11 +31,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   resolvedTeamRiddles: TeamRiddle[] = [];
 
   userSubscription: Subscription | undefined;
-  riddleSubscription: Subscription | undefined;
+  teamSubscription: Subscription | undefined;
+  riddleCurrentSubscription: Subscription | undefined;
+  riddleResolvedSubscription: Subscription | undefined;
   geoLocalisationId: number | null = null;
   private geoLocalisationUser = '';
 
   constructor(
+    private teamsService: TeamsService,
     private riddleService: TeamRiddlesService,
     private notificationsService: NotificationsService,
     private router: Router,
@@ -57,8 +61,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
-    if (this.riddleSubscription) {
-      this.riddleSubscription.unsubscribe();
+    if (this.riddleCurrentSubscription) {
+      this.riddleCurrentSubscription.unsubscribe();
+    }
+    if (this.riddleResolvedSubscription) {
+      this.riddleResolvedSubscription.unsubscribe();
+    }
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
     }
   }
   async initPlayer(username: string) {
@@ -82,28 +92,55 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.player = user;
         // console.log(this.player);
         this.trackPosition(this.player.username);
-        this.subscribeTeamRiddle(this.player);
+        if (this.player.team?._id && this.teamId !== this.player.team?._id) {
+          this.subscribeTeam(this.player);
+          this.subscribeTeamRiddle(this.player);
+        }
       } else {
         window.location.reload();
       }
     });
   }
 
-  async subscribeTeamRiddle(player: Player) {
-    if (player.team?._id && this.teamId !== player.team?._id) {
-      // this.riddleService.stopListenForRiddleUpdates(this.teamId);
-      if (this.riddleSubscription) {
-        this.riddleSubscription.unsubscribe();
-      }
+  async subscribeTeam(player: Player) {
+    console.log(`subscribeTeam(${player.team?._id})`);
 
-      this.teamId = player.team?._id;
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
+    }
+
+    this.teamId = player.team?._id;
+    if (this.teamId) {
+      this.teamsService.listenForTeamsUpdates(this.teamId);
+      this.teamSubscription = this.teamsService.teams$.subscribe((teams) => {
+        const team = teams?.find((t) => t._id === this.teamId);
+        if (this.player && team) {
+          this.player.team = team;
+        }
+      });
+    }
+  }
+
+  async subscribeTeamRiddle(player: Player) {
+    console.log(`subscribeTeamRiddle(${player.team?._id})`);
+    // this.riddleService.stopListenForRiddleUpdates(this.teamId);
+    if (this.riddleCurrentSubscription) {
+      this.riddleCurrentSubscription.unsubscribe();
+    }
+    if (this.riddleResolvedSubscription) {
+      this.riddleResolvedSubscription.unsubscribe();
+    }
+
+    this.teamId = player.team?._id;
+    if (this.teamId) {
       this.currentTeamRiddle = await firstValueFrom(this.riddleService.loadCurrentTeamRiddle(this.teamId));
-      this.resolvedTeamRiddles = await firstValueFrom(this.riddleService.loadResolvedTeamRiddle(this.teamId));
       this.riddleService.listenForCurrentTeamRiddleUpdates(this.teamId);
-      this.riddleSubscription = this.riddleService.currentTeamRiddle$.subscribe((teamRiddle) => {
+      this.riddleCurrentSubscription = this.riddleService.currentTeamRiddle$.subscribe((teamRiddle) => {
         this.currentTeamRiddle = teamRiddle;
       });
-      this.riddleSubscription = this.riddleService.resolvedTeamRiddleSubject$.subscribe((teamRiddle) => {
+      this.riddleService.listenForCurrentTeamRiddleUpdates(this.teamId);
+      this.resolvedTeamRiddles = await firstValueFrom(this.riddleService.loadResolvedTeamRiddle(this.teamId));
+      this.riddleResolvedSubscription = this.riddleService.resolvedTeamRiddleSubject$.subscribe((teamRiddle) => {
         this.resolvedTeamRiddles = teamRiddle ? teamRiddle : [];
       });
     }

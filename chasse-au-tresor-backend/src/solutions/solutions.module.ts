@@ -4,24 +4,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
 import { NotificationsModule } from 'src/notifications/notifications.module';
 import { Player, PlayerSchema } from 'src/players/schemas/player.schema';
-import {
-  TeamRiddle,
-  TeamRiddleSchema,
-} from 'src/riddles/schemas/team-riddle.schema';
+import { TeamRiddle, TeamRiddleSchema } from 'src/riddles/schemas/team-riddle.schema';
 import { multerOptionsFactory } from '../config/multer.config';
 import { Solution, SolutionSchema } from './schemas/solution.schema';
 import { SolutionsController } from './solutions.controller';
 import { SolutionsService } from './solutions.service';
+import { TeamsModule } from 'src/teams/teams.module';
 
 @Module({
   imports: [
     ConfigModule,
-    MongooseModule.forFeature([
-      { name: Solution.name, schema: SolutionSchema },
-    ]),
-    MongooseModule.forFeature([
-      { name: TeamRiddle.name, schema: TeamRiddleSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Solution.name, schema: SolutionSchema }]),
+    MongooseModule.forFeature([{ name: TeamRiddle.name, schema: TeamRiddleSchema }]),
     MongooseModule.forFeature([{ name: Player.name, schema: PlayerSchema }]),
     MulterModule.registerAsync({
       imports: [ConfigModule], // Permet l'accès à ConfigService
@@ -29,6 +23,7 @@ import { SolutionsService } from './solutions.service';
       inject: [ConfigService],
     }),
     NotificationsModule,
+    TeamsModule,
   ],
   controllers: [SolutionsController],
   providers: [SolutionsService],
