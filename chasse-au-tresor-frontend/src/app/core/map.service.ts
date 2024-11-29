@@ -108,7 +108,7 @@ export class MapService {
       this.map?.removeLayer(poly);
     }
     const pathLine = L.polyline(this.connectTeamRiddle(teamRiddles));
-    pathLine.setStyle({ color: color });
+    pathLine.setStyle({ color: this.getColor(color), opacity: 0.5 });
     this.map?.addLayer(pathLine);
 
     this.polylines.set(color, pathLine);
@@ -173,6 +173,19 @@ export class MapService {
     this.icons[type][color] = icon;
     // console.log(`${type} ${color} -> ${icon}`);
     return icon;
+  }
+
+  private getColor(color: string) {
+    if (color === 'blue') {
+      return 'rgb(27,118,200)';
+    } else if (color === 'red') {
+      return 'rgb(202,40,59)';
+    } else if (color === 'grey') {
+      return 'rgb(122,122,122)';
+    } else {
+      console.log(`Unknown color: ${color}`);
+      return color;
+    }
   }
 
   private connectTeamRiddle(teamRiddles: TeamRiddle[]): L.LatLngExpression[] {
