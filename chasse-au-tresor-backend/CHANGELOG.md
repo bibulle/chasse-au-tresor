@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.4](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.3...v0.7.4) (2024-11-29)
+
+
+### Features
+
+* add new riddles ([0af9dc8](https://github.com/bibulle/chasse-au-tresor/commit/0af9dc8154b832e973983ae60833fd8c892ce0ba))
+* calcul le zoom pour que tous soit dans la map ([588154d](https://github.com/bibulle/chasse-au-tresor/commit/588154db94cf102dc7131ca622d193920b34c224)), closes [#21](https://github.com/bibulle/chasse-au-tresor/issues/21)
+* change polylines look and fell in the map ([0b1cd1f](https://github.com/bibulle/chasse-au-tresor/commit/0b1cd1fafc39e3002a08334de68cb60eab5f3d16))
+
+
+### Bug Fixes
+
+* automatic login if admin already logged ([74f0bf6](https://github.com/bibulle/chasse-au-tresor/commit/74f0bf67d2bf7f26a48c68d739c2e49a0925c567))
+
 ### [0.7.3](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.2...v0.7.3) (2024-11-29)
 
 
