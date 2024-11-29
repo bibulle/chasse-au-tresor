@@ -23,7 +23,7 @@
       <mat-icon>help</mat-icon>
     </button>
     <div class="spacer"></div>
-    <button mat-mini-fab color="primary" (click)="openSubmitSolutionDialog()">
+    <button mat-mini-fab color="primary" (click)="openSubmitSolutionDialog()" *ngIf="!isSolutionLocked()">
       <mat-icon>lightbulb</mat-icon>
     </button>
   </mat-card-footer>

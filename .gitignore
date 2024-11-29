@@ -1,6 +1,7 @@
 .env
 data
 treasure_hunt_data*.json
+!treasure_hunt_data_init.json
 
 # compiled output
 **/dist

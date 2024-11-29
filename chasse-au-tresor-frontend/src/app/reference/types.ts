@@ -29,6 +29,7 @@ export class Riddle {
   latitude = 43.604429;
   longitude = 1.443812;
   trivia?: string;
+  solutionLocked = false;
 }
 
 export class TeamRiddle {
@@ -53,6 +54,7 @@ export class Hint {
   cost = 0;
   isPurchased = false;
   order = 1;
+  unlockSolution = true;
 }
 
 export class Version {
