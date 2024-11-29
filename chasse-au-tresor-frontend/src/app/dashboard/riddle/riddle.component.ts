@@ -22,6 +22,16 @@ export class RiddleComponent {
 
   constructor(private dialog: MatDialog) {}
 
+  isSolutionLocked() {
+    if (
+      this.teamRiddle?.riddle?.solutionLocked &&
+      !this.teamRiddle?.hints.some((hint) => hint.isPurchased && hint.unlockSolution)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   openSubmitSolutionDialog(): void {
     this.dialog.open(SubmitSolutionDialogComponent, {
       width: '600px',

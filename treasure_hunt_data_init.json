@@ -1,0 +1,227 @@
+{
+  "teams": [
+    {
+      "_id": "64b2f9c2d5a29e3c3e5a6e01",
+      "name": "Explorateurs du Capitole",
+      "color": "red",
+      "players": [
+        "64b2f9c2d5a29e3c3e5a6f01",
+        "64b2f9c2d5a29e3c3e5a6f02",
+        "673f7948524a110f24a1bc56",
+        "67431ea609fcfd6e63e4cbab",
+        "6748501c1638a29e8aec3ee1"
+      ],
+      "score": 0,
+      "position": {
+        "latitude": 43.604652,
+        "longitude": 1.444209,
+        "_id": "673f78ee524a110f24a1bbfb"
+      },
+      "__v": 0
+    },
+    {
+      "_id": "64b2f9c2d5a29e3c3e5a6e02",
+      "name": "Aventuriers de la Garonne",
+      "color": "blue",
+      "players": [
+        "64b2f9c2d5a29e3c3e5a6f03",
+        "64b2f9c2d5a29e3c3e5a6f04",
+        "673f78fe524a110f24a1bc10",
+        "67406baec569cf88ba420add",
+        "6740833c536ef59302d6c8a3",
+        "6740c70e536ef59302d6e227"
+      ],
+      "score": 0,
+      "position": {
+        "latitude": 43.600694,
+        "longitude": 1.438361,
+        "_id": "673f78ee524a110f24a1bbfe"
+      },
+      "__v": 0
+    }
+  ],
+  "players": [
+    {
+      "_id": "673f78fe524a110f24a1bc10",
+      "username": "Eric",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "latitude": 43.5932085,
+      "longitude": 1.368492,
+      "isAdmin": true,
+      "__v": 0
+    },
+    {
+      "_id": "673f7948524a110f24a1bc56",
+      "username": "Juliette",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "latitude": 43.60140208448757,
+      "longitude": 1.439499166385523,
+      "isAdmin": true,
+      "__v": 0
+    }
+  ],
+  "riddles": [
+    {
+      "_id": "67489c3fe221a072ff24eaa6",
+      "text": "Bienvenue dans la chasse au trésor ! Voici ta première énigme. Si tu as besoin d'aide, n'hésite pas à cliquer sur le point d'interrogation pour découvrir des indices. Mais attention, chaque indice te coûtera des points ! À toi de jouer, et bonne chance ! 🎯 Maintenant regarde les indices.",
+      "gain": 40,
+      "latitude": 43.598333,
+      "longitude": 1.434167,
+      "__v": 0,
+      "title": "Tutoriel",
+      "solutionLocked": true
+    },
+    {
+      "_id": "6748b13615de354b59dd46fb",
+      "text": "Derrière les murs où les vies sont soignées,\r\nSe cache un secret, souvent ignoré.\r\nUne armoire veille, en silence discrète,\r\nHommage aux tout-petits que l'on n'oublie jamais.\r\n\r\nCe refuge ancien, entre amour et mystère,\r\nPortait l'espoir pour ceux en détresse.\r\nTrouve cet endroit où les cœurs s'éclairent,\r\nEt où les bébés trouvaient une adresse.",
+      "gain": 50,
+      "latitude": 43.599444,
+      "longitude": 1.436944,
+      "__v": 0,
+      "title": "Armoire à bébés"
+    },
+    {
+      "_id": "6748b1b215de354b59dd4ad4",
+      "text": "Sous le regard des ponts anciens,\r\nUn lieu se déploie, calme et serein.\r\nAutrefois, c'était un bastion d'ingénieurs,\r\nAujourd'hui, c'est un havre pour les promeneurs.\r\n\r\nLe vent y danse au gré des saisons,\r\nPortant des éclats de rires et de chansons.\r\nMais souviens-toi : son nom évoque une mission,\r\nPurifier l’eau pour les âmes de la Ville Rose, une noble raison.\r\n\r\nTrouve cet écrin au bord de la Garonne,\r\nOù nature et histoire à jamais résonnent.",
+      "gain": 50,
+      "latitude": 43.598056,
+      "longitude": 1.4375,
+      "__v": 0,
+      "title": "Prairie des filtres"
+    },
+    {
+      "_id": "6748b22315de354b59dd4e57",
+      "text": "Dans les rues de la Ville Rose, un roi a laissé son empreinte,\r\nNon pas par l’épée, mais par une boisson bien distincte.\r\nSa couronne est une pinte, son sceptre une chope,\r\nEt ses fidèles trinquent jusqu’à ce que la nuit s’écope.\r\n\r\nCe lieu porte son nom et célèbre ses exploits,\r\nLà où l’amitié s’écoule dans des verres remplis de joie.\r\nMais qui est donc ce roi, si célèbre chez les bons vivants,\r\nEt où son esprit mousse-t-il encore aujourd’hui dans le présent ?",
+      "gain": 50,
+      "latitude": 43.5975,
+      "longitude": 1.441944,
+      "__v": 0,
+      "title": "Gambrinus"
+    }
+  ],
+  "hints": [
+    {
+      "_id": "674985e57a9df117948ab11f",
+      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. Achète l'indice suivant.",
+      "cost": 0,
+      "isPurchased": true,
+      "order": 1,
+      "__v": 0,
+      "unlockSolution": false
+    },
+    {
+      "_id": "674985f77a9df117948ab12e",
+      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. Achète l'indice suivant.",
+      "cost": 0,
+      "isPurchased": true,
+      "order": 1,
+      "__v": 0,
+      "unlockSolution": false
+    },
+    {
+      "_id": "6749863f7a9df117948ab13d",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. La solution a cette énigme est juste une blague et un jolie selphie de ton équipe.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "__v": 0
+    },
+    {
+      "_id": "6749864a7a9df117948ab14c",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. La solution a cette énigme est juste une blague et un jolie selphie de ton équipe.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "__v": 0
+    }
+  ],
+  "teamRiddles": [
+    {
+      "_id": "67489ebada23a9f0cb4c1131",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "67489c3fe221a072ff24eaa6",
+      "order": 1,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "674985e57a9df117948ab11f",
+        "6749864a7a9df117948ab14c"
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "67489ebada23a9f0cb4c1132",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "67489c3fe221a072ff24eaa6",
+      "order": 1,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "674985f77a9df117948ab12e",
+        "6749863f7a9df117948ab13d"
+      ],
+      "__v": 4
+    },
+    {
+      "_id": "6748b13615de354b59dd46ff",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6748b13615de354b59dd46fb",
+      "order": 3,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6748b13615de354b59dd46fe",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6748b13615de354b59dd46fb",
+      "order": 2,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6748b1b215de354b59dd4ad7",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6748b1b215de354b59dd4ad4",
+      "order": 3,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6748b1b215de354b59dd4ad8",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6748b1b215de354b59dd4ad4",
+      "order": 2,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6748b22315de354b59dd4e5a",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6748b22315de354b59dd4e57",
+      "order": 4,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6748b22315de354b59dd4e5b",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6748b22315de354b59dd4e57",
+      "order": 4,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    }
+  ],
+  "solutions": []
+}

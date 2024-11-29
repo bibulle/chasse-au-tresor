@@ -14,6 +14,9 @@ export class Hint extends Document {
 
   @Prop({ type: Number, default: 1 })
   order: number;
+
+  @Prop({ type: Boolean, required: true, default: true })
+  unlockSolution: boolean;
 }
 
 export const HintSchema = SchemaFactory.createForClass(Hint);
