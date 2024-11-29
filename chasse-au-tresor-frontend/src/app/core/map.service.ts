@@ -52,6 +52,15 @@ export class MapService {
       this.map.setView([player.latitude, player.longitude]);
     }
   }
+  centerRiddles() {
+    if (this.map) {
+      const mergedMaps = [
+        ...new Map([...this.markers[ICON_TYPE.Riddle].entries(), ...this.markers[ICON_TYPE.Player].entries()]).values(),
+      ];
+      var group = new L.FeatureGroup(mergedMaps);
+      this.map.fitBounds(group.getBounds());
+    }
+  }
 
   // Écouter les notifications de mise à jour pour cet utilisateur
   listenForPositionUpdates(teamId: string): void {
@@ -75,7 +84,7 @@ export class MapService {
   updateMarkerRiddles(riddles: Riddle[], removeOld = true, color = 'grey') {
     const positions: ItemPosition[] = riddles.map((riddle) => {
       return {
-        itemId: riddle.text ? riddle?.text : '',
+        itemId: riddle.title ? riddle?.title : '',
         latitude: riddle.latitude ? riddle?.latitude : 0,
         longitude: riddle.longitude ? riddle?.longitude : 0,
       };
@@ -87,7 +96,7 @@ export class MapService {
     console.log(`updateMarkerTeamRiddles(${color}`);
     const positions: ItemPosition[] = teamRiddles.map((tr) => {
       return {
-        itemId: tr.riddle?.text ? tr.riddle?.text : '',
+        itemId: tr.riddle?.title ? tr.riddle?.title : '',
         latitude: tr.riddle?.latitude ? tr.riddle?.latitude : 0,
         longitude: tr.riddle?.longitude ? tr.riddle?.longitude : 0,
       };
