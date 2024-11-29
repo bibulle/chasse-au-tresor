@@ -1,4 +1,4 @@
-<app-admin-header></app-admin-header>
+<app-admin-header (centerRiddles)="centerRiddles()"></app-admin-header>
 <app-split-screen (resized)="onSplitResize()">
   <div left class="dashboard-map">
     <app-map [allTeams]="true"></app-map>

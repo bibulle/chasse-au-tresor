@@ -123,6 +123,10 @@ export class AdminDashboardComponent implements OnInit {
     return this.players.filter((p) => !p.team);
   }
 
+  centerRiddles() {
+    this.mapService.centerRiddles();
+  }
+
   assignPlayerToTeam() {
     const { playerId, teamId } = this.assignmentForm.value;
     this.teamsService.assignPlayerToTeam(playerId, teamId).subscribe(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,6 +21,8 @@ import { TeamsService } from '../../core/teams.service';
 })
 export class HeaderComponent implements OnInit {
   teamOrder: { team: Team; order: number }[] = [];
+
+  @Output() centerRiddles = new EventEmitter<void>();
 
   constructor(
     private readonly router: Router,

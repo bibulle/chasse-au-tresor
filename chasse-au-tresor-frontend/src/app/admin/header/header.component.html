@@ -1,39 +1,22 @@
 <mat-toolbar>
   <span class="title">Chasse au trésor</span>
-  <button
-    mat-stroked-button
-    class="goto-dashboard"
-    aria-label="Dashboard"
-    (click)="goToDashboard()"
-  >
+  <button class="center-button" color="primary" mat-mini-fab (click)="centerRiddles.emit()">
+    <mat-icon matChipAvatar>my_location</mat-icon>
+  </button>
+  <button mat-stroked-button class="goto-dashboard" aria-label="Dashboard" (click)="goToDashboard()">
     <mat-icon>home</mat-icon>
     <span>Dashboard</span>
   </button>
   <span class="spacer"></span>
-  <button
-    mat-stroked-button
-    class="new-riddle-icon"
-    aria-label="nouvelle énigme"
-    (click)="newRiddle()"
-  >
+  <button mat-stroked-button class="new-riddle-icon" aria-label="nouvelle énigme" (click)="newRiddle()">
     <mat-icon>add</mat-icon>
     <span>Énigme</span>
   </button>
-  <button
-    mat-stroked-button
-    class="import-export-icon"
-    aria-label="Import/Export"
-    (click)="importExport()"
-  >
+  <button mat-stroked-button class="import-export-icon" aria-label="Import/Export" (click)="importExport()">
     <mat-icon>save</mat-icon>
     <span>Import/Export</span>
   </button>
-  <button
-    mat-stroked-button
-    class="logout-icon"
-    aria-label="Logout"
-    (click)="logout()"
-  >
+  <button mat-stroked-button class="logout-icon" aria-label="Logout" (click)="logout()">
     <mat-icon>logout</mat-icon>
     <span>Logout</span>
   </button>
