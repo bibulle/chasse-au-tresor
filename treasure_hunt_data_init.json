@@ -45,8 +45,8 @@
       "_id": "673f78fe524a110f24a1bc10",
       "username": "Eric",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
-      "latitude": 43.5932085,
-      "longitude": 1.368492,
+      "latitude": 43.5780159,
+      "longitude": 1.3168645,
       "isAdmin": true,
       "__v": 0
     },
@@ -64,39 +64,102 @@
     {
       "_id": "67489c3fe221a072ff24eaa6",
       "text": "Bienvenue dans la chasse au trésor ! Voici ta première énigme. Si tu as besoin d'aide, n'hésite pas à cliquer sur le point d'interrogation pour découvrir des indices. Mais attention, chaque indice te coûtera des points ! À toi de jouer, et bonne chance ! 🎯 Maintenant regarde les indices.",
+      "title": "Tutoriel",
       "gain": 40,
       "latitude": 43.598333,
       "longitude": 1.434167,
       "__v": 0,
-      "title": "Tutoriel",
       "solutionLocked": true
     },
     {
       "_id": "6748b13615de354b59dd46fb",
       "text": "Derrière les murs où les vies sont soignées,\r\nSe cache un secret, souvent ignoré.\r\nUne armoire veille, en silence discrète,\r\nHommage aux tout-petits que l'on n'oublie jamais.\r\n\r\nCe refuge ancien, entre amour et mystère,\r\nPortait l'espoir pour ceux en détresse.\r\nTrouve cet endroit où les cœurs s'éclairent,\r\nEt où les bébés trouvaient une adresse.",
+      "title": "Armoire à bébés",
       "gain": 50,
       "latitude": 43.599444,
       "longitude": 1.436944,
-      "__v": 0,
-      "title": "Armoire à bébés"
+      "__v": 0
     },
     {
       "_id": "6748b1b215de354b59dd4ad4",
       "text": "Sous le regard des ponts anciens,\r\nUn lieu se déploie, calme et serein.\r\nAutrefois, c'était un bastion d'ingénieurs,\r\nAujourd'hui, c'est un havre pour les promeneurs.\r\n\r\nLe vent y danse au gré des saisons,\r\nPortant des éclats de rires et de chansons.\r\nMais souviens-toi : son nom évoque une mission,\r\nPurifier l’eau pour les âmes de la Ville Rose, une noble raison.\r\n\r\nTrouve cet écrin au bord de la Garonne,\r\nOù nature et histoire à jamais résonnent.",
+      "title": "Prairie des filtres",
       "gain": 50,
       "latitude": 43.598056,
       "longitude": 1.4375,
-      "__v": 0,
-      "title": "Prairie des filtres"
+      "__v": 0
     },
     {
       "_id": "6748b22315de354b59dd4e57",
       "text": "Dans les rues de la Ville Rose, un roi a laissé son empreinte,\r\nNon pas par l’épée, mais par une boisson bien distincte.\r\nSa couronne est une pinte, son sceptre une chope,\r\nEt ses fidèles trinquent jusqu’à ce que la nuit s’écope.\r\n\r\nCe lieu porte son nom et célèbre ses exploits,\r\nLà où l’amitié s’écoule dans des verres remplis de joie.\r\nMais qui est donc ce roi, si célèbre chez les bons vivants,\r\nEt où son esprit mousse-t-il encore aujourd’hui dans le présent ?",
+      "title": "Gambrinus",
       "gain": 50,
       "latitude": 43.5975,
       "longitude": 1.441944,
-      "__v": 0,
-      "title": "Gambrinus"
+      "__v": 0
+    },
+    {
+      "_id": "6749c4958e12d613f98771e1",
+      "text": "?????",
+      "title": "Statue Saint Etienne",
+      "gain": 0,
+      "latitude": 43.5997222,
+      "longitude": 1.4491666666666667,
+      "__v": 0
+    },
+    {
+      "_id": "6749c4df8e12d613f9877207",
+      "text": "???",
+      "title": "Horloge sans aiguille",
+      "gain": 0,
+      "latitude": 43.6016667,
+      "longitude": 1.4433333333333334,
+      "__v": 0
+    },
+    {
+      "_id": "6749c5f18e12d613f987723d",
+      "text": "??",
+      "title": "Horloge",
+      "gain": 0,
+      "latitude": 43.6058333,
+      "longitude": 1.4455555555555555,
+      "__v": 0
+    },
+    {
+      "_id": "6749c6548e12d613f9877283",
+      "text": "???",
+      "title": "Façade de la Dépêche",
+      "gain": 0,
+      "latitude": 43.6063889,
+      "longitude": 1.4455555555555555,
+      "__v": 0
+    },
+    {
+      "_id": "6749c6ad8e12d613f98772d9",
+      "text": "???",
+      "title": "Bibliothèque des Études et du Patrimoine",
+      "gain": 0,
+      "latitude": 43.6072222,
+      "longitude": 1.443888888888889,
+      "__v": 0
+    },
+    {
+      "_id": "6749c7408e12d613f987738b",
+      "text": "???",
+      "title": "Portrait de Nougaro",
+      "gain": 0,
+      "latitude": 43.6038889,
+      "longitude": 1.4361111111111111,
+      "__v": 0
+    },
+    {
+      "_id": "6749c7a98e12d613f9877431",
+      "text": "????",
+      "title": "Les Pêcheurs de sable",
+      "gain": 0,
+      "latitude": 43.6011111,
+      "longitude": 1.4388888888888889,
+      "__v": 0
     }
   ],
   "hints": [
@@ -147,7 +210,7 @@
         "674985e57a9df117948ab11f",
         "6749864a7a9df117948ab14c"
       ],
-      "__v": 4
+      "__v": 0
     },
     {
       "_id": "67489ebada23a9f0cb4c1132",
@@ -160,7 +223,7 @@
         "674985f77a9df117948ab12e",
         "6749863f7a9df117948ab13d"
       ],
-      "__v": 4
+      "__v": 0
     },
     {
       "_id": "6748b13615de354b59dd46ff",
