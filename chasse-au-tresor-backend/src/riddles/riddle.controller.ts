@@ -46,6 +46,7 @@ export class RiddleController {
     @Body('photo') photo: string,
     @Body('trivia') trivia: string,
     @Body('text') text: string,
+    @Body('title') title: string,
     @Body('teams') teamsS: string,
     @UploadedFile() file: Express.Multer.File,
   ) {
@@ -56,7 +57,18 @@ export class RiddleController {
     const photoPath = file ? file.path : null; // Chemin de la photo sauvegardée
     const teams = JSON.parse(teamsS);
 
-    return this.riddleService.saveRiddle(riddleId, gain, latitude, longitude, text, photo, trivia, photoPath, teams);
+    return this.riddleService.saveRiddle(
+      riddleId,
+      gain,
+      latitude,
+      longitude,
+      text,
+      title,
+      photo,
+      trivia,
+      photoPath,
+      teams,
+    );
   }
 
   @Delete(':riddleId')

@@ -3,8 +3,11 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Riddle extends Document {
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   text: string;
+
+  @Prop({ type: String })
+  title: string;
 
   @Prop({ type: Number, default: 0 })
   gain: number;

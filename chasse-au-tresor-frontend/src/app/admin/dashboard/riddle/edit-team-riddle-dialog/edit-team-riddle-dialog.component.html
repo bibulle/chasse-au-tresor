@@ -3,6 +3,12 @@
 </h1>
 <div mat-dialog-content>
   <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Titre de l'énigme</mat-label>
+    <input matInput [(ngModel)]="data.riddle.title" rows="1" required #titleInput="ngModel" />
+    <mat-error *ngIf="titleInput.invalid">Le titre de l'énigme est obligatoire.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
     <mat-label>Texte de l'énigme</mat-label>
     <textarea matInput [(ngModel)]="data.riddle.text" rows="3" required #textInput="ngModel"></textarea>
     <mat-error *ngIf="textInput.invalid">Le texte de l'énigme est obligatoire.</mat-error>
@@ -58,7 +64,12 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Annuler</button>
-  <button mat-button color="primary" [disabled]="textInput.invalid || gainInput.invalid" (click)="onSave()">
+  <button
+    mat-button
+    color="primary"
+    [disabled]="titleInput.invalid || textInput.invalid || gainInput.invalid"
+    (click)="onSave()"
+  >
     Enregistrer
   </button>
   <button *ngIf="data.riddle._id" mat-button color="warn" (click)="onDelete()">Supprimer définitivement</button>

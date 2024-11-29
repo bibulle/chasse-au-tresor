@@ -44,8 +44,8 @@ export class RiddlesService {
   }
 
   saveRiddle(data: any) {
-    console.log(data);
-    console.log(data.riddle);
+    // console.log(data);
+    // console.log(data.riddle);
     const formData = new FormData();
     if (data.riddle._id) formData.append('_id', data.riddle._id);
     if (data.riddle.gain) formData.append('gain', data.riddle.gain);
@@ -54,6 +54,7 @@ export class RiddlesService {
     if (data.riddle.photo) formData.append('photo', data.riddle.photo);
     if (data.riddle.trivia) formData.append('trivia', data.riddle.trivia);
     if (data.riddle.text) formData.append('text', data.riddle.text);
+    if (data.riddle.title) formData.append('title', data.riddle.title);
     if (data.selectedFile) formData.append('file', data.selectedFile);
     if (data.teams) formData.append('teams', JSON.stringify(data.teams));
 

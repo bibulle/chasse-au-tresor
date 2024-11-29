@@ -2,8 +2,11 @@
   align-items: center;
 }
 
-.riddle-text {
+.riddle-title {
   font-size: large;
+}
+.team-name {
+  font-weight: 600;
 }
 
 button {
@@ -46,8 +49,14 @@ mat-icon {
 
 .riddle-description {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+  row-gap: 8px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 }
 
 .riddle-photo {
@@ -62,13 +71,13 @@ mat-icon {
   flex-direction: column;
   div {
     display: flex;
-    flex-direction: row;   
+    flex-direction: row;
     .name {
-      flex: 1
-    }   
+      flex: 1;
+    }
     .order {
-        width: 7em;
-        padding-left: 1em;    
+      width: 7em;
+      padding-left: 1em;
     }
   }
 }

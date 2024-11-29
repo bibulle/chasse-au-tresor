@@ -2,13 +2,12 @@ import { Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/com
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Team } from './schemas/team.schema';
-import { Player } from 'src/players/schemas/player.schema';
-import { TeamRiddle } from 'src/riddles/schemas/team-riddle.schema';
-import { NotificationsGateway } from 'src/notifications/notifications.gateway';
 import { Hint } from 'src/hints/schemas/hint.schema';
-import { Solution } from 'src/solutions/schemas/solution.schema';
+import { NotificationsGateway } from 'src/notifications/notifications.gateway';
+import { Player } from 'src/players/schemas/player.schema';
 import { Riddle } from 'src/riddles/schemas/riddle.schema';
+import { TeamRiddle } from 'src/riddles/schemas/team-riddle.schema';
+import { Team } from './schemas/team.schema';
 
 @Injectable()
 export class TeamsService implements OnModuleInit {

@@ -5,10 +5,7 @@ import { join } from 'path';
 
 export const multerOptionsFactory = (configService: ConfigService) => ({
   storage: diskStorage({
-    destination: join(
-      configService.get<string>('BASE_PATH'),
-      configService.get<string>('UPLOAD_PATH'),
-    ),
+    destination: join(configService.get<string>('BASE_PATH'), configService.get<string>('UPLOAD_PATH')),
     filename: (req, file, cb) => {
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
       const ext = path.extname(file.originalname);

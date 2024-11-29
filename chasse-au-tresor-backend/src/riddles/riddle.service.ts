@@ -32,13 +32,14 @@ export class RiddleService {
     latitude: number,
     longitude: number,
     text: string,
+    title: string,
     photo: string,
     trivia: string,
     photoPath: string,
     teamOrders: { team: Team; order: number }[],
   ) {
     this.logger.log(
-      `saveRiddle(${riddleId}, ${gain}, ${latitude}, ${longitude}, ${text}, ${photo}, ${trivia}, ${photoPath}, ${teamOrders?.length})`,
+      `saveRiddle(${riddleId}, ${gain}, ${latitude}, ${longitude}, ${text}, ${title}, ${photo}, ${trivia}, ${photoPath}, ${teamOrders?.length})`,
     );
 
     // Validation du chemin de la photo
@@ -56,6 +57,7 @@ export class RiddleService {
         latitude: latitude,
         longitude: longitude,
         text: text,
+        title: title,
         photo: photo,
         trivia: trivia,
       });
@@ -77,6 +79,7 @@ export class RiddleService {
       oldRiddle.latitude = latitude;
       oldRiddle.longitude = longitude;
       oldRiddle.text = text;
+      oldRiddle.title = title;
       oldRiddle.photo = photo;
       oldRiddle.trivia = trivia;
 

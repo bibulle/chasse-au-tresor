@@ -23,6 +23,7 @@ export class Position {
 export class Riddle {
   _id = '';
   text = '';
+  title = '';
   gain = 0;
   photo?: string;
   latitude = 43.604429;

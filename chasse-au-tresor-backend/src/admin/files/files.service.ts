@@ -112,6 +112,6 @@ export class FilesService {
     const teamRiddles = await this.teamRiddleModel.find().lean();
     const solutions = await this.solutionModel.find().lean();
 
-    return JSON.stringify({ teams, players, riddles, teamRiddles, solutions }, null, 2);
+    return JSON.stringify({ teams, players, riddles, hints, teamRiddles, solutions }, null, 2);
   }
 }

@@ -45,8 +45,11 @@ export class EditTeamRiddleDialogComponent implements OnInit {
     if (!this.data.riddle.gain) {
       this.data.riddle.gain = 0;
     }
+    if (!this.data.riddle.title) {
+      this.data.riddle.title = '';
+    }
     if (!this.data.riddle.text) {
-      this.data.riddle.text = ''; // Texte vide pour forcer l'utilisateur à le remplir
+      this.data.riddle.text = '';
     }
 
     // console.log(this.data);
