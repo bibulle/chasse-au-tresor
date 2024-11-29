@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Injectable,
-  Logger,
-  OnModuleInit,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -56,7 +51,7 @@ export class AuthService implements OnModuleInit {
   async validateAdmin(username: string, password: string): Promise<any> {
     const admin = await this.adminModel.findOne({ username }).exec();
     if (admin && (await bcrypt.compare(password, admin.password))) {
-      const { password, ...result } = admin;
+      const { password, ...result } = admin.toObject();
       return result;
     }
     throw new UnauthorizedException('Invalid credentials');

@@ -1,19 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { MatOption } from '@angular/material/core';
-import {
-  MatError,
-  MatFormField,
-  MatFormFieldModule,
-  MatLabel,
-} from '@angular/material/form-field';
+import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -37,7 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatInputModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
 })
 export class LoginComponent {
@@ -58,26 +47,14 @@ export class LoginComponent {
 
   goToDashboard() {
     this.router.navigate(['/']);
-  } 
+  }
 
   async onSubmit() {
     if (this.loginForm.valid) {
       let username = this.loginForm.value.username;
-      username = username.charAt(0).toUpperCase() + username.slice(1);
 
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          this.playerService
-            .alreadyExists(username)
-            .subscribe((alreadyExists) => {
-              if (!alreadyExists) {
-                this.playerService
-                  .createPlayer({ username: username })
-                  .subscribe();
-              }
-            });
-
-          localStorage.setItem('createdUser', `{"username": "${username}"}`);
           localStorage.setItem('token', response.access_token);
           this.router.navigate(['/admin']); // Redirection après login
         },
