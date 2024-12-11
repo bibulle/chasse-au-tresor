@@ -15,6 +15,7 @@ import { HintsComponent } from './hints/hints.component';
 import { TeamsService } from '../core/teams.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SolutionPopupComponent } from './solution-popup/solution-popup.component';
+import { OptionalRiddlePopupComponent } from './optional-riddle-popup/optional-riddle-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,11 +32,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   currentTeamRiddle: TeamRiddle | null = null;
   resolvedTeamRiddles: TeamRiddle[] = [];
+  optionalTeamRiddles: TeamRiddle[] = [];
 
   userSubscription: Subscription | undefined;
   teamSubscription: Subscription | undefined;
   riddleCurrentSubscription: Subscription | undefined;
   riddleResolvedSubscription: Subscription | undefined;
+  riddleOptionalSubscription: Subscription | undefined;
   geoLocalisationId: number | null = null;
   private geoLocalisationUser = '';
 
@@ -69,6 +72,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     if (this.riddleResolvedSubscription) {
       this.riddleResolvedSubscription.unsubscribe();
+    }
+    if (this.riddleOptionalSubscription) {
+      this.riddleOptionalSubscription.unsubscribe();
     }
     if (this.teamSubscription) {
       this.teamSubscription.unsubscribe();
@@ -134,6 +140,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.riddleResolvedSubscription) {
       this.riddleResolvedSubscription.unsubscribe();
     }
+    if (this.riddleOptionalSubscription) {
+      this.riddleOptionalSubscription.unsubscribe();
+    }
 
     this.teamId = player.team?._id;
     if (this.teamId) {
@@ -142,12 +151,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.riddleCurrentSubscription = this.riddleService.currentTeamRiddle$.subscribe((teamRiddle) => {
         this.currentTeamRiddle = teamRiddle;
       });
-      this.riddleService.listenForCurrentTeamRiddleUpdates(this.teamId);
       this.resolvedTeamRiddles = await firstValueFrom(this.riddleService.loadResolvedTeamRiddle(this.teamId));
       this.riddleResolvedSubscription = this.riddleService.resolvedTeamRiddleSubject$.subscribe((teamRiddle) => {
         this.resolvedTeamRiddles = teamRiddle ? teamRiddle : [];
         // check if new Resolved riddle
         this.sendPopupIfNewResolvedRiddle(this.resolvedTeamRiddles);
+      });
+      this.optionalTeamRiddles = await firstValueFrom(this.riddleService.loadOptionalTeamRiddle(this.teamId));
+      this.riddleOptionalSubscription = this.riddleService.optionalTeamRiddleSubject$.subscribe((teamRiddle) => {
+        this.optionalTeamRiddles = teamRiddle ? teamRiddle : [];
+        // check if new Resolved riddle
+        this.sendPopupIfNewOptionalRiddle(this.optionalTeamRiddles);
       });
     }
   }
@@ -194,6 +208,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
         //width: '400px',
         data: {
           lastResolved: lastResolved,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('Popup fermée.');
+      });
+    }
+  }
+
+  sendPopupIfNewOptionalRiddle(optionalTeamRiddles: TeamRiddle[]) {
+    const lastOptional = optionalTeamRiddles.sort((tr1, tr2) => tr1.order - tr2.order).at(-1);
+    if (!lastOptional) {
+      return;
+    }
+
+    const localS = localStorage.getItem('lastOptionalRiddleId');
+    let previousOptionalIds: String[] = [];
+    if (localS) {
+      previousOptionalIds = JSON.parse(localS);
+    }
+
+    if (!previousOptionalIds.find((s) => s === lastOptional._id)) {
+      previousOptionalIds.push(lastOptional._id);
+      localStorage.setItem('lastOptionalRiddleId', JSON.stringify(previousOptionalIds));
+
+      const dialogRef = this.dialog.open(OptionalRiddlePopupComponent, {
+        //width: '400px',
+        data: {
+          lastOptional: lastOptional,
         },
       });
 

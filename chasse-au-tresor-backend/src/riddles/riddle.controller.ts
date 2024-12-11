@@ -47,6 +47,7 @@ export class RiddleController {
     @Body('trivia') trivia: string,
     @Body('text') text: string,
     @Body('title') title: string,
+    @Body('optional') optional: boolean,
     @Body('teams') teamsS: string,
     @UploadedFile() file: Express.Multer.File,
   ) {
@@ -64,6 +65,7 @@ export class RiddleController {
       longitude,
       text,
       title,
+      optional,
       photo,
       trivia,
       photoPath,

@@ -35,27 +35,51 @@ export class TeamRiddlesService {
   }
 
   async getCurrentTeamRiddle(teamId: string): Promise<TeamRiddle> {
-    // 1. Trouver les énigmes associées à l'équipe
-    const teamRiddle = await this.teamRiddleModel
-      .findOne({ team: new Types.ObjectId(teamId), resolved: false }) // Non résolue
-      .sort({ order: 1 }) // Trier par ordre croissant
-      .populate('riddle') // Charger les détails de l'énigme
-      .populate({ path: 'hints', model: 'Hint' })
-      .exec();
+    const teamRiddle = await this.teamRiddleModel.aggregate([
+      {
+        $lookup: {
+          from: 'riddles', // Nom de la collection Riddle
+          localField: 'riddle', // Champ dans TeamRiddle
+          foreignField: '_id', // Champ correspondant dans Riddle
+          as: 'riddle',
+        },
+      },
+      {
+        $unwind: '$riddle', // Décompose riddleData en documents individuels
+      },
+      {
+        $match: {
+          team: new Types.ObjectId(teamId),
+          resolved: false,
+          $or: [
+            { 'riddle.optional': false }, // `optional` est false
+            { 'riddle.optional': { $exists: false } }, // `optional` n'est pas défini
+          ],
+        },
+      },
+      {
+        $sort: { order: 1 }, // Tri par ordre croissant
+      },
+      {
+        $limit: 1, // Limiter à un résultat
+      },
+    ]);
 
-    if (!teamRiddle || !teamRiddle.riddle) {
+    if (!teamRiddle || teamRiddle.length == 0 || !teamRiddle[0].riddle) {
       this.logger.log(`No current riddle found for team "${teamId}".`);
       return null;
     }
 
+    // console.log(teamRiddle);
+
     // 2. Retourner l'énigme courante
-    return teamRiddle as unknown as TeamRiddle;
+    return teamRiddle[0] as unknown as TeamRiddle;
   }
 
-  async getFinishedTeamRiddle(teamId: string): Promise<TeamRiddle[]> {
+  async getFinishedTeamRiddles(teamId: string): Promise<TeamRiddle[]> {
     // 1. Trouver les énigmes associées à l'équipe
     const teamRiddles = await this.teamRiddleModel
-      .find({ team: new Types.ObjectId(teamId), resolved: true }) // Non résolue
+      .find({ team: new Types.ObjectId(teamId), resolved: true }) // Résolue
       .sort({ order: 1 }) // Trier par ordre croissant
       .populate('riddle') // Charger les détails de l'énigme
       .populate({ path: 'solutions', model: 'Solution', populate: 'player' }) // Charger les détails de l'énigme
@@ -65,6 +89,34 @@ export class TeamRiddlesService {
       this.logger.log(`No finished riddle found for team "${teamId}".`);
       return [];
     }
+
+    // 2. Retourner l'énigme courante
+    return teamRiddles;
+  }
+
+  async getOptionalTeamRiddles(teamId: string): Promise<TeamRiddle[]> {
+    // 1. Trouver les énigmes associées à l'équipe
+    let teamRiddles = await this.teamRiddleModel
+      .find({
+        team: new Types.ObjectId(teamId),
+        resolved: false,
+      })
+      .sort({ order: -1 }) // Trier par ordre croissant
+      .populate({
+        path: 'riddle',
+        match: { optional: true },
+      }) // Charger les détails de l'énigme
+      // .populate({ path: 'solutions', model: 'Solution', populate: 'player' }) // Charger les détails de l'énigme
+      .exec();
+
+    teamRiddles = teamRiddles.filter((teamRiddle) => teamRiddle.riddle !== null);
+
+    if (!teamRiddles) {
+      this.logger.log(`No optional riddle found for team "${teamId}".`);
+      return [];
+    }
+
+    // console.log(teamRiddles);
 
     // 2. Retourner l'énigme courante
     return teamRiddles;

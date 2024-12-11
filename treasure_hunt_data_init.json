@@ -45,8 +45,8 @@
       "_id": "673f78fe524a110f24a1bc10",
       "username": "Eric",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
-      "latitude": 43.5780159,
-      "longitude": 1.3168645,
+      "latitude": 43.578026,
+      "longitude": 1.3168846,
       "isAdmin": true,
       "__v": 0
     },
@@ -171,6 +171,18 @@
       "longitude": 1.4388888888888889,
       "solutionLocked": false,
       "__v": 0
+    },
+    {
+      "_id": "6759cf4dd6e334493c0ff18e",
+      "text": "Dans certaines rues de Toulouse, vous remarquerez que d'anciennes plaques de rue sont soit jaunes, soit blanches. Pourquoi ces différences de couleur ?",
+      "title": "Plaques de rue",
+      "gain": 100,
+      "photo": "/upload/photos/file-1733939021766-639953225.jpeg",
+      "latitude": 43.5975,
+      "longitude": 1.4419444444444445,
+      "solutionLocked": false,
+      "__v": 0,
+      "optional": true
     }
   ],
   "hints": [

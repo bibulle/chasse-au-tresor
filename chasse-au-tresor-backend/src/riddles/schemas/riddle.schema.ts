@@ -26,6 +26,9 @@ export class Riddle extends Document {
 
   @Prop({ type: Boolean, required: true, default: false })
   solutionLocked: boolean;
+
+  @Prop({ type: Boolean, required: true, default: false })
+  optional: boolean;
 }
 
 export const RiddleSchema = SchemaFactory.createForClass(Riddle);

@@ -4,6 +4,10 @@
 
 .riddle-title {
   font-size: large;
+  .optional {
+    padding-left: 2em;
+    font-size: 0.7em;
+  }
 }
 .team-name {
   font-weight: 600;

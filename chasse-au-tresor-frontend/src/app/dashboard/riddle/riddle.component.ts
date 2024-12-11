@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { Player, TeamRiddle } from '../../reference/types';
+import { Player, Riddle, TeamRiddle } from '../../reference/types';
 import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submit-solution-dialog.component';
 
 @Component({
@@ -16,6 +16,10 @@ import { SubmitSolutionDialogComponent } from '../solution/submit-solution/submi
 })
 export class RiddleComponent {
   @Input() teamRiddle: TeamRiddle | undefined;
+
+  @Input() optionalRiddles: TeamRiddle[] = [];
+  optionalRiddlesIndex = 0;
+
   @Input() player: Player | null = null;
 
   @Output() toggleHints = new EventEmitter<void>();
@@ -24,17 +28,19 @@ export class RiddleComponent {
 
   getHtml() {
     //<img *ngIf="teamRiddle?.riddle?.photo" mat-card-md-image src="/api/files{{ teamRiddle?.riddle?.photo }}" />
-    if (!this.teamRiddle?.riddle?.photo) {
-      return this.teamRiddle?.riddle?.text;
+    if (!this.getTeamRiddle()?.riddle?.photo) {
+      return this.getTeamRiddle()?.riddle?.text;
     } else {
-      return `<img mat-card-md-image class="image-riddle" src="/api/files${this.teamRiddle?.riddle?.photo}" /> ${this.teamRiddle?.riddle?.text}`;
+      return `<img mat-card-md-image class="image-riddle" src="/api/files${this.getTeamRiddle()?.riddle?.photo}" /> ${
+        this.getTeamRiddle()?.riddle?.text
+      }`;
     }
   }
 
   isSolutionLocked() {
     if (
-      this.teamRiddle?.riddle?.solutionLocked &&
-      !this.teamRiddle?.hints.some((hint) => hint.isPurchased && hint.unlockSolution)
+      this.getTeamRiddle()?.riddle?.solutionLocked &&
+      !this.getTeamRiddle()?.hints.some((hint) => hint.isPurchased && hint.unlockSolution)
     ) {
       return true;
     }
@@ -46,20 +52,49 @@ export class RiddleComponent {
       width: '600px',
       data: {
         playerId: this.player?._id,
-        teamRiddleId: this.teamRiddle?._id,
+        teamRiddleId: this.getTeamRiddle()?._id,
       },
     });
   }
 
+  getTeamRiddle(): TeamRiddle | undefined {
+    if (this.optionalRiddlesIndex === 0) {
+      return this.teamRiddle;
+    } else {
+      return this.optionalRiddles[this.optionalRiddlesIndex - 1];
+    }
+  }
   calculatedGain(): number {
-    let calculated = this.teamRiddle?.riddle?.gain ? this.teamRiddle?.riddle?.gain : 0;
+    const initial = this.getTeamRiddle()?.riddle?.gain;
+    let calculated = 0;
+    if (initial) {
+      calculated = initial;
+    }
 
-    this.teamRiddle?.hints
-      .filter((h) => h.isPurchased)
+    this.getTeamRiddle()
+      ?.hints.filter((h) => h.isPurchased)
       .forEach((h) => {
         calculated -= h.cost;
       });
 
     return calculated;
+  }
+
+  toggleOptionalRiddles() {
+    if (this.optionalRiddlesIndex === 0) {
+      this.optionalRiddlesIndex = Math.min(1, this.optionalRiddles.length);
+    } else {
+      this.optionalRiddlesIndex = 0;
+    }
+  }
+  incrementOptionalRiddles(increment: number) {
+    this.optionalRiddlesIndex += increment;
+
+    if (this.optionalRiddlesIndex < 0) {
+      this.optionalRiddlesIndex = 0;
+    }
+    if (this.optionalRiddlesIndex > this.optionalRiddles.length) {
+      this.optionalRiddlesIndex = this.optionalRiddles.length;
+    }
   }
 }
