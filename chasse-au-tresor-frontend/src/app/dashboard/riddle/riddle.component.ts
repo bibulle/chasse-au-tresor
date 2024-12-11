@@ -22,6 +22,15 @@ export class RiddleComponent {
 
   constructor(private dialog: MatDialog) {}
 
+  getHtml() {
+    //<img *ngIf="teamRiddle?.riddle?.photo" mat-card-md-image src="/api/files{{ teamRiddle?.riddle?.photo }}" />
+    if (!this.teamRiddle?.riddle?.photo) {
+      return this.teamRiddle?.riddle?.text;
+    } else {
+      return `<img mat-card-md-image class="image-riddle" src="/api/files${this.teamRiddle?.riddle?.photo}" /> ${this.teamRiddle?.riddle?.text}`;
+    }
+  }
+
   isSolutionLocked() {
     if (
       this.teamRiddle?.riddle?.solutionLocked &&

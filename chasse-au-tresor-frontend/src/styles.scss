@@ -11,7 +11,7 @@ $dark-theme: mat.define-theme(
     ),
     typography: (
       brand-family: "Sour Gummy",
-      bold-weight: 900, 
+      bold-weight: 900,
     ),
   )
 );
@@ -29,7 +29,6 @@ $light-theme: mat.define-theme(
     ),
   )
 );
-
 
 html {
   // Apply the dark theme by default
@@ -54,4 +53,11 @@ body {
 body {
   margin: 0;
   font-family: "Sour Gummy", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.image-riddle {
+  width: 112px;
+  height: 112px;
+  float: left;
+  margin-right: 16px;
 }
