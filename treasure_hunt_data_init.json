@@ -5,11 +5,7 @@
       "name": "Explorateurs du Capitole",
       "color": "red",
       "players": [
-        "64b2f9c2d5a29e3c3e5a6f01",
-        "64b2f9c2d5a29e3c3e5a6f02",
         "673f7948524a110f24a1bc56",
-        "67431ea609fcfd6e63e4cbab",
-        "6748501c1638a29e8aec3ee1"
       ],
       "score": 0,
       "position": {
@@ -24,12 +20,7 @@
       "name": "Aventuriers de la Garonne",
       "color": "blue",
       "players": [
-        "64b2f9c2d5a29e3c3e5a6f03",
-        "64b2f9c2d5a29e3c3e5a6f04",
         "673f78fe524a110f24a1bc10",
-        "67406baec569cf88ba420add",
-        "6740833c536ef59302d6c8a3",
-        "6740c70e536ef59302d6e227"
       ],
       "score": 0,
       "position": {
@@ -69,6 +60,7 @@
       "latitude": 43.598333,
       "longitude": 1.434167,
       "solutionLocked": true,
+      "optional": false,
       "__v": 0
     },
     {
@@ -79,6 +71,7 @@
       "latitude": 43.599444,
       "longitude": 1.436944,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -90,6 +83,7 @@
       "latitude": 43.598056,
       "longitude": 1.4375,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -100,6 +94,7 @@
       "latitude": 43.5975,
       "longitude": 1.441944,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -110,6 +105,7 @@
       "latitude": 43.5997222,
       "longitude": 1.4491666666666667,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -120,6 +116,7 @@
       "latitude": 43.6016667,
       "longitude": 1.4433333333333334,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -130,6 +127,7 @@
       "latitude": 43.6058333,
       "longitude": 1.4455555555555555,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -140,6 +138,7 @@
       "latitude": 43.6063889,
       "longitude": 1.4455555555555555,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -150,6 +149,7 @@
       "latitude": 43.6072222,
       "longitude": 1.443888888888889,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -160,6 +160,7 @@
       "latitude": 43.6038889,
       "longitude": 1.4361111111111111,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -170,6 +171,7 @@
       "latitude": 43.6011111,
       "longitude": 1.4388888888888889,
       "solutionLocked": false,
+      "optional": false,
       "__v": 0
     },
     {
@@ -177,12 +179,12 @@
       "text": "Dans certaines rues de Toulouse, vous remarquerez que d'anciennes plaques de rue sont soit jaunes, soit blanches. Pourquoi ces différences de couleur ?",
       "title": "Plaques de rue",
       "gain": 100,
-      "photo": "/upload/photos/file-1733939021766-639953225.jpeg",
+      "photo": "/upload/photos/file-1733953393759-574332644.jpeg",
       "latitude": 43.5975,
       "longitude": 1.4419444444444445,
       "solutionLocked": false,
-      "__v": 0,
-      "optional": true
+      "optional": true,
+      "__v": 0
     }
   ],
   "hints": [
@@ -307,7 +309,7 @@
         "674985e57a9df117948ab11f",
         "6749864a7a9df117948ab14c"
       ],
-      "__v": 3
+      "__v": 0
     },
     {
       "_id": "67489ebada23a9f0cb4c1132",
@@ -320,7 +322,7 @@
         "674985f77a9df117948ab12e",
         "6749863f7a9df117948ab13d"
       ],
-      "__v": 6
+      "__v": 0
     },
     {
       "_id": "6748b13615de354b59dd46ff",
@@ -378,7 +380,7 @@
       "_id": "6748b22315de354b59dd4e5a",
       "team": "64b2f9c2d5a29e3c3e5a6e01",
       "riddle": "6748b22315de354b59dd4e57",
-      "order": 4,
+      "order": 5,
       "resolved": false,
       "solutions": [],
       "hints": [],
@@ -388,6 +390,26 @@
       "_id": "6748b22315de354b59dd4e5b",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
       "riddle": "6748b22315de354b59dd4e57",
+      "order": 5,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "675a077199680bf616eec176",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6759cf4dd6e334493c0ff18e",
+      "order": 4,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "675a077199680bf616eec177",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6759cf4dd6e334493c0ff18e",
       "order": 4,
       "resolved": false,
       "solutions": [],
