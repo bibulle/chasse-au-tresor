@@ -63,30 +63,33 @@
   "riddles": [
     {
       "_id": "67489c3fe221a072ff24eaa6",
-      "text": "Bienvenue dans la chasse au trésor ! Voici ta première énigme. Si tu as besoin d'aide, n'hésite pas à cliquer sur le point d'interrogation pour découvrir des indices. Mais attention, chaque indice te coûtera des points ! À toi de jouer, et bonne chance ! 🎯 Maintenant regarde les indices.",
+      "text": "Bienvenue dans la chasse au trésor !<BR>Voici ta première énigme.<BR> Si tu as besoin d'aide, n'hésite pas à cliquer sur le point d'interrogation pour découvrir des indices. Mais attention, chaque indice te coûtera des points ! À toi de jouer, et bonne chance ! 🎯 <BR>Maintenant regarde les indices.",
       "title": "Tutoriel",
       "gain": 40,
       "latitude": 43.598333,
       "longitude": 1.434167,
-      "__v": 0,
-      "solutionLocked": true
+      "solutionLocked": true,
+      "__v": 0
     },
     {
       "_id": "6748b13615de354b59dd46fb",
-      "text": "Derrière les murs où les vies sont soignées,\r\nSe cache un secret, souvent ignoré.\r\nUne armoire veille, en silence discrète,\r\nHommage aux tout-petits que l'on n'oublie jamais.\r\n\r\nCe refuge ancien, entre amour et mystère,\r\nPortait l'espoir pour ceux en détresse.\r\nTrouve cet endroit où les cœurs s'éclairent,\r\nEt où les bébés trouvaient une adresse.",
+      "text": "Derrière les murs où les vies sont soignées,<br>\r\nSe cache un secret, souvent ignoré.<br>\r\nUne armoire veille, en silence discrète,<br>\r\nHommage aux tout-petits que l'on n'oublie jamais.<br>\r\n<br>\r\nCe refuge ancien, entre amour et mystère,<br>\r\nPortait l'espoir pour ceux en détresse.<br>\r\nTrouve cet endroit où les cœurs s'éclairent,<br>\r\nEt où les bébés trouvaient une adresse.",
       "title": "Armoire à bébés",
       "gain": 50,
       "latitude": 43.599444,
       "longitude": 1.436944,
+      "solutionLocked": false,
       "__v": 0
     },
     {
       "_id": "6748b1b215de354b59dd4ad4",
-      "text": "Sous le regard des ponts anciens,\r\nUn lieu se déploie, calme et serein.\r\nAutrefois, c'était un bastion d'ingénieurs,\r\nAujourd'hui, c'est un havre pour les promeneurs.\r\n\r\nLe vent y danse au gré des saisons,\r\nPortant des éclats de rires et de chansons.\r\nMais souviens-toi : son nom évoque une mission,\r\nPurifier l’eau pour les âmes de la Ville Rose, une noble raison.\r\n\r\nTrouve cet écrin au bord de la Garonne,\r\nOù nature et histoire à jamais résonnent.",
+      "text": "Sous les ponts anciens de Toulouse,<br>\r\nUn lieu de calme et d'histoire s'amuse.<br>\r\nAutrefois bastion, aujourd'hui havre de paix,<br>\r\nSon nom purifie, l'eau et ses secrets.<br>\r\nCherchez dans la Prairie où nature rayonne,<br>\r\nl'endroit ou cette image résonne.",
       "title": "Prairie des filtres",
       "gain": 50,
+      "photo": "/upload/photos/file-1733929255245-769935916.jpg",
       "latitude": 43.598056,
       "longitude": 1.4375,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -96,15 +99,17 @@
       "gain": 50,
       "latitude": 43.5975,
       "longitude": 1.441944,
+      "solutionLocked": false,
       "__v": 0
     },
     {
       "_id": "6749c4958e12d613f98771e1",
       "text": "?????",
-      "title": "Statue Saint Etienne",
+      "title": "Statue Saint Étienne",
       "gain": 0,
       "latitude": 43.5997222,
       "longitude": 1.4491666666666667,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -114,6 +119,7 @@
       "gain": 0,
       "latitude": 43.6016667,
       "longitude": 1.4433333333333334,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -123,6 +129,7 @@
       "gain": 0,
       "latitude": 43.6058333,
       "longitude": 1.4455555555555555,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -132,6 +139,7 @@
       "gain": 0,
       "latitude": 43.6063889,
       "longitude": 1.4455555555555555,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -141,6 +149,7 @@
       "gain": 0,
       "latitude": 43.6072222,
       "longitude": 1.443888888888889,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -150,6 +159,7 @@
       "gain": 0,
       "latitude": 43.6038889,
       "longitude": 1.4361111111111111,
+      "solutionLocked": false,
       "__v": 0
     },
     {
@@ -159,42 +169,117 @@
       "gain": 0,
       "latitude": 43.6011111,
       "longitude": 1.4388888888888889,
+      "solutionLocked": false,
       "__v": 0
     }
   ],
   "hints": [
     {
       "_id": "674985e57a9df117948ab11f",
-      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. Achète l'indice suivant.",
+      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. <strong>Achète l'indice suivant.</strong>",
       "cost": 0,
       "isPurchased": true,
       "order": 1,
-      "__v": 0,
-      "unlockSolution": false
+      "unlockSolution": false,
+      "__v": 0
     },
     {
       "_id": "674985f77a9df117948ab12e",
-      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. Achète l'indice suivant.",
+      "description": "Voila, c'est ici !\nTu peux \"acheter\" des indices en cliquant sur le point d’interrogation. Ces indices te guideront vers la solution, mais choisis-les judicieusement pour préserver tes points. <strong>Achète l'indice suivant.</strong>",
       "cost": 0,
       "isPurchased": true,
       "order": 1,
-      "__v": 0,
-      "unlockSolution": false
+      "unlockSolution": false,
+      "__v": 0
     },
     {
       "_id": "6749863f7a9df117948ab13d",
-      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. La solution a cette énigme est juste une blague et un jolie selphie de ton équipe.",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <BR>La solution a cette énigme est juste une blague et un jolie selfie de ton équipe.",
       "cost": 10,
       "isPurchased": false,
       "order": 2,
+      "unlockSolution": true,
       "__v": 0
     },
     {
       "_id": "6749864a7a9df117948ab14c",
-      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. La solution a cette énigme est juste une blague et un jolie selphie de ton équipe.",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <br>La solution a cette énigme est juste une blague et un jolie selfie de ton équipe.",
       "cost": 10,
       "isPurchased": false,
       "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67596903d5da4c48674e7dba",
+      "description": "On cherche une niche a droite de l'escalier principale du bâtiment.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67596927d5da4c48674e7e23",
+      "description": "On cherche une niche a droite de l'escalier principale du bâtiment.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67596987d5da4c48674e7e72",
+      "description": "Le bâtiment en question est l'Hôtel-Dieu",
+      "cost": 30,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67596996d5da4c48674e7eb1",
+      "description": "Le bâtiment en question est l'Hôtel-Dieu",
+      "cost": 30,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6759a968d5da4c48674e7f99",
+      "description": "L'image recherché est sur le seul bâtiment de l'endroit",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6759a983d5da4c48674e7fc4",
+      "description": "Il s'agit de la prairie des filtres",
+      "cost": 20,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6759aa67d5da4c48674e7ffd",
+      "description": "L'image recherché est sur le seul bâtiment de l'endroit",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6759aa79d5da4c48674e8030",
+      "description": "Il s'agit de la prairie des filtres",
+      "cost": 20,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
       "__v": 0
     }
   ],
@@ -210,7 +295,7 @@
         "674985e57a9df117948ab11f",
         "6749864a7a9df117948ab14c"
       ],
-      "__v": 0
+      "__v": 3
     },
     {
       "_id": "67489ebada23a9f0cb4c1132",
@@ -223,7 +308,7 @@
         "674985f77a9df117948ab12e",
         "6749863f7a9df117948ab13d"
       ],
-      "__v": 0
+      "__v": 6
     },
     {
       "_id": "6748b13615de354b59dd46ff",
@@ -232,7 +317,10 @@
       "order": 3,
       "resolved": false,
       "solutions": [],
-      "hints": [],
+      "hints": [
+        "67596927d5da4c48674e7e23",
+        "67596996d5da4c48674e7eb1"
+      ],
       "__v": 0
     },
     {
@@ -242,7 +330,10 @@
       "order": 2,
       "resolved": false,
       "solutions": [],
-      "hints": [],
+      "hints": [
+        "67596903d5da4c48674e7dba",
+        "67596987d5da4c48674e7e72"
+      ],
       "__v": 0
     },
     {
@@ -252,7 +343,10 @@
       "order": 3,
       "resolved": false,
       "solutions": [],
-      "hints": [],
+      "hints": [
+        "6759a968d5da4c48674e7f99",
+        "6759a983d5da4c48674e7fc4"
+      ],
       "__v": 0
     },
     {
@@ -262,7 +356,10 @@
       "order": 2,
       "resolved": false,
       "solutions": [],
-      "hints": [],
+      "hints": [
+        "6759aa67d5da4c48674e7ffd",
+        "6759aa79d5da4c48674e8030"
+      ],
       "__v": 0
     },
     {
