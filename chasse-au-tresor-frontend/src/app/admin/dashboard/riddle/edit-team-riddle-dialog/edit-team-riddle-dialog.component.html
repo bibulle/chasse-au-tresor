@@ -61,6 +61,11 @@
       </div>
     </div>
   </fieldset>
+
+  <fieldset class="optional-fieldset">
+    <legend>Optionnelle</legend>
+    <mat-checkbox [(ngModel)]="data.riddle.optional" class="full-width"> Cette énigme est optionnelle </mat-checkbox>
+  </fieldset>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Annuler</button>

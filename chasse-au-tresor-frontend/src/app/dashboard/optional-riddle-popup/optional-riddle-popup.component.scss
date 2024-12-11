@@ -1,0 +1,14 @@
+.popup-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-message {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}

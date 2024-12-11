@@ -1,11 +1,17 @@
-<mat-card *ngIf="teamRiddle?.riddle" class="enigme-card">
+<mat-card *ngIf="getTeamRiddle()?.riddle" class="enigme-card">
   <mat-card-header>
     <!-- <mat-card-title> -->
-    <span class="titre">Énigme en cours</span>
+    <span class="titre" *ngIf="optionalRiddlesIndex == 0">Énigme en cours</span>
+    <span class="titre" *ngIf="optionalRiddlesIndex >= 1"
+      >Énigme optionnelle
+      <span class="optional-count" *ngIf="optionalRiddles.length > 1"
+        >{{ optionalRiddlesIndex }}/{{ optionalRiddles.length }}</span
+      ></span
+    >
     <span class="spacer"></span>
     <span class="gain"
-      ><span *ngIf="teamRiddle?.riddle?.gain !== calculatedGain()" class="gain-initial">{{
-        teamRiddle?.riddle?.gain
+      ><span *ngIf="getTeamRiddle()?.riddle?.gain !== calculatedGain()" class="gain-initial">{{
+        getTeamRiddle()?.riddle?.gain
       }}</span
       ><span class="gain-calculated">{{ calculatedGain() }}</span></span
     ><mat-icon color="yellow">star</mat-icon>
@@ -16,8 +22,50 @@
     <div class="card-content" [innerHTML]="getHtml()"></div>
   </mat-card-content>
   <mat-card-footer class="card-footer">
-    <button *ngIf="teamRiddle?.hints?.length" mat-mini-fab color="secondary" (click)="toggleHints.emit()">
+    <button
+      mat-mini-fab
+      color="secondary"
+      [class]="{ hidden: !getTeamRiddle()?.hints?.length }"
+      [disabled]="!getTeamRiddle()?.hints?.length"
+      (click)="toggleHints.emit()"
+    >
       <mat-icon>help</mat-icon>
+    </button>
+    <div class="spacer"></div>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="optional"
+      [class]="{ hidden: optionalRiddles.length === 0 || optionalRiddlesIndex < 2 }"
+      [disabled]="optionalRiddles.length === 0 || optionalRiddlesIndex < 2"
+      (click)="incrementOptionalRiddles(-1)"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="optional"
+      (click)="toggleOptionalRiddles()"
+      *ngIf="optionalRiddles.length > 0"
+    >
+      <mat-icon *ngIf="optionalRiddlesIndex === 0">add</mat-icon>
+      <mat-icon *ngIf="optionalRiddlesIndex !== 0">remove</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="optional"
+      [class]="{
+        hidden:
+          optionalRiddles.length === 0 || optionalRiddlesIndex === 0 || optionalRiddlesIndex >= optionalRiddles.length
+      }"
+      [disabled]="
+        optionalRiddles.length === 0 || optionalRiddlesIndex === 0 || optionalRiddlesIndex >= optionalRiddles.length
+      "
+      (click)="incrementOptionalRiddles(+1)"
+    >
+      <mat-icon>arrow_forward</mat-icon>
     </button>
     <div class="spacer"></div>
     <button mat-mini-fab color="primary" (click)="openSubmitSolutionDialog()" *ngIf="!isSolutionLocked()">

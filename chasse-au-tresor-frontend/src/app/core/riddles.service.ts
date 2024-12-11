@@ -55,6 +55,7 @@ export class RiddlesService {
     if (data.riddle.trivia) formData.append('trivia', data.riddle.trivia);
     if (data.riddle.text) formData.append('text', data.riddle.text);
     if (data.riddle.title) formData.append('title', data.riddle.title);
+    if (data.riddle.optional) formData.append('optional', data.riddle.optional);
     if (data.selectedFile) formData.append('file', data.selectedFile);
     if (data.teams) formData.append('teams', JSON.stringify(data.teams));
 

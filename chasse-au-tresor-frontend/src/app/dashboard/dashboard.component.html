@@ -5,6 +5,7 @@
   <app-riddle
     *ngIf="currentTeamRiddle"
     [teamRiddle]="currentTeamRiddle"
+    [optionalRiddles]="optionalTeamRiddles"
     [player]="player"
     (toggleHints)="toggleHints()"
   ></app-riddle>

@@ -12,6 +12,9 @@
     padding-bottom: 8px;
     .titre {
       font-size: 1.4em;
+      .optional-count {
+        font-size: 0.8em;
+      }
     }
     .spacer {
       flex: 1 1 auto;
@@ -40,8 +43,12 @@
   .card-footer {
     display: flex;
     padding: 16px;
+    gap: 8px;
     .spacer {
       flex: 1 1 auto;
+    }
+    .hidden {
+      opacity: 0;
     }
   }
 }

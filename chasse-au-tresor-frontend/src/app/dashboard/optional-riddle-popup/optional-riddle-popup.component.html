@@ -1,0 +1,10 @@
+<div class="popup-container">
+  <h1 class="popup-title">Vous avez une nouvelle énigme optionnelle&nbsp;!</h1>
+  <p class="popup-message">
+    <strong>{{ data.lastOptional.riddle?.title }}</strong
+    ><br /><br />
+    Utilisé le bouton <button mat-mini-fab disabled><mat-icon>add</mat-icon></button> pour la trouver.
+  </p>
+
+  <button mat-raised-button color="primary" (click)="closeDialog()">Fermer</button>
+</div>

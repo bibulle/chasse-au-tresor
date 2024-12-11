@@ -30,6 +30,7 @@ export class Riddle {
   longitude = 1.443812;
   trivia?: string;
   solutionLocked = false;
+  optional = false;
 }
 
 export class TeamRiddle {

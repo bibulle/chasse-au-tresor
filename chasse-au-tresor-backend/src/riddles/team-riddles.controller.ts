@@ -17,7 +17,12 @@ export class TeamRiddlesController {
   }
 
   @Get('finished/:teamId')
-  async getFinishedTeamRiddle(@Param('teamId') teamId: string): Promise<TeamRiddle[]> {
-    return this.teamRiddleService.getFinishedTeamRiddle(teamId);
+  async getFinishedTeamRiddles(@Param('teamId') teamId: string): Promise<TeamRiddle[]> {
+    return this.teamRiddleService.getFinishedTeamRiddles(teamId);
+  }
+
+  @Get('optional/:teamId')
+  async getOptionalTeamRiddles(@Param('teamId') teamId: string): Promise<TeamRiddle[]> {
+    return this.teamRiddleService.getOptionalTeamRiddles(teamId);
   }
 }

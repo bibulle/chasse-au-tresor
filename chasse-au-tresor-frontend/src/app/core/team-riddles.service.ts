@@ -21,6 +21,8 @@ export class TeamRiddlesService {
   currentTeamRiddle$: Observable<TeamRiddle | null> = this.currentTeamRiddleSubject.asObservable();
   private resolvedTeamRiddleSubject = new BehaviorSubject<TeamRiddle[]>([]);
   resolvedTeamRiddleSubject$: Observable<TeamRiddle[] | null> = this.resolvedTeamRiddleSubject.asObservable();
+  private optionalTeamRiddleSubject = new BehaviorSubject<TeamRiddle[]>([]);
+  optionalTeamRiddleSubject$: Observable<TeamRiddle[] | null> = this.optionalTeamRiddleSubject.asObservable();
 
   // private pollingSubscription: Subscription | undefined;
 
@@ -84,9 +86,10 @@ export class TeamRiddlesService {
         // Recharge les données à jour
         this.loadCurrentTeamRiddle(teamId).subscribe();
         this.loadResolvedTeamRiddle(teamId).subscribe();
+        this.loadOptionalTeamRiddle(teamId).subscribe();
       });
   }
-  // Charger l'énigme courante connecté depuis le backend
+  // Charger l'énigme courante  depuis le backend
   loadCurrentTeamRiddle(teamId: string): Observable<TeamRiddle | null> {
     if (!teamId) {
       return of(null);
@@ -99,7 +102,7 @@ export class TeamRiddlesService {
       })
     );
   }
-  // Charger l'énigme courante connecté depuis le backend
+  // Charger les énigmes finit  depuis le backend
   loadResolvedTeamRiddle(teamId: string): Observable<TeamRiddle[]> {
     if (!teamId) {
       return of([]);
@@ -108,6 +111,19 @@ export class TeamRiddlesService {
     return this.http.get<TeamRiddle[]>(url).pipe(
       map((p) => {
         this.resolvedTeamRiddleSubject.next(p);
+        return p;
+      })
+    );
+  }
+  // Charger les énigmes optionelles non terminé depuis le backend
+  loadOptionalTeamRiddle(teamId: string): Observable<TeamRiddle[]> {
+    if (!teamId) {
+      return of([]);
+    }
+    const url = `${this.apiUrl}/optional/${encodeURIComponent(teamId)}`;
+    return this.http.get<TeamRiddle[]>(url).pipe(
+      map((p) => {
+        this.optionalTeamRiddleSubject.next(p);
         return p;
       })
     );
