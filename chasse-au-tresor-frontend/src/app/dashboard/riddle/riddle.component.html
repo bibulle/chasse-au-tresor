@@ -15,7 +15,7 @@
   <mat-card-content>
     <div class="card-content">
       <img *ngIf="teamRiddle?.riddle?.photo" mat-card-md-image src="/api/files{{ teamRiddle?.riddle?.photo }}" />
-      <div>{{ teamRiddle?.riddle?.text }}</div>
+      <div [innerHTML]="teamRiddle?.riddle?.text"></div>
     </div>
   </mat-card-content>
   <mat-card-footer class="card-footer">

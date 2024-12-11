@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="hint" *ngFor="let hint of hintsPurchased()">
-      {{ hint.description }}
+      <span [innerHTML]="hint.description"></span>
       <span class="hint-cost">{{ hint.cost }}<mat-icon>star</mat-icon></span>
     </div>
     <div class="next-hint" *ngIf="nextHintToPurchase()"></div>
