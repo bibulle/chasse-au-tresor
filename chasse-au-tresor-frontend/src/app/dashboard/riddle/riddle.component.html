@@ -1,5 +1,5 @@
 <div class="swipeable-riddle-card" [ngClass]="{ hidden: isCardHidden }" (touchstart)="onTouchStart($event)"
-  (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
+  (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)">
 
   <mat-card *ngIf="getTeamRiddle()?.riddle" class="enigme-card">
     <div class="swipe-handle"></div>

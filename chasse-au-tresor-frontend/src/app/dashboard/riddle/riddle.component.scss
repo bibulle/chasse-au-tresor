@@ -8,22 +8,14 @@
 
   transition: transform 0.3s ease-in-out;
   transform: translateY(0);
-  /* État affiché */
   z-index: 1000;
 
 }
 
 .swipeable-riddle-card.hidden {
-  transform: translateY(100%);
-  /* État caché */
+  transform: translateY(97%);
 }
 
-// .riddle-card {
-//   padding: 16px;
-//   background: white;
-//   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
-//   overflow: hidden;
-// }
 .enigme-card {
   transition: transform 0.3s ease, opacity 0.3s ease;
   // position: absolute;
