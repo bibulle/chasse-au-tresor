@@ -24,6 +24,11 @@ export class RiddleComponent {
 
   @Output() toggleHints = new EventEmitter<void>();
 
+  isCardHidden = false; // État de la carte (visible ou cachée)
+  startY = 0; // Position initiale du toucher
+  currentY = 0; // Position actuelle pendant le glissement
+  threshold = 100; // Distance minimale pour déclencher un changement d'état
+
   constructor(private dialog: MatDialog) {}
 
   getHtml() {
@@ -95,6 +100,43 @@ export class RiddleComponent {
     }
     if (this.optionalRiddlesIndex > this.optionalRiddles.length) {
       this.optionalRiddlesIndex = this.optionalRiddles.length;
+    }
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    console.log(`onTouchStart(${event.touches[0].clientY})`);
+    this.startY = event.touches[0].clientY;
+    this.currentY = this.startY;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    console.log(`onTouchMove(${event.touches[0].clientY})`);
+    this.currentY = event.touches[0].clientY;
+
+    // Optionnel : appliquez une translation visuelle pendant le mouvement
+    const deltaY = this.currentY - this.startY;
+    const card = document.querySelector('.swipeable-riddle-card') as HTMLElement;
+    if (card) {
+      card.style.transform = `translateY(${deltaY}px)`;
+    }
+  }
+
+  onTouchEnd(): void {
+    console.log(`onTouchEnd(${this.startY})`);
+    const deltaY = this.currentY - this.startY;
+    console.log(`   deltaY -> ${deltaY}`);
+
+    // Si le mouvement dépasse le seuil, basculez l'état de la carte
+    if (deltaY > this.threshold) {
+      this.isCardHidden = true; // Ranger la carte
+    } else if (deltaY < -this.threshold) {
+      this.isCardHidden = false; // Remonter la carte
+    }
+
+    // Réinitialisez la translation
+    const card = document.querySelector('.swipeable-riddle-card') as HTMLElement;
+    if (card) {
+      card.style.transform = '';
     }
   }
 }

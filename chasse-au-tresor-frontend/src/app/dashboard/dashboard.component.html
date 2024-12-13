@@ -2,6 +2,7 @@
 <div class="dashboard">
   <app-header [player]="player"></app-header>
   <app-map [player]="player" [resolvedTeamRiddles]="resolvedTeamRiddles"></app-map>
+  
   <app-riddle
     *ngIf="currentTeamRiddle"
     [teamRiddle]="currentTeamRiddle"
