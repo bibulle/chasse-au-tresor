@@ -3,16 +3,17 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { MapService } from '../../core/map.service';
 import { NotificationsService } from '../../core/notifications.service';
 import { Player } from '../../reference/types';
-import { MapService } from '../../core/map.service';
 import { ScoreComponent } from '../score/score.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MatChipsModule, MatIconModule, MatButtonModule, ScoreComponent],
+  imports: [CommonModule, MatChipsModule, MatIconModule, MatButtonModule, MatMenuModule,ScoreComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
