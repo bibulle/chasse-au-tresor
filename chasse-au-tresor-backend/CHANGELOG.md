@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.5](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.4...v0.7.5) (2024-12-13)
+
+
+### Features
+
+* add new riddles and hints ([a502868](https://github.com/bibulle/chasse-au-tresor/commit/a502868fac5bbe1a0d302d6d9c3875f23c82236d))
+* add some content ([1c016a6](https://github.com/bibulle/chasse-au-tresor/commit/1c016a60804c2074347e0469eab65a842e20910d))
+* add swipable riddle ([a8350b3](https://github.com/bibulle/chasse-au-tresor/commit/a8350b38fab631dd645e59217d6f8898e425b33d))
+* ajout de questions subsidiaires ([fae54f2](https://github.com/bibulle/chasse-au-tresor/commit/fae54f27f994d0605e13248ad52437dd33ca6690)), closes [#25](https://github.com/bibulle/chasse-au-tresor/issues/25)
+* allow riddle text around the image ([843c691](https://github.com/bibulle/chasse-au-tresor/commit/843c69142c37e791c0b67f0b06ecd85b1936e3c9))
+* move admin buttons to a menu ([0f547ed](https://github.com/bibulle/chasse-au-tresor/commit/0f547ed31d107a2f317ebf0cdb38df5c8c676209))
+* riddle and hint can be in HTML ([d236448](https://github.com/bibulle/chasse-au-tresor/commit/d23644883fb36523bfdcc597ea999d2a59afa846))
+
+
+### Bug Fixes
+
+* change the requests ([96525fe](https://github.com/bibulle/chasse-au-tresor/commit/96525fe1622adef8d99f35c611bebbd7c879dfca))
+* get smaller text ([441dea2](https://github.com/bibulle/chasse-au-tresor/commit/441dea2b72cd5eb6c1bf5ad6428c0d206d0159ff))
+* optional is required ([73330b0](https://github.com/bibulle/chasse-au-tresor/commit/73330b033da6a383f7e6528b9394b7052649be1f))
+* remove old token if needed ([80baa56](https://github.com/bibulle/chasse-au-tresor/commit/80baa56b1082aa85294037eab0ae843190f6fd8c))
+* remove typos ([8210f1a](https://github.com/bibulle/chasse-au-tresor/commit/8210f1a71892dbab09e28c62408cebc63d2a0492))
+
 ### [0.7.4](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.3...v0.7.4) (2024-11-29)
 
 
