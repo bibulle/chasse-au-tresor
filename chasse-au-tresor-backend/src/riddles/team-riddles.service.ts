@@ -63,6 +63,14 @@ export class TeamRiddlesService {
       {
         $limit: 1, // Limiter à un résultat
       },
+      {
+        $lookup: {
+          from: 'hints', // Nom de la collection Riddle
+          localField: 'hints', // Champ dans TeamRiddle
+          foreignField: '_id', // Champ correspondant dans Riddle
+          as: 'hints',
+        },
+      },
     ]);
 
     if (!teamRiddle || teamRiddle.length == 0 || !teamRiddle[0].riddle) {
@@ -95,13 +103,16 @@ export class TeamRiddlesService {
   }
 
   async getOptionalTeamRiddles(teamId: string): Promise<TeamRiddle[]> {
+    const current = await this.getCurrentTeamRiddle(teamId);
+
     // 1. Trouver les énigmes associées à l'équipe
     let teamRiddles = await this.teamRiddleModel
       .find({
         team: new Types.ObjectId(teamId),
         resolved: false,
+        order: { $lt: current.order },
       })
-      .sort({ order: -1 }) // Trier par ordre croissant
+      .sort({ order: -1 }) // Trier par ordre décroissant
       .populate({
         path: 'riddle',
         match: { optional: true },
