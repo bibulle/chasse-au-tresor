@@ -88,7 +88,7 @@
     },
     {
       "_id": "6748b22315de354b59dd4e57",
-      "text": "Dans les rues de la Ville Rose, un roi a laissé son empreinte,\r\nNon pas par l’épée, mais par une boisson bien distincte.\r\nSa couronne est une pinte, son sceptre une chope,\r\nEt ses fidèles trinquent jusqu’à ce que la nuit s’écope.\r\n\r\nCe lieu porte son nom et célèbre ses exploits,\r\nLà où l’amitié s’écoule dans des verres remplis de joie.\r\nMais qui est donc ce roi, si célèbre chez les bons vivants,\r\nEt où son esprit mousse-t-il encore aujourd’hui dans le présent ?",
+      "text": "Il trône joyeusement, une chope à la main,<BR>\r\nLe roi de la bière, en ce coin Toulousain.<BR>\r\nCherchez la figure qui célèbre la boisson,<BR>\r\nSa statue veille, pleine de passion.",
       "title": "Gambrinus",
       "gain": 50,
       "latitude": 43.5975,
@@ -110,11 +110,11 @@
     },
     {
       "_id": "6749c4df8e12d613f9877207",
-      "text": "???",
-      "title": "Horloge sans aiguille",
-      "gain": 0,
-      "latitude": 43.6016667,
-      "longitude": 1.4433333333333334,
+      "text": "Après des visites pas toujours très amusantes,<BR>\r\nUn endroit sucré rendait les journées brillantes.<BR>\r\nUn lieu où les enfants trouvaient des douceurs,<BR>\r\nPour oublier l’orthodontiste et retrouver le bonheur.<BR>\r\nTrouvez cette boutique et prenez un selfie,<BR>\r\nPour immortaliser ces souvenirs sucrés et jolis.",
+      "title": "Bâtiment effondré",
+      "gain": 50,
+      "latitude": 43.60176089930369,
+      "longitude": 1.4435786061668399,
       "solutionLocked": false,
       "optional": false,
       "__v": 0
@@ -184,6 +184,52 @@
       "longitude": 1.4419444444444445,
       "solutionLocked": false,
       "optional": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5870e44656996b755f12",
+      "text": "En hommage aux moines d’un ancien couvent,<BR>\r\nUne place porte leur nom, paisiblement.<BR>\r\nSous une verrière où l’Art déco scintille,<BR>\r\nLes détails élégants ravissent la ville.<BR>\r\nCherchez ce trésor, où passé et beauté,<BR>\r\nSe rencontrent pour mieux vous émerveiller.",
+      "title": "Place de la Trinité",
+      "gain": 50,
+      "photo": "/upload/photos/file-1734105200528-53437407.jpg",
+      "latitude": 43.599666202544384,
+      "longitude": 1.4441658294533166,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0
+    },
+    {
+      "_id": "675c60ace44656996b7564d3",
+      "text": "Dans la Ville Rose, une rue si discrète,<BR>\r\nQu'un souffle suffit pour qu'on s'y arrête.<BR>\r\nLa plus étroite, elle serpente en silence,<BR>\r\nUn passage secret, témoin du temps et de l'essence.<BR>\r\nTrouvez ce fil fin dans le tissu urbain,<BR>\r\nUn trésor caché au creux Toulousain.",
+      "title": "Rue bedelière",
+      "gain": 50,
+      "latitude": 43.60202746437608,
+      "longitude": 1.4430315355234935,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0,
+      "photo": "/upload/photos/file-1734107499197-798375036.jpg"
+    },
+    {
+      "_id": "675c6a66e44656996b75689b",
+      "text": "Un départ vers les monts, une promesse d’évasion,<BR>\r\nUn sentier qui commence dans un lieu d’admiration.<BR>\r\nSous le regard d’une place empreinte de prestige,<BR>\r\nLe GR86 s’élance, hors des murs et des vestiges.<BR>\r\nCherchez les signes, rouge et blanc, à proximité,<BR>\r\nC’est ici que l’aventure commence, à vous de jouer !",
+      "title": "Départ du GR86",
+      "gain": 50,
+      "latitude": 43.60476011160468,
+      "longitude": 1.4429697968090327,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0
+    },
+    {
+      "_id": "675c6b43e44656996b756920",
+      "text": "Elle est courte, presque un clin d’œil,<BR>\r\nUn passage discret, niché sous le seuil.<BR>\r\nLes artistes y entrent, en toute intimité,<BR>\r\nPour faire vibrer la scène de cette cité.<BR>\r\nCherchez la rue où le talent se glisse,<BR>\r\nMalgré les travaux, elle reste un délice.",
+      "title": "Entrée des artistes",
+      "gain": 50,
+      "latitude": 43.604364192706946,
+      "longitude": 1.4446786137929868,
+      "solutionLocked": false,
+      "optional": false,
       "__v": 0
     }
   ],
@@ -295,6 +341,276 @@
       "order": 2,
       "unlockSolution": true,
       "__v": 0
+    },
+    {
+      "_id": "675c53c4e44656996b755dbc",
+      "description": "Traversez le Pont Neuf, en admirant la Garonne qui s'étend majestueusement.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c543ee44656996b755df0",
+      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi des bières qui vous attend.",
+      "cost": 20,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c545be44656996b755e24",
+      "description": "Traversez le Pont Neuf, en admirant la Garonne qui s'étend majestueusement.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5474e44656996b755e60",
+      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi des bières qui vous attend.",
+      "cost": 20,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c59b2e44656996b756053",
+      "description": "Au nord-ouest de Gambrinus, laissez-vous guider par les rues anciennes.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c59c8e44656996b75608a",
+      "description": "Là où se tenait jadis le couvent des moines Trinitaires, une place porte leur mémoire.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c59dce44656996b7560c1",
+      "description": "Recherchez un trésor sur la rue des Filatiers, là où l'Art déco illumine la ville.",
+      "cost": 15,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c59f9e44656996b7560f8",
+      "description": "Au nord-ouest de Gambrinus, laissez-vous guider par les rues anciennes.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5a15e44656996b75616f",
+      "description": "Là où se tenait jadis le couvent des moines Trinitaires, une place porte leur mémoire.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5a2de44656996b7561b0",
+      "description": "Recherchez un trésor sur la rue des Filatiers, là où l'Art déco illumine la ville.",
+      "cost": 15,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5eb0e44656996b7562e7",
+      "description": "Mais si, rappelez vous le magasin Glups !!",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5ec3e44656996b756310",
+      "description": "Mais si, rappelez vous le magasin Glups !!",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5f3fe44656996b756385",
+      "description": "Dans la rue Saint-Rome",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5f51e44656996b7563d2",
+      "description": "Dans la rue Saint-Rome",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5fc9e44656996b756423",
+      "description": "C'est au 4...Oups.... le bâtiment n'est plus là !!!",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c5fd6e44656996b75644c",
+      "description": "C'est au 4...Oups.... le bâtiment n'est plus là !!!",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c62b6e44656996b756760",
+      "description": "suivez la Rue des Filatiers en direction du nord.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6362e44656996b756787",
+      "description": "Presque cachée dans le mur des bâtiments : c'est là que se trouve votre passage secret.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c63b2e44656996b7567ae",
+      "description": "Entre le 7 et le 9 de la rue Saint-Rome",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c63dee44656996b7567d5",
+      "description": "Continuez vers le Nord",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6409e44656996b7567fe",
+      "description": "Presque cachée dans le mur des bâtiments : c'est là que se trouve votre passage secret.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6436e44656996b756873",
+      "description": "Entre le 7 et le 9 de la rue Saint-Rome",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6c7ee44656996b756aea",
+      "description": "Laissez-vous guider vers le lieu où triomphes et honneurs sont célébrés, là où le rugby trouve sa gloire.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6c97e44656996b756b11",
+      "description": "Laissez-vous guider vers le lieu où triomphes et honneurs sont célébrés, là où le rugby trouve sa gloire.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6db3e44656996b756b88",
+      "description": "Cherchez l’angle où commence la Rue du Taur, un départ discret vers l’évasion.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6dc2e44656996b756bb1",
+      "description": "Cherchez l’angle où commence la Rue du Taur, un départ discret vers l’évasion.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6e50e44656996b756bd8",
+      "description": "Rejoignez la grande place où l'opéra fait vibrer les âmes.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6e6be44656996b756c29",
+      "description": "Rejoignez la grande place où l'opéra fait vibrer les âmes.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6e9ce44656996b756c50",
+      "description": "Ne cherchez pas l’entrée majestueuse des spectateurs, mais un passage discret pour les étoiles montantes.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "675c6eaae44656996b756c77",
+      "description": "Ne cherchez pas l’entrée majestueuse des spectateurs, mais un passage discret pour les étoiles montantes.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
     }
   ],
   "teamRiddles": [
@@ -383,8 +699,11 @@
       "order": 5,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "675c545be44656996b755e24",
+        "675c5474e44656996b755e60"
+      ],
+      "__v": 4
     },
     {
       "_id": "6748b22315de354b59dd4e5b",
@@ -393,8 +712,11 @@
       "order": 5,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "675c53c4e44656996b755dbc",
+        "675c543ee44656996b755df0"
+      ],
+      "__v": 4
     },
     {
       "_id": "675a077199680bf616eec176",
@@ -404,7 +726,7 @@
       "resolved": false,
       "solutions": [],
       "hints": [],
-      "__v": 0
+      "__v": 1
     },
     {
       "_id": "675a077199680bf616eec177",
@@ -415,6 +737,142 @@
       "solutions": [],
       "hints": [],
       "__v": 0
+    },
+    {
+      "_id": "675c5870e44656996b755f16",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "675c5870e44656996b755f12",
+      "order": 6,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c59b2e44656996b756053",
+        "675c59c8e44656996b75608a",
+        "675c59dce44656996b7560c1"
+      ],
+      "__v": 7
+    },
+    {
+      "_id": "675c5870e44656996b755f15",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "675c5870e44656996b755f12",
+      "order": 6,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c59f9e44656996b7560f8",
+        "675c5a15e44656996b75616f",
+        "675c5a2de44656996b7561b0"
+      ],
+      "__v": 6
+    },
+    {
+      "_id": "675c5e49e44656996b7561f3",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c4df8e12d613f9877207",
+      "order": 7,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c5eb0e44656996b7562e7",
+        "675c5f51e44656996b7563d2",
+        "675c5fc9e44656996b756423"
+      ],
+      "__v": 8
+    },
+    {
+      "_id": "675c5e49e44656996b7561f4",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c4df8e12d613f9877207",
+      "order": 8,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c5ec3e44656996b756310",
+        "675c5f3fe44656996b756385",
+        "675c5fd6e44656996b75644c"
+      ],
+      "__v": 8
+    },
+    {
+      "_id": "675c60ace44656996b7564d7",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "675c60ace44656996b7564d3",
+      "order": 7,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c62b6e44656996b756760",
+        "675c6362e44656996b756787",
+        "675c63b2e44656996b7567ae"
+      ],
+      "__v": 8
+    },
+    {
+      "_id": "675c60ace44656996b7564d6",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "675c60ace44656996b7564d3",
+      "order": 8,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c63dee44656996b7567d5",
+        "675c6409e44656996b7567fe",
+        "675c6436e44656996b756873"
+      ],
+      "__v": 6
+    },
+    {
+      "_id": "675c6a66e44656996b75689e",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "675c6a66e44656996b75689b",
+      "order": 10,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c6c97e44656996b756b11",
+        "675c6db3e44656996b756b88"
+      ],
+      "__v": 5
+    },
+    {
+      "_id": "675c6a66e44656996b75689f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "675c6a66e44656996b75689b",
+      "order": 9,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c6c7ee44656996b756aea",
+        "675c6dc2e44656996b756bb1"
+      ],
+      "__v": 5
+    },
+    {
+      "_id": "675c6b43e44656996b756923",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "675c6b43e44656996b756920",
+      "order": 9,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c6e50e44656996b756bd8",
+        "675c6eaae44656996b756c77"
+      ],
+      "__v": 5
+    },
+    {
+      "_id": "675c6b43e44656996b756924",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "675c6b43e44656996b756920",
+      "order": 10,
+      "resolved": false,
+      "solutions": [],
+      "hints": [
+        "675c6e6be44656996b756c29",
+        "675c6e9ce44656996b756c50"
+      ],
+      "__v": 4
     }
   ],
   "solutions": []
