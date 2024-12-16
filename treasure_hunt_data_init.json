@@ -4,9 +4,7 @@
       "_id": "64b2f9c2d5a29e3c3e5a6e01",
       "name": "Explorateurs du Capitole",
       "color": "red",
-      "players": [
-        "673f7948524a110f24a1bc56"
-      ],
+      "players": [],
       "score": 0,
       "position": {
         "latitude": 43.604652,
@@ -19,9 +17,7 @@
       "_id": "64b2f9c2d5a29e3c3e5a6e02",
       "name": "Aventuriers de la Garonne",
       "color": "blue",
-      "players": [
-        "673f78fe524a110f24a1bc10"
-      ],
+      "players": [],
       "score": 0,
       "position": {
         "latitude": 43.600694,
@@ -36,17 +32,17 @@
       "_id": "673f78fe524a110f24a1bc10",
       "username": "Eric",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
-      "latitude": 43.578026,
-      "longitude": 1.3168846,
+      "latitude": 43.5763817,
+      "longitude": 1.3193594,
       "isAdmin": true,
       "__v": 0
     },
     {
       "_id": "673f7948524a110f24a1bc56",
       "username": "Juliette",
-      "team": "64b2f9c2d5a29e3c3e5a6e01",
-      "latitude": 43.60140208448757,
-      "longitude": 1.439499166385523,
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "latitude": 43.5780573123668,
+      "longitude": 1.316795638440626,
       "isAdmin": true,
       "__v": 0
     }
@@ -203,12 +199,12 @@
       "text": "Dans la Ville Rose, une rue si discrète,<BR>\r\nQu'un souffle suffit pour qu'on s'y arrête.<BR>\r\nLa plus étroite, elle serpente en silence,<BR>\r\nUn passage secret, témoin du temps et de l'essence.<BR>\r\nTrouvez ce fil fin dans le tissu urbain,<BR>\r\nUn trésor caché au creux Toulousain.",
       "title": "Rue bedelière",
       "gain": 50,
+      "photo": "/upload/photos/file-1734107499197-798375036.jpg",
       "latitude": 43.60202746437608,
       "longitude": 1.4430315355234935,
       "solutionLocked": false,
       "optional": false,
-      "__v": 0,
-      "photo": "/upload/photos/file-1734107499197-798375036.jpg"
+      "__v": 0
     },
     {
       "_id": "675c6a66e44656996b75689b",
@@ -254,7 +250,7 @@
     },
     {
       "_id": "6749863f7a9df117948ab13d",
-      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <BR>La solution a cette énigme est juste une blague et un jolie selfie de ton équipe.",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme d'ampoule. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <BR>La solution à cette énigme est juste une blague et un joli selfie de ton équipe.",
       "cost": 10,
       "isPurchased": false,
       "order": 2,
@@ -263,7 +259,7 @@
     },
     {
       "_id": "6749864a7a9df117948ab14c",
-      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme de lampe. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <br>La solution a cette énigme est juste une blague et un jolie selfie de ton équipe.",
+      "description": "Une fois prêt, ferme cette fenêtre en cliquant à nouveau sur le point d’interrogation, puis propose une solution en cliquant sur le bouton en forme d'ampoule. Et n’oublie pas : une belle solution contient toujours un joli selfie ! 📸. <br>La solution à cette énigme est juste une blague et un joli selfie de ton équipe.",
       "cost": 10,
       "isPurchased": false,
       "order": 2,
@@ -272,7 +268,7 @@
     },
     {
       "_id": "67596903d5da4c48674e7dba",
-      "description": "On cherche une niche a droite de l'escalier principale du bâtiment.",
+      "description": "On cherche une niche à droite de l'escalier principal du bâtiment.",
       "cost": 10,
       "isPurchased": false,
       "order": 1,
@@ -281,7 +277,7 @@
     },
     {
       "_id": "67596927d5da4c48674e7e23",
-      "description": "On cherche une niche a droite de l'escalier principale du bâtiment.",
+      "description": "On cherche une niche à droite de l'escalier principal du bâtiment.",
       "cost": 10,
       "isPurchased": false,
       "order": 1,
@@ -290,7 +286,7 @@
     },
     {
       "_id": "67596987d5da4c48674e7e72",
-      "description": "Le bâtiment en question est l'Hôtel-Dieu",
+      "description": "Le bâtiment en question est l'Hôtel-Dieu.",
       "cost": 30,
       "isPurchased": false,
       "order": 2,
@@ -299,7 +295,7 @@
     },
     {
       "_id": "67596996d5da4c48674e7eb1",
-      "description": "Le bâtiment en question est l'Hôtel-Dieu",
+      "description": "Le bâtiment en question est l'Hôtel-Dieu.",
       "cost": 30,
       "isPurchased": false,
       "order": 2,
@@ -308,7 +304,7 @@
     },
     {
       "_id": "6759a968d5da4c48674e7f99",
-      "description": "L'image recherché est sur le seul bâtiment de l'endroit",
+      "description": "L'image recherché est sur le seul bâtiment de l'endroit.",
       "cost": 10,
       "isPurchased": false,
       "order": 1,
@@ -317,7 +313,7 @@
     },
     {
       "_id": "6759a983d5da4c48674e7fc4",
-      "description": "Il s'agit de la prairie des filtres",
+      "description": "Il s'agit de la prairie des filtres.",
       "cost": 20,
       "isPurchased": false,
       "order": 2,
@@ -326,7 +322,7 @@
     },
     {
       "_id": "6759aa67d5da4c48674e7ffd",
-      "description": "L'image recherché est sur le seul bâtiment de l'endroit",
+      "description": "L'image recherché est sur le seul bâtiment de l'endroit.",
       "cost": 10,
       "isPurchased": false,
       "order": 1,
@@ -335,7 +331,7 @@
     },
     {
       "_id": "6759aa79d5da4c48674e8030",
-      "description": "Il s'agit de la prairie des filtres",
+      "description": "Il s'agit de la prairie des filtres.",
       "cost": 20,
       "isPurchased": false,
       "order": 2,
@@ -353,7 +349,7 @@
     },
     {
       "_id": "675c543ee44656996b755df0",
-      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi des bières qui vous attend.",
+      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi de la bière qui vous attend.",
       "cost": 20,
       "isPurchased": false,
       "order": 2,
@@ -371,7 +367,7 @@
     },
     {
       "_id": "675c5474e44656996b755e60",
-      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi des bières qui vous attend.",
+      "description": "Remontez le long des quais pendant 139 Morgans (ou 132 Juliettes sans talon), puis prenez à gauche pour trouver le roi de la bière qui vous attend.",
       "cost": 20,
       "isPurchased": false,
       "order": 2,
@@ -452,7 +448,7 @@
     },
     {
       "_id": "675c5f3fe44656996b756385",
-      "description": "Dans la rue Saint-Rome",
+      "description": "Dans la rue Saint-Rome.",
       "cost": 5,
       "isPurchased": false,
       "order": 2,
@@ -461,7 +457,7 @@
     },
     {
       "_id": "675c5f51e44656996b7563d2",
-      "description": "Dans la rue Saint-Rome",
+      "description": "Dans la rue Saint-Rome.",
       "cost": 5,
       "isPurchased": false,
       "order": 2,
@@ -488,7 +484,7 @@
     },
     {
       "_id": "675c62b6e44656996b756760",
-      "description": "suivez la Rue des Filatiers en direction du nord.",
+      "description": "Suivez la Rue des Filatiers en direction du nord.",
       "cost": 5,
       "isPurchased": false,
       "order": 1,
@@ -506,7 +502,7 @@
     },
     {
       "_id": "675c63b2e44656996b7567ae",
-      "description": "Entre le 7 et le 9 de la rue Saint-Rome",
+      "description": "Entre le 7 et le 9 de la rue Saint-Rome.",
       "cost": 10,
       "isPurchased": false,
       "order": 3,
@@ -515,7 +511,7 @@
     },
     {
       "_id": "675c63dee44656996b7567d5",
-      "description": "Continuez vers le Nord",
+      "description": "Continuez vers le Nord.",
       "cost": 5,
       "isPurchased": false,
       "order": 1,
@@ -533,7 +529,7 @@
     },
     {
       "_id": "675c6436e44656996b756873",
-      "description": "Entre le 7 et le 9 de la rue Saint-Rome",
+      "description": "Entre le 7 et le 9 de la rue Saint-Rome.",
       "cost": 10,
       "isPurchased": false,
       "order": 3,
