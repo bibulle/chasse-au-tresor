@@ -67,6 +67,13 @@ export class RiddleComponent {
     if (this.optionalRiddlesIndex === 0) {
       return this.teamRiddle;
     } else {
+      if (
+        this.optionalRiddlesIndex > this.optionalRiddles.length ||
+        !this.optionalRiddles[this.optionalRiddlesIndex - 1].riddle
+      ) {
+        this.optionalRiddlesIndex = 0;
+        return this.teamRiddle;
+      }
       return this.optionalRiddles[this.optionalRiddlesIndex - 1];
     }
   }
