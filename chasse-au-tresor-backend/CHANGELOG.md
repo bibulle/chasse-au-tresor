@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.6](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.5...v0.7.6) (2024-12-16)
+
+
+### Features
+
+* add more riddles and hints ([0c18280](https://github.com/bibulle/chasse-au-tresor/commit/0c18280755c0247b9e2a81a731cd63ee32dc25b1))
+
+
+### Bug Fixes
+
+* change event management ([cd79959](https://github.com/bibulle/chasse-au-tresor/commit/cd79959ef4113d1417d3155ba1aa66b47a1b36c7))
+* some typos un the hints ([0844311](https://github.com/bibulle/chasse-au-tresor/commit/0844311bd2eb7caada9dfb094666abaa0d40e77d))
+
 ### [0.7.5](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.4...v0.7.5) (2024-12-13)
 
 
