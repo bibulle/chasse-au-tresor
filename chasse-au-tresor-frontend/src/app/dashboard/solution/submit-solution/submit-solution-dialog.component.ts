@@ -12,14 +12,7 @@ import { UserNotificationsService } from '../../../core/user-notifications.servi
 @Component({
   selector: 'app-submit-solution-dialog',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './submit-solution-dialog.component.html',
   styleUrl: './submit-solution-dialog.component.scss',
 })
@@ -53,30 +46,17 @@ export class SubmitSolutionDialogComponent {
     // console.log(`submitSolution()`);
     // console.log(this.data);
     if (this.solutionText && this.selectedFile) {
+      this.closeDialog();
       this.solutionsService
-        .submitSolution(
-          this.data.playerId,
-          this.data.teamRiddleId,
-          this.solutionText,
-          this.selectedFile
-        )
+        .submitSolution(this.data.playerId, this.data.teamRiddleId, this.solutionText, this.selectedFile)
         .subscribe({
           next: () => {
-            this.userNotificationsService.success(
-              'Solution soumise avec succès !! En attente de validation.'
-            );
-            this.closeDialog();
+            this.userNotificationsService.success('Solution soumise avec succès !! En attente de validation.');
           },
-          error: (err) =>
-            this.userNotificationsService.error(
-              'Erreur lors de la soumission',
-              err
-            ),
+          error: (err) => this.userNotificationsService.error('Erreur lors de la soumission', err),
         });
     } else {
-      this.userNotificationsService.error(
-        'Veuillez remplir le texte et ajouter une photo.', null
-      );
+      this.userNotificationsService.error('Veuillez remplir le texte et ajouter une photo.', null);
     }
   }
 
