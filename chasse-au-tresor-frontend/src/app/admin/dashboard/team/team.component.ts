@@ -33,6 +33,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class TeamComponent implements OnInit, OnDestroy {
   @Input() team: Team | undefined;
 
+  opened = false;
+
   actionNeededStateGlobal = false;
   actionNeededStateByRiddle: { [key: string]: boolean } = {};
 
@@ -57,13 +59,28 @@ export class TeamComponent implements OnInit, OnDestroy {
     }
   }
 
+  openTeam() {
+    // console.log(`openTeam(${this.team?.name})`);
+    this.opened = true;
+    this.loadRiddlesForTeam();
+
+    this.mapService.updateMarkerTeamRiddles(this.teamRiddles, false, this.team?.color, true);
+  }
+  closeTeam() {
+    // console.log(`closeTeam(${this.team?.name})`);
+    this.opened = false;
+
+    this.mapService.updateMarkerTeamRiddles(this.teamRiddles, false, this.team?.color), false;
+  }
+
   actionNeededStateChange(state: boolean, teamRiddleId: string) {
-    console.log(`actionNeededStateChange(${state}, ${teamRiddleId})`);
+    // console.log(`actionNeededStateChange(${state}, ${teamRiddleId})`);
     this.actionNeededStateByRiddle[teamRiddleId] = state;
     this.actionNeededStateGlobal = Object.values(this.actionNeededStateByRiddle).some((b) => b);
   }
 
   async loadRiddlesForTeam(): Promise<void> {
+    // console.log(`loadRiddlesForTeam(${this.team?.name})`);
     if (this.team && !this.teamRiddleSubscription) {
       this.updateTeamRiddles(await firstValueFrom(this.riddleService.loadTeamRiddles(this.team._id)));
       this.riddleService.listenForTeamRiddlesUpdates(this.team._id);
@@ -74,6 +91,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   }
 
   updateTeamRiddles(teamRiddles: TeamRiddle[] | null) {
+    // console.log(`updateTeamRiddles(${this.team?.name})`);
     if (!teamRiddles) {
       return;
     }

@@ -72,8 +72,10 @@ export class PlayerPositionsUpdate {
 }
 export class ItemPosition {
   itemId = '';
+  title = '';
   latitude = 0;
   longitude = 0;
+  color = '';
 }
 
 export enum ICON_TYPE {

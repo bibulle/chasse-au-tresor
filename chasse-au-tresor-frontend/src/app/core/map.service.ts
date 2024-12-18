@@ -84,55 +84,63 @@ export class MapService {
   updateMarkerRiddles(riddles: Riddle[], removeOld = true, color = 'grey') {
     const positions: ItemPosition[] = riddles.map((riddle) => {
       return {
-        itemId: riddle.title ? riddle?.title : '',
+        itemId: riddle._id ? riddle?._id : '',
+        title: riddle.title ? riddle?.title : '',
         latitude: riddle.latitude ? riddle?.latitude : 0,
         longitude: riddle.longitude ? riddle?.longitude : 0,
+        color: color,
       };
     });
-    this.updateMakers(ICON_TYPE.Riddle, positions, removeOld, color);
+    this.updateMakers(ICON_TYPE.Riddle, positions, removeOld);
   }
 
-  updateMarkerTeamRiddles(teamRiddles: TeamRiddle[], removeOld = true, color = 'grey') {
-    console.log(`updateMarkerTeamRiddles(${color}`);
+  updateMarkerTeamRiddles(teamRiddles: TeamRiddle[], removeOld = true, color = 'grey', highlight = false) {
+    // console.log(`updateMarkerTeamRiddles(${color}`);
     const positions: ItemPosition[] = teamRiddles.map((tr) => {
       return {
-        itemId: tr.riddle?.title ? tr.riddle?.title : '',
+        itemId: tr._id ? tr._id : '',
+        title: tr.riddle?.title ? tr.riddle?.title : '',
         latitude: tr.riddle?.latitude ? tr.riddle?.latitude : 0,
         longitude: tr.riddle?.longitude ? tr.riddle?.longitude : 0,
+        color: tr.resolved ? 'grey' : color,
       };
     });
-    this.updateMakers(ICON_TYPE.Riddle, positions, removeOld, color);
+    this.updateMakers(ICON_TYPE.Riddle, positions, removeOld, highlight ? 50 : 25);
 
     const poly = this.polylines.get(color);
     if (poly) {
       this.map?.removeLayer(poly);
     }
     const pathLine = L.polyline(this.connectTeamRiddle(teamRiddles));
-    pathLine.setStyle({ color: this.getColor(color), opacity: 0.5 });
+    pathLine.setStyle({ color: this.getColor(color), opacity: highlight ? 0.7 : 0.5 });
     this.map?.addLayer(pathLine);
 
     this.polylines.set(color, pathLine);
   }
 
-  updateMarkerPlayers(positions: ItemPosition[], removeOld = true, color = 'grey') {
-    this.updateMakers(ICON_TYPE.Player, positions, removeOld, color);
+  updateMarkerPlayers(positions: ItemPosition[], removeOld = true) {
+    this.updateMakers(ICON_TYPE.Player, positions, removeOld, 650);
   }
 
-  private updateMakers(type: ICON_TYPE, positions: ItemPosition[], removeOld = true, color = 'grey') {
+  private updateMakers(type: ICON_TYPE, positions: ItemPosition[], removeOld = true, zIndexOffset = 10) {
     // console.log(`updateMakers(${type}, ${positions.length})`);
     positions.forEach((p) => {
       // console.log(`${type} ${p.latitude}, ${p.longitude} ${color}: ${p.itemId}`);
       if (this.markers[type].has(p.itemId)) {
         const marker = this.markers[type].get(p.itemId);
         marker?.setLatLng([p.latitude, p.longitude]);
-        marker?.setIcon(this.getIcon(type, color));
+        marker?.setIcon(this.getIcon(type, p.color));
+        marker?.setZIndexOffset(zIndexOffset);
       } else {
-        const newMarker = L.marker([p.latitude, p.longitude], { icon: this.getIcon(type, color) });
+        const newMarker = L.marker([p.latitude, p.longitude], {
+          icon: this.getIcon(type, p.color),
+          zIndexOffset: zIndexOffset,
+        });
         if (type === ICON_TYPE.Player) {
-          newMarker.setZIndexOffset(650);
+          newMarker.setZIndexOffset(zIndexOffset);
         }
         this.map?.addLayer(newMarker);
-        newMarker.bindPopup(`${p.itemId}`);
+        newMarker.bindPopup(`${p.title}`);
 
         this.markers[type].set(p.itemId, newMarker);
       }

@@ -108,7 +108,11 @@ export class MapComponent implements OnInit, OnChanges, OnDestroy {
       // console.log(data);
       // Ajouter ou mettre à jour les marqueurs sur la carte
       if (data?.positions) {
-        this.mapService.updateMarkerPlayers(data?.positions, newTeamId != 'all', data?.color);
+        data.positions.forEach((p) => {
+          p.color = data?.color;
+          p.title = p.itemId;
+        });
+        this.mapService.updateMarkerPlayers(data?.positions, newTeamId != 'all');
       }
     });
   }

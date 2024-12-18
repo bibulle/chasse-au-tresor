@@ -77,7 +77,7 @@ export class RiddleComponent implements OnInit, OnChanges {
   }
 
   actionNeededStateChange(state: boolean) {
-    console.log(`actionNeededStateChange(${state})`);
+    // console.log(`actionNeededStateChange(${state})`);
     this.actionNeededState = state;
     this.actionNeeded.emit(state);
   }

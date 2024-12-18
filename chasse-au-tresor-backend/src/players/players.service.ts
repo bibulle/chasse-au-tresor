@@ -33,10 +33,7 @@ export class PlayersService implements OnModuleInit {
   }
 
   async deletePlayer(playerId: string): Promise<void> {
-    const player = await this.playerModel
-      .findOne({ _id: playerId })
-      .populate({ path: 'team', model: 'Team' })
-      .exec();
+    const player = await this.playerModel.findOne({ _id: playerId }).populate({ path: 'team', model: 'Team' }).exec();
 
     if (player) {
       const username = player.username;
@@ -76,10 +73,7 @@ export class PlayersService implements OnModuleInit {
   // }
 
   async getPlayerByName(username: string): Promise<Player> {
-    const player = await this.playerModel
-      .findOne({ username })
-      .populate({ path: 'team', model: 'Team' })
-      .exec();
+    const player = await this.playerModel.findOne({ username }).populate({ path: 'team', model: 'Team' }).exec();
 
     //if player, add if it's an admin
     if (player) {
@@ -94,10 +88,7 @@ export class PlayersService implements OnModuleInit {
   }
 
   async getAllPlayers(): Promise<Player[]> {
-    const players = await this.playerModel
-      .find()
-      .populate({ path: 'team', model: 'Team' })
-      .exec();
+    const players = await this.playerModel.find().populate({ path: 'team', model: 'Team' }).exec();
 
     // reassign plyaer to team
     const teams = await this.teamsService.getAllTeams();
@@ -120,16 +111,9 @@ export class PlayersService implements OnModuleInit {
     return players;
   }
 
-  async updatePosition(
-    playerId: string,
-    position: { latitude: number; longitude: number },
-  ) {
+  async updatePosition(playerId: string, position: { latitude: number; longitude: number }) {
     const updatedPlayer = await this.playerModel
-      .findByIdAndUpdate(
-        playerId,
-        { latitude: position.latitude, longitude: position.longitude },
-        { new: true },
-      )
+      .findByIdAndUpdate(playerId, { latitude: position.latitude, longitude: position.longitude }, { new: true })
       .exec();
 
     // Diffusez la position mise à jour

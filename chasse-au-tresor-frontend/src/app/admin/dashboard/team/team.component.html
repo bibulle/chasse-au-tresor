@@ -1,15 +1,10 @@
-<mat-expansion-panel
-  *ngIf="team"
-  [ngClass]="{
+<mat-expansion-panel *ngIf="team" [ngClass]="{
     'action-needed': actionNeededStateGlobal
-  }"
-  (opened)="loadRiddlesForTeam()"
->
+  }" (opened)="openTeam()" (closed)="closeTeam()">
   <mat-expansion-panel-header>
     <mat-panel-title class="team-name">
       <img class="color-box" src="/assets/leaflet/marker-icon-2x-{{ team.color }}.png" />
-      {{ team.name }}</mat-panel-title
-    >
+      {{ team.name }}</mat-panel-title>
     <div>Score : {{ team.score }}</div>
     <mat-icon class="icon-action-needed" title="Action nécessaire">priority_high</mat-icon>
   </mat-expansion-panel-header>
@@ -20,17 +15,15 @@
     <mat-chip-set>
       <mat-chip *ngFor="let player of team.players" (click)="openPlayerActionDialog(player)">{{
         player.username
-      }}</mat-chip>
+        }}</mat-chip>
     </mat-chip-set>
   </div>
 
   <!-- Liste des énigmes -->
   <div class="team-riddles" *ngIf="teamRiddles && teamRiddles.length > 0; else noRiddles">
     <div *ngFor="let teamRiddle of teamRiddles">
-      <app-admin-riddle
-        [teamRiddle]="teamRiddle"
-        (actionNeeded)="actionNeededStateChange($event, teamRiddle._id)"
-      ></app-admin-riddle>
+      <app-admin-riddle [teamRiddle]="teamRiddle"
+        (actionNeeded)="actionNeededStateChange($event, teamRiddle._id)"></app-admin-riddle>
     </div>
   </div>
 
