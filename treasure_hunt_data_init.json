@@ -94,17 +94,6 @@
       "__v": 0
     },
     {
-      "_id": "6749c4958e12d613f98771e1",
-      "text": "?????",
-      "title": "Statue Saint Étienne",
-      "gain": 0,
-      "latitude": 43.5997222,
-      "longitude": 1.4491666666666667,
-      "solutionLocked": false,
-      "optional": false,
-      "__v": 0
-    },
-    {
       "_id": "6749c4df8e12d613f9877207",
       "text": "Après des visites pas toujours très amusantes,<BR>\r\nUn endroit sucré rendait les journées brillantes.<BR>\r\nUn lieu où les enfants trouvaient des douceurs,<BR>\r\nPour oublier l’orthodontiste et retrouver le bonheur.<BR>\r\nTrouvez cette boutique et prenez un selfie,<BR>\r\nPour immortaliser ces souvenirs sucrés et jolis.",
       "title": "Bâtiment effondré",
@@ -117,20 +106,19 @@
     },
     {
       "_id": "6749c5f18e12d613f987723d",
-      "text": "??",
+      "text": "Sur une rue où le temps jamais ne s’arrête,<BR>\r\nUne horloge vous attend, discrète mais parfaite.<BR>\r\nSon cadran cache un secret peu commun,<BR>\r\nUne curiosité qu’elle partage avec presque aucun.<BR>\r\nObservez bien, et répondez avec soin :<BR>\r\nQuelle est la particularité de ce trésor Toulousain ?",
       "title": "Horloge",
-      "gain": 0,
       "latitude": 43.6058333,
       "longitude": 1.4455555555555555,
       "solutionLocked": false,
       "optional": false,
-      "__v": 0
+      "__v": 0,
+      "gain": 50
     },
     {
       "_id": "6749c6548e12d613f9877283",
-      "text": "???",
+      "text": "Juste en face, une façade remarquable,<BR>\r\nÉcho d’un journal aux pages mémorables.<BR>\r\nDe la Ville Rose, il conte chaque histoire,<BR>\r\nQu’il s’agisse de succès ou de déboires.<BR>\r\nLevez les yeux, trouvez son nom gravé,<BR>\r\nQuel journal ici laisse son empreinte à jamais ?",
       "title": "Façade de la Dépêche",
-      "gain": 0,
       "latitude": 43.6063889,
       "longitude": 1.4455555555555555,
       "solutionLocked": false,
@@ -139,31 +127,30 @@
     },
     {
       "_id": "6749c6ad8e12d613f98772d9",
-      "text": "???",
+      "text": "Une porte sculptée, riche de savoir,<BR>\r\nGarde l’entrée d’un lieu empreint de mémoire.<BR>\r\nSes détails gravés racontent le passé,<BR>\r\nOuvrant sur un trésor de pages à explorer.<BR>\r\nTrouvez ce portail, majestueux et discret,<BR>\r\nUn sanctuaire pour les esprits éclairés.",
       "title": "Bibliothèque des Études et du Patrimoine",
-      "gain": 0,
       "latitude": 43.6072222,
       "longitude": 1.443888888888889,
       "solutionLocked": false,
       "optional": false,
-      "__v": 0
+      "__v": 0,
+      "gain": 50
     },
     {
       "_id": "6749c7408e12d613f987738b",
-      "text": "???",
+      "text": "Dans la Ville Rose, un poète chante encore,<BR>\r\nSes mots résonnent comme un accord.<BR>\r\nPrès de l’eau, là où la fête bat son plein,<BR>\r\nIl veille en silence, un verre à la main.<BR>\r\nCherchez cet hommage, un portrait en mémoire,<BR>\r\nPrenez-en une photo pour honorer son histoire.",
       "title": "Portrait de Nougaro",
-      "gain": 0,
       "latitude": 43.6038889,
       "longitude": 1.4361111111111111,
       "solutionLocked": false,
       "optional": false,
-      "__v": 0
+      "__v": 0,
+      "gain": 50
     },
     {
       "_id": "6749c7a98e12d613f9877431",
-      "text": "????",
+      "text": "Près des quais où la Garonne se pavane,<BR>\r\nDes hommes travaillaient, pêcheurs de sable en cabane.<BR>\r\nAu Port de la Daurade, leur histoire se devine,<BR>\r\nUn clin d’œil discret à leurs racines.<BR>\r\nTrouvez cet hommage au bord du courant,<BR>\r\nLà où la mémoire s’écoule doucement.",
       "title": "Les Pêcheurs de sable",
-      "gain": 0,
       "latitude": 43.6011111,
       "longitude": 1.4388888888888889,
       "solutionLocked": false,
@@ -208,7 +195,7 @@
     },
     {
       "_id": "675c6a66e44656996b75689b",
-      "text": "Un départ vers les monts, une promesse d’évasion,<BR>\r\nUn sentier qui commence dans un lieu d’admiration.<BR>\r\nSous le regard d’une place empreinte de prestige,<BR>\r\nLe GR86 s’élance, hors des murs et des vestiges.<BR>\r\nCherchez les signes, rouge et blanc, à proximité,<BR>\r\nC’est ici que l’aventure commence, à vous de jouer !",
+      "text": "Un départ vers les monts, une promesse d’évasion,<BR>\r\nUn sentier qui commence dans un lieu d’admiration.<BR>\r\nSous l’éclat d’une place où triomphes sont salués,<BR>\r\nLe GR86 s’élance, hors des murs, prêt à voyager.<BR>\r\nCherchez les signes, rouge et blanc pour vous guider.",
       "title": "Départ du GR86",
       "gain": 50,
       "latitude": 43.60476011160468,
@@ -224,6 +211,60 @@
       "gain": 50,
       "latitude": 43.604364192706946,
       "longitude": 1.4446786137929868,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0
+    },
+    {
+      "_id": "6762ecf619a0f653b422963e",
+      "text": "Dans un chef-d’œuvre où chaque pierre est soignée,<BR>\r\nUn bloc brut garde son mystère en entier.<BR>\r\nNon sculpté, il défie l’ouvrage parfait,<BR>\r\nUn témoin du passé, qui reste secret.<BR>\r\nTrouvez cette énigme au cœur de la basilique,<BR>\r\nUn détail discret dans ce joyau romanesque unique.",
+      "title": "Bloc de la basilique Saint Sernin",
+      "latitude": 43.60819,
+      "longitude": 1.44222,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0,
+      "gain": 50
+    },
+    {
+      "_id": "6762ed6519a0f653b42296b4",
+      "text": "Un homme connu pour ses outils et râteaux,<BR>\r\nVendait aux jardiniers tout ce qu’il faut.<BR>\r\nPrès d’un musée chargé d’histoire,<BR>\r\nSe trouve la maison d’un gardien, lieu de mémoire.<BR>\r\nRepérez l’inscription qu’elle arbore fièrement,<BR>\r\nEt prenez-en une photo, tout simplement.",
+      "title": "Maison du gardien du musée Saint Raymond",
+      "latitude": 43.60767,
+      "longitude": 1.44116,
+      "solutionLocked": false,
+      "optional": true,
+      "__v": 0,
+      "gain": 100
+    },
+    {
+      "_id": "6762edaf19a0f653b422973a",
+      "text": " Pour ce dernier arrêt, suivez votre cœur,<BR>\r\nVers un lieu connu pour sa chaleur.<BR>\r\nC’est le QG de Juliette, son repaire,<BR>\r\nUn bar où le dragon veille, fier et sincère.<BR>\r\nTrouvez ce refuge, un havre pour trinquer,<BR>\r\nL’aventure s’achève là où elle aimait rester.",
+      "title": "The George and Dragon",
+      "latitude": 43.6074,
+      "longitude": 1.43959,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0,
+      "gain": 50
+    },
+    {
+      "_id": "6762ee4b19a0f653b42297d0",
+      "text": "Un donjon discret, mais témoin du passé,<BR>\r\nSe dresse dans la ville, fier et sculpté.<BR>\r\nIl porte le nom d’un ordre en habit,<BR>\r\nLes Cordeliers, présents en ce lieu jadis.<BR>\r\nCherchez cette tour où le temps s’est figé,<BR>\r\nUn fragment d’histoire à jamais ancré.",
+      "title": "Donjon des cordelliers",
+      "latitude": 43.60532,
+      "longitude": 1.4409,
+      "solutionLocked": false,
+      "optional": false,
+      "__v": 0,
+      "gain": 50
+    },
+    {
+      "_id": "6762f02819a0f653b4229876",
+      "text": "Sous l’ombre des grands esprits passés,<BR>\r\nUn portail se dresse, témoin du savoir et de l’éternité.<BR>\r\nLà où Pierre, un génie des nombres, laisse son nom,<BR>\r\nUne porte élégante garde la maison de la réflexion.<BR>\r\nCherchez ce lieu où l’Histoire et les mathématiques se croisent,<BR>\r\nUn passage vers un monde que la logique embrasse.",
+      "title": "Portail du collège Pierre de Fermat",
+      "latitude": 43.60329,
+      "longitude": 1.44083,
       "solutionLocked": false,
       "optional": false,
       "__v": 0
@@ -699,7 +740,7 @@
         "675c545be44656996b755e24",
         "675c5474e44656996b755e60"
       ],
-      "__v": 4
+      "__v": 0
     },
     {
       "_id": "6748b22315de354b59dd4e5b",
@@ -712,7 +753,7 @@
         "675c53c4e44656996b755dbc",
         "675c543ee44656996b755df0"
       ],
-      "__v": 4
+      "__v": 0
     },
     {
       "_id": "675a077199680bf616eec176",
@@ -722,7 +763,7 @@
       "resolved": false,
       "solutions": [],
       "hints": [],
-      "__v": 1
+      "__v": 0
     },
     {
       "_id": "675a077199680bf616eec177",
@@ -746,7 +787,7 @@
         "675c59c8e44656996b75608a",
         "675c59dce44656996b7560c1"
       ],
-      "__v": 7
+      "__v": 0
     },
     {
       "_id": "675c5870e44656996b755f15",
@@ -760,7 +801,7 @@
         "675c5a15e44656996b75616f",
         "675c5a2de44656996b7561b0"
       ],
-      "__v": 6
+      "__v": 0
     },
     {
       "_id": "675c5e49e44656996b7561f3",
@@ -774,7 +815,7 @@
         "675c5f51e44656996b7563d2",
         "675c5fc9e44656996b756423"
       ],
-      "__v": 8
+      "__v": 0
     },
     {
       "_id": "675c5e49e44656996b7561f4",
@@ -788,7 +829,7 @@
         "675c5f3fe44656996b756385",
         "675c5fd6e44656996b75644c"
       ],
-      "__v": 8
+      "__v": 0
     },
     {
       "_id": "675c60ace44656996b7564d7",
@@ -802,7 +843,7 @@
         "675c6362e44656996b756787",
         "675c63b2e44656996b7567ae"
       ],
-      "__v": 8
+      "__v": 0
     },
     {
       "_id": "675c60ace44656996b7564d6",
@@ -816,59 +857,259 @@
         "675c6409e44656996b7567fe",
         "675c6436e44656996b756873"
       ],
-      "__v": 6
+      "__v": 0
     },
     {
       "_id": "675c6a66e44656996b75689e",
       "team": "64b2f9c2d5a29e3c3e5a6e01",
       "riddle": "675c6a66e44656996b75689b",
-      "order": 10,
+      "order": 9,
       "resolved": false,
       "solutions": [],
       "hints": [
         "675c6c97e44656996b756b11",
         "675c6db3e44656996b756b88"
       ],
-      "__v": 5
+      "__v": 0
     },
     {
       "_id": "675c6a66e44656996b75689f",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
       "riddle": "675c6a66e44656996b75689b",
-      "order": 9,
+      "order": 18,
       "resolved": false,
       "solutions": [],
       "hints": [
         "675c6c7ee44656996b756aea",
         "675c6dc2e44656996b756bb1"
       ],
-      "__v": 5
+      "__v": 0
     },
     {
       "_id": "675c6b43e44656996b756923",
       "team": "64b2f9c2d5a29e3c3e5a6e01",
       "riddle": "675c6b43e44656996b756920",
-      "order": 9,
+      "order": 10,
       "resolved": false,
       "solutions": [],
       "hints": [
         "675c6e50e44656996b756bd8",
         "675c6eaae44656996b756c77"
       ],
-      "__v": 5
+      "__v": 0
     },
     {
       "_id": "675c6b43e44656996b756924",
       "team": "64b2f9c2d5a29e3c3e5a6e02",
       "riddle": "675c6b43e44656996b756920",
-      "order": 10,
+      "order": 17,
       "resolved": false,
       "solutions": [],
       "hints": [
         "675c6e6be44656996b756c29",
         "675c6e9ce44656996b756c50"
       ],
-      "__v": 4
+      "__v": 0
+    },
+    {
+      "_id": "6762f69b19a0f653b4229a4f",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c5f18e12d613f987723d",
+      "order": 11,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f6a719a0f653b4229ad5",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c6548e12d613f9877283",
+      "order": 12,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f6c119a0f653b4229b4f",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c6ad8e12d613f98772d9",
+      "order": 13,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f6d219a0f653b4229bbd",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6762ecf619a0f653b422963e",
+      "order": 14,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f6e119a0f653b4229c1f",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6762ed6519a0f653b42296b4",
+      "order": 15,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f6fe19a0f653b4229c75",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c7408e12d613f987738b",
+      "order": 16,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f70b19a0f653b4229cbf",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6749c7a98e12d613f9877431",
+      "order": 17,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f71b19a0f653b4229cfd",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6762f02819a0f653b4229876",
+      "order": 18,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f72b19a0f653b4229d2f",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6762ee4b19a0f653b42297d0",
+      "order": 19,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f73819a0f653b4229d55",
+      "team": "64b2f9c2d5a29e3c3e5a6e01",
+      "riddle": "6762edaf19a0f653b422973a",
+      "order": 20,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f77f19a0f653b4229d6f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6762f02819a0f653b4229876",
+      "order": 9,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f7f619a0f653b4229edc",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6762edaf19a0f653b422973a",
+      "order": 20,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f81219a0f653b4229f8d",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6762ee4b19a0f653b42297d0",
+      "order": 19,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f89019a0f653b422a13f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c7a98e12d613f9877431",
+      "order": 10,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f8c119a0f653b422a2b3",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c7408e12d613f987738b",
+      "order": 11,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f90819a0f653b422a42f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6762ed6519a0f653b42296b4",
+      "order": 12,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f93619a0f653b422a5b3",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6762ecf619a0f653b422963e",
+      "order": 13,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f96319a0f653b422a73f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c6ad8e12d613f98772d9",
+      "order": 14,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f99b19a0f653b422a8d3",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c5f18e12d613f987723d",
+      "order": 15,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
+    },
+    {
+      "_id": "6762f9ce19a0f653b422aa6f",
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "riddle": "6749c6548e12d613f9877283",
+      "order": 16,
+      "resolved": false,
+      "solutions": [],
+      "hints": [],
+      "__v": 0
     }
   ],
   "solutions": []
