@@ -31,7 +31,7 @@
     {
       "_id": "673f78fe524a110f24a1bc10",
       "username": "Eric",
-      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "team": null,
       "latitude": 43.5763817,
       "longitude": 1.3193594,
       "isAdmin": true,
@@ -40,7 +40,7 @@
     {
       "_id": "673f7948524a110f24a1bc56",
       "username": "Juliette",
-      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "team": null,
       "latitude": 43.5780573123668,
       "longitude": 1.316795638440626,
       "isAdmin": true,
@@ -119,8 +119,8 @@
       "_id": "6749c6548e12d613f9877283",
       "text": "Juste en face, une façade remarquable,<BR>\r\nÉcho d’un journal aux pages mémorables.<BR>\r\nDe la Ville Rose, il conte chaque histoire,<BR>\r\nQu’il s’agisse de succès ou de déboires.<BR>\r\nLevez les yeux, trouvez son nom gravé,<BR>\r\nQuel journal ici laisse son empreinte à jamais ?",
       "title": "Façade de la Dépêche",
-      "latitude": 43.6063889,
-      "longitude": 1.4455555555555555,
+      "latitude": 43.60638,
+      "longitude": 1.44575,
       "solutionLocked": false,
       "optional": false,
       "__v": 0
