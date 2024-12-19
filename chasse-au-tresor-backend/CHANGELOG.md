@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.7](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.6...v0.7.7) (2024-12-19)
+
+
+### Features
+
+*  highlight markers on map for selected team ([18b819e](https://github.com/bibulle/chasse-au-tresor/commit/18b819ea25fcc0f5b530c711a0c8d8440321f450))
+* add popup for player on solution rejection ([8da90d1](https://github.com/bibulle/chasse-au-tresor/commit/8da90d12878a6a04f63f99ae4a4ad8fe6d89af0d))
+* ajout des dernières énigmes ([1d17939](https://github.com/bibulle/chasse-au-tresor/commit/1d1793987c58d06e943d526bc26ab08d4c5d0d6d))
+
 ### [0.7.6](https://github.com/bibulle/chasse-au-tresor/compare/v0.7.5...v0.7.6) (2024-12-16)
 
 
