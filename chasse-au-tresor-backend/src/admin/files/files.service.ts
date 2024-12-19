@@ -49,7 +49,7 @@ export class FilesService {
     if (parsedData.players) {
       parsedData.players = parsedData.players.map((player) => {
         player._id = new Types.ObjectId('' + player._id);
-        player.team = new Types.ObjectId('' + player.team);
+        if (player.team) player.team = new Types.ObjectId('' + player.team);
         return player;
       });
     }
