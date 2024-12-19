@@ -8,6 +8,7 @@ import { AdminService } from '../../../core/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoViewerComponent } from './photo-viewer/photo-viewer.component';
 import { UserNotificationsService } from '../../../core/user-notifications.service';
+import { RejectionReasonDialogComponent } from './rejection-reason-dialog/rejection-reason-dialog.component';
 
 @Component({
   selector: 'app-admin-solutions',
@@ -54,12 +55,13 @@ export class SolutionsComponent implements OnChanges {
     this.actionNeeded.emit(this.solutions?.some((s) => s.validated === undefined));
   }
 
-  onStatusClick(solution: Solution, status: boolean) {
+  onStatusClick(solution: Solution, status: boolean, rejectionReason = '') {
     if ((solution.validated === false && status === true) || (solution.validated === true && status === false)) {
       solution.validated = undefined;
     } else {
       solution.validated = status;
     }
+    solution.rejectionReason = rejectionReason;
 
     // Mise à jour du statut dans le backend
     this.adminService.updateSolutionStatus(solution).subscribe({
@@ -72,5 +74,30 @@ export class SolutionsComponent implements OnChanges {
         this.userNotificationsService.error('Une erreur est survenue lors de la mise à jour du statut.', err);
       },
     });
+  }
+
+  openRejectionReason(solution: any): void {
+    if (solution.validated === true) {
+      return this.onStatusClick(solution, false);
+    }
+    const dialogRef = this.dialog.open(RejectionReasonDialogComponent, {
+      width: '400px',
+      data: { solution },
+    });
+
+    dialogRef.afterClosed().subscribe((reason: string) => {
+      if (reason) {
+        // Appeler une méthode pour enregistrer le refus avec une raison
+        this.rejectSolutionWithReason(solution, reason);
+      }
+    });
+  }
+
+  rejectSolutionWithReason(solution: any, reason: string): void {
+    // Implémentez la logique pour sauvegarder la raison du refus
+    console.log(`Solution refusée : ${solution._id}, Raison : ${reason}`);
+    // Exemple d'appel à un service backend :
+    // this.solutionService.rejectSolution(solution._id, reason).subscribe();
+    this.onStatusClick(solution, false, reason);
   }
 }

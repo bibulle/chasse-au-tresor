@@ -21,6 +21,11 @@ export class RiddleController {
 
   constructor(private readonly riddleService: RiddleService) {}
 
+  @Get('teamriddle/:teamRiddleId')
+  async getRiddleFromTeamRiddleId(@Param('teamRiddleId') teamRiddleId: string): Promise<Riddle> {
+    return this.riddleService.getRiddleFromTeamRiddleId(teamRiddleId);
+  }
+
   @Get(':riddleId/teams')
   async getTeams(@Param('riddleId') riddleId: string): Promise<{ team: Team; order: number }[]> {
     return this.riddleService.getTeams(riddleId);

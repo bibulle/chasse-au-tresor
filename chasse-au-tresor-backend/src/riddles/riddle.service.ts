@@ -243,6 +243,15 @@ export class RiddleService {
     return teamRiddle.riddle as unknown as Riddle;
   }
 
+  async getRiddleFromTeamRiddleId(teamRiddleId: string): Promise<Riddle> {
+    const teamRiddle = await this.teamRiddleModel
+      .findOne({ _id: new Types.ObjectId(teamRiddleId) }) // Non résolue
+      .populate('riddle') // Charger les détails de l'énigme
+      .exec();
+
+    return teamRiddle.riddle as unknown as Riddle;
+  }
+
   private validatePhotoPath(photoPath: string): string {
     const basePath = this.configService.get<string>('BASE_PATH');
     if (!basePath) {

@@ -63,7 +63,11 @@ export class SolutionsService {
     return savedSolution;
   }
 
-  async toggleValidated(solutionId: string, validated: boolean | undefined): Promise<Solution> {
+  async toggleValidated(
+    solutionId: string,
+    validated: boolean | undefined,
+    rejectionReason: string,
+  ): Promise<Solution> {
     // search solution
     let solution = await this.solutionModel.findOne({ _id: solutionId });
 
@@ -72,6 +76,7 @@ export class SolutionsService {
     }
 
     solution.validated = validated;
+    solution.rejectionReason = rejectionReason;
     solution = await solution.save();
 
     // recalculate the teamriddle status
@@ -96,6 +101,14 @@ export class SolutionsService {
 
     // Notifier via WebSocket que l'énigme a été mis à jour
     this.notificationsGateway.notifyRiddleUpdate('' + teamRiddle.team);
+
+    if (solution.validated === false) {
+      this.notificationsGateway.notifySolutionRefused(
+        '' + solution.player,
+        solution.rejectionReason,
+        '' + teamRiddle._id,
+      );
+    }
 
     return solution;
   }

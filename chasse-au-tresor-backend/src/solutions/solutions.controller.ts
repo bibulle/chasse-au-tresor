@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Logger, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 
 import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,10 +26,11 @@ export class SolutionsController {
     return this.solutionsService.createSolution(playerId, riddleId, text, photoPath);
   }
 
-  @Get('toggle/:solutionId/:validated')
+  @Post('toggle/:solutionId/:validated')
   async toggleValidated(
     @Param('solutionId') solutionId: string,
     @Param('validated') validatedS: string,
+    @Body('rejectionReason') rejectionReason: string,
   ): Promise<Solution> {
     let validated: boolean | undefined;
     if (validatedS.toLocaleLowerCase() === 'true') {
@@ -38,6 +39,6 @@ export class SolutionsController {
       validated = false;
     }
 
-    return this.solutionsService.toggleValidated(solutionId, validated);
+    return this.solutionsService.toggleValidated(solutionId, validated, rejectionReason);
   }
 }

@@ -1,0 +1,10 @@
+<div class="popup-container">
+    <h1 class="popup-title">❌&nbsp;Désolé, cette solution n'est pas correcte&nbsp;!</h1>
+
+    <div class="riddle" [innerHTML]="getHtml()"></div>
+
+    <div class="reason" [innerHTML]="data.rejection.rejectionReason">
+    </div>
+
+    <button mat-raised-button color="primary" (click)="closeDialog()">Fermer</button>
+</div>

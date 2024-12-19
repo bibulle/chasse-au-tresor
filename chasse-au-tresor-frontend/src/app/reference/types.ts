@@ -48,7 +48,9 @@ export class Solution {
   photo: string = '';
   text: string = '';
   validated: boolean | undefined;
+  rejectionReason: string = '';
 }
+
 export class Hint {
   _id = '';
   description = '';

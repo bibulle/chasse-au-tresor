@@ -14,6 +14,9 @@ export class Solution extends Document {
 
   @Prop({ type: Boolean, default: undefined })
   validated: boolean;
+
+  @Prop({ type: String, default: '' })
+  rejectionReason: string;
 }
 
 export const SolutionSchema = SchemaFactory.createForClass(Solution);

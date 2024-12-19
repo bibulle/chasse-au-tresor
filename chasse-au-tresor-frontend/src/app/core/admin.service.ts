@@ -4,11 +4,10 @@ import { Observable } from 'rxjs';
 import { Player, Solution, Team, TeamRiddle } from '../reference/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createRiddle(formData: FormData): Observable<Object> {
     // Exemple de requête HTTP vers le backend
@@ -16,7 +15,9 @@ export class AdminService {
   }
 
   updateSolutionStatus(solution: Solution): Observable<Solution> {
-    return this.http.get<Solution>(`/api/solutions/toggle/${solution._id}/${solution.validated}`);
+    const body = {
+      rejectionReason: solution.rejectionReason,
+    };
+    return this.http.post<Solution>(`/api/solutions/toggle/${solution._id}/${solution.validated}`, body);
   }
-
 }

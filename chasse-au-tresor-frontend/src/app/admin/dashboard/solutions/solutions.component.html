@@ -27,20 +27,12 @@
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef> Statut </mat-header-cell>
     <mat-cell *matCellDef="let solution">
-      <button
-        mat-icon-button
-        aria-label="Good answer"
-        color="{{ solution.validated === false ? 'grey' : 'green' }}"
-        (click)="onStatusClick(solution, true)"
-      >
+      <button mat-icon-button aria-label="Good answer" color="{{ solution.validated === false ? 'grey' : 'green' }}"
+        (click)="onStatusClick(solution, true)">
         <mat-icon>check</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        aria-label="Wrong answer"
-        color="{{ solution.validated === true ? 'grey' : 'red' }}"
-        (click)="onStatusClick(solution, false)"
-      >
+      <button mat-icon-button aria-label="Wrong answer" color="{{ solution.validated === true ? 'grey' : 'red' }}"
+        (click)="openRejectionReason(solution)">
         <mat-icon>close</mat-icon>
       </button>
     </mat-cell>

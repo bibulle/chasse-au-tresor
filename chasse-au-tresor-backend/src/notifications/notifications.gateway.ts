@@ -89,6 +89,16 @@ export class NotificationsGateway {
     this.server.emit('riddleUpdated', { teamId });
   }
 
+  // Émettre une notification lorsqu'une solution a été refusé
+  notifySolutionRefused(playerId: string, rejectionReason: string, teamRiddleId: string) {
+    this.logger.debug(`notifySolutionRefused(${playerId}, ${rejectionReason})`);
+    this.server.emit('solutionRefused', {
+      playerId: playerId,
+      rejectionReason: rejectionReason,
+      teamRiddleId: teamRiddleId,
+    });
+  }
+
   // Utilisation
   // this.notificationsGateway.sendNotification('playerPositionUpdated', updatedPlayer);
 }

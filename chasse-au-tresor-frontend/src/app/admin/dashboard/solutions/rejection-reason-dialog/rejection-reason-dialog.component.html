@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Raison du refus</h2>
+<mat-dialog-content>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Expliquez pourquoi la solution a été refusée</mat-label>
+        <textarea matInput [(ngModel)]="reason" rows="4"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-button color="warn" (click)="onConfirm()">Confirmer</button>
+</mat-dialog-actions>

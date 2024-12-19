@@ -73,6 +73,10 @@ export class RiddlesService {
     return this.http.get<any[]>(`${this.apiUrl}/${riddleId}/teams`);
   }
 
+  getRiddleFromTeamRiddle(teamRiddleId: string): Observable<Riddle> {
+    return this.http.get<Riddle>(`${this.apiUrl}/teamriddle/${teamRiddleId}`);
+  }
+
   ngOnDestroy(): void {
     // this.stopPolling();
   }

@@ -1,0 +1,25 @@
+.popup-container {
+    text-align: center;
+    padding: 20px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-title {
+    font-size: 1.8rem;
+    color: #af4c4c;
+    margin-bottom: 16px;
+}
+
+.reason {
+    margin-top: 16px;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+button {
+    margin-top: 16px;
+}

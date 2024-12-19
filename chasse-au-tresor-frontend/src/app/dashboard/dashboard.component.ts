@@ -16,6 +16,8 @@ import { TeamsService } from '../core/teams.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SolutionPopupComponent } from './solution-popup/solution-popup.component';
 import { OptionalRiddlePopupComponent } from './optional-riddle-popup/optional-riddle-popup.component';
+import { Rejection, SolutionsService } from '../core/solutions.service';
+import { SolutionRejectedPopupComponent } from './solution-rejected-popup/solution-rejected-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,12 +41,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   riddleCurrentSubscription: Subscription | undefined;
   riddleResolvedSubscription: Subscription | undefined;
   riddleOptionalSubscription: Subscription | undefined;
+  rejectedSolutionSubscription: Subscription | undefined;
   geoLocalisationId: number | null = null;
   private geoLocalisationUser = '';
 
   constructor(
     private teamsService: TeamsService,
     private riddleService: TeamRiddlesService,
+    private solutionService: SolutionsService,
     private notificationsService: NotificationsService,
     private router: Router,
     private dialog: MatDialog,
@@ -79,6 +83,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.teamSubscription) {
       this.teamSubscription.unsubscribe();
     }
+    if (this.rejectedSolutionSubscription) {
+      this.rejectedSolutionSubscription.unsubscribe();
+    }
   }
 
   async initPlayer(username: string) {
@@ -102,6 +109,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.player = user;
         // console.log(this.player);
         this.trackPosition(this.player.username);
+        this.subscribeRejectedSolution(this.player._id);
         if (this.player.team?._id && this.teamId !== this.player.team?._id) {
           this.subscribeTeam(this.player);
           this.subscribeTeamRiddle(this.player);
@@ -166,6 +174,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  async subscribeRejectedSolution(playerId: string) {
+    if (!playerId) {
+      return;
+    }
+
+    console.log(`subscribeRefusedSolution(${playerId})`);
+    if (this.rejectedSolutionSubscription) {
+      this.rejectedSolutionSubscription.unsubscribe();
+    }
+
+    this.solutionService.listenForRejectedSolution(playerId);
+    this.rejectedSolutionSubscription = this.solutionService.rejectedSolution$.subscribe((rejection) => {
+      this.sendPopupIfRejectedSolution(rejection);
+    });
+  }
+
   toggleHints() {
     console.log(`toggleHints()`);
     this.showHints = !this.showHints;
@@ -215,6 +239,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log('Popup fermée.');
       });
     }
+  }
+
+  sendPopupIfRejectedSolution(rejection: Rejection | null) {
+    if (!rejection) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(SolutionRejectedPopupComponent, {
+      //width: '400px',
+      data: {
+        rejection: rejection,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('Popup fermée.');
+    });
   }
 
   sendPopupIfNewOptionalRiddle(optionalTeamRiddles: TeamRiddle[]) {
