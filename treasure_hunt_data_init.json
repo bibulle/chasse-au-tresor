@@ -31,16 +31,16 @@
     {
       "_id": "673f78fe524a110f24a1bc10",
       "username": "Eric",
-      "team": null,
-      "latitude": 43.5763817,
-      "longitude": 1.3193594,
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
+      "latitude": 43.5780405,
+      "longitude": 1.3169345,
       "isAdmin": true,
       "__v": 0
     },
     {
       "_id": "673f7948524a110f24a1bc56",
       "username": "Juliette",
-      "team": null,
+      "team": "64b2f9c2d5a29e3c3e5a6e02",
       "latitude": 43.5780573123668,
       "longitude": 1.316795638440626,
       "isAdmin": true,
@@ -129,8 +129,8 @@
       "_id": "6749c6ad8e12d613f98772d9",
       "text": "Une porte sculptée, riche de savoir,<BR>\r\nGarde l’entrée d’un lieu empreint de mémoire.<BR>\r\nSes détails gravés racontent le passé,<BR>\r\nOuvrant sur un trésor de pages à explorer.<BR>\r\nTrouvez ce portail, majestueux et discret,<BR>\r\nUn sanctuaire pour les esprits éclairés.",
       "title": "Bibliothèque des Études et du Patrimoine",
-      "latitude": 43.6072222,
-      "longitude": 1.443888888888889,
+      "latitude": 43.60745,
+      "longitude": 1.44398,
       "solutionLocked": false,
       "optional": false,
       "__v": 0,
@@ -149,7 +149,7 @@
     },
     {
       "_id": "6749c7a98e12d613f9877431",
-      "text": "Près des quais où la Garonne se pavane,<BR>\r\nDes hommes travaillaient, pêcheurs de sable en cabane.<BR>\r\nAu Port de la Daurade, leur histoire se devine,<BR>\r\nUn clin d’œil discret à leurs racines.<BR>\r\nTrouvez cet hommage au bord du courant,<BR>\r\nLà où la mémoire s’écoule doucement.",
+      "text": "Sur les rives où la Garonne murmure,<BR>\r\nDes hommes travaillaient, leurs vies dans l’azur.<BR>\r\nLe sable, leur trésor, extrait avec soin,<BR>\r\nRacontait un labeur ancien, mais bien toulousain.<BR>\r\nSuivez le courant, cherchez l’histoire cachée,<BR>\r\nUn clin d’œil discret à leur mémoire gravée.",
       "title": "Les Pêcheurs de sable",
       "latitude": 43.6011111,
       "longitude": 1.4388888888888889,
@@ -217,7 +217,7 @@
     },
     {
       "_id": "6762ecf619a0f653b422963e",
-      "text": "Dans un chef-d’œuvre où chaque pierre est soignée,<BR>\r\nUn bloc brut garde son mystère en entier.<BR>\r\nNon sculpté, il défie l’ouvrage parfait,<BR>\r\nUn témoin du passé, qui reste secret.<BR>\r\nTrouvez cette énigme au cœur de la basilique,<BR>\r\nUn détail discret dans ce joyau romanesque unique.",
+      "text": "Dans un chef-d’œuvre où chaque pierre est soignée,<BR>\r\nUn bloc brut garde son mystère en entier.<BR>\r\nNon sculpté, il défie l’ouvrage parfait,<BR>\r\nUn témoin du passé, visible et discret.<BR>\r\nTrouvez cette énigme sur les murs extérieurs,<BR>\r\nUn détail caché dans ce joyau de splendeur.",
       "title": "Bloc de la basilique Saint Sernin",
       "latitude": 43.60819,
       "longitude": 1.44222,
@@ -648,6 +648,294 @@
       "order": 2,
       "unlockSolution": true,
       "__v": 0
+    },
+    {
+      "_id": "67656b558ccac84ee5e5d7c6",
+      "description": "Suivez le flux de la ville en empruntant la rue d’Alsace-Lorraine, artère animée et commerçante.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67656b878ccac84ee5e5d7d5",
+      "description": "Levez les yeux pour repérer une horloge unique en son genre, affichant toutes les heures d’une seule rotation.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67656c108ccac84ee5e5d7e4",
+      "description": "C'est au 42.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67656e148ccac84ee5e5d817",
+      "description": "Tournez vos pas vers le nord-ouest, en quête d'une rue dont le nom évoque les grands-parents.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765704b8ccac84ee5e5d83c",
+      "description": "Explorez les murs extérieurs de la basilique, là où chaque pierre raconte une histoire.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676570d98ccac84ee5e5d84b",
+      "description": "Dirigez-vous vers le transept Est pour trouver ce bloc mystérieux, témoin silencieux d’un passé révolu.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676572848ccac84ee5e5d868",
+      "description": "Depuis la basilique, partez vers le sud en longeant l’Université de Toulouse, gardienne des savoirs depuis des siècles.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676572fc8ccac84ee5e5d877",
+      "description": "Tournez vous en arrivant sur la place Saint Pierre.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765741e8ccac84ee5e5d89c",
+      "description": "Suivez les quais et remontez la Garonne, là où l’eau raconte les histoires d’un autre temps.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765743d8ccac84ee5e5d8ab",
+      "description": "Arrêtez-vous à hauteur d’un bateau qui évoque des aventures lointaines, un navire digne des pirates.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676575728ccac84ee5e5d8ba",
+      "description": "Depuis les rives où les pêcheurs de sable vivaient leur labeur, remontez vers le centre.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765759c8ccac84ee5e5d8d7",
+      "description": "A coté de l'église des Jacobins.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765761c8ccac84ee5e5d8e6",
+      "description": "Toujours vers le nord, croisé la rue Pargaminière.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765770b8ccac84ee5e5d903",
+      "description": "Rue du Collège de Foix",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676577668ccac84ee5e5d912",
+      "description": "Vraiment besoin d'un indice ? Bon... remontez la rue des Lois",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657be88ccac84ee5e5d935",
+      "description": "Vers le nord-ouest.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657bfa8ccac84ee5e5d944",
+      "description": "Poursuivez jusqu’à rejoindre l’imposante église des Jacobins, chef-d’œuvre gothique niché au cœur de la ville.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657c418ccac84ee5e5d953",
+      "description": "Redescendons vers la Garonne.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657c738ccac84ee5e5d962",
+      "description": "Arrêtez-vous à hauteur d’un bateau qui évoque des aventures lointaines, un navire digne des pirates.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657c9f8ccac84ee5e5d971",
+      "description": "Descendez la Garonne.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657cb18ccac84ee5e5d980",
+      "description": "Place Saint Pierre.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657e868ccac84ee5e5d98f",
+      "description": "Depuis le portrait de Nougaro, longez l’Université de Toulouse Capitole, où le savoir règne depuis des siècles.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657e998ccac84ee5e5d99e",
+      "description": "Continuez vers le nord, et laissez-vous guider par l’ombre imposante de la Basilique Saint-Sernin, bijou roman de la Ville Rose.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657ecc8ccac84ee5e5d9ad",
+      "description": "Dirigez-vous vers le transept Est pour trouver ce bloc mystérieux, témoin silencieux d’un passé révolu.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "67657f4c8ccac84ee5e5d9ca",
+      "description": "Tournez vos pas vers le l'est, en quête d'une rue dont le nom évoque les grands-parents.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676580bb8ccac84ee5e5d9d9",
+      "description": "Depuis la porte monumentale du musée, partez vers l’ouest pour rejoindre une grande rue piétonne animée.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676581a78ccac84ee5e5d9e8",
+      "description": "Avancez le long de cette artère vivante, en descendant vers le Capitole.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676581e58ccac84ee5e5d9f7",
+      "description": "Levez les yeux pour trouver une horloge rare et fascinante, affichant toutes les heures en un seul tour.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 3,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676582298ccac84ee5e5da06",
+      "description": "C'est au 42.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676582e18ccac84ee5e5da31",
+      "description": "Vraiment besoin d'un indice ? Bon... remontez la rue des Lois",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "6765832c8ccac84ee5e5da40",
+      "description": "Vers l'ouest.",
+      "cost": 5,
+      "isPurchased": false,
+      "order": 1,
+      "unlockSolution": true,
+      "__v": 0
+    },
+    {
+      "_id": "676583468ccac84ee5e5da4f",
+      "description": "Rue du Collège de Foix.",
+      "cost": 10,
+      "isPurchased": false,
+      "order": 2,
+      "unlockSolution": true,
+      "__v": 0
     }
   ],
   "teamRiddles": [
@@ -918,8 +1206,11 @@
       "order": 11,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67656b558ccac84ee5e5d7c6",
+        "67656b878ccac84ee5e5d7d5"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f6a719a0f653b4229ad5",
@@ -928,8 +1219,10 @@
       "order": 12,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67656c108ccac84ee5e5d7e4"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f6c119a0f653b4229b4f",
@@ -938,8 +1231,10 @@
       "order": 13,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67656e148ccac84ee5e5d817"
+      ],
+      "__v": 2
     },
     {
       "_id": "6762f6d219a0f653b4229bbd",
@@ -948,8 +1243,11 @@
       "order": 14,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "6765704b8ccac84ee5e5d83c",
+        "676570d98ccac84ee5e5d84b"
+      ],
+      "__v": 5
     },
     {
       "_id": "6762f6e119a0f653b4229c1f",
@@ -968,8 +1266,11 @@
       "order": 16,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676572848ccac84ee5e5d868",
+        "676572fc8ccac84ee5e5d877"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f70b19a0f653b4229cbf",
@@ -978,8 +1279,11 @@
       "order": 17,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "6765741e8ccac84ee5e5d89c",
+        "6765743d8ccac84ee5e5d8ab"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f71b19a0f653b4229cfd",
@@ -988,8 +1292,11 @@
       "order": 18,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676575728ccac84ee5e5d8ba",
+        "6765759c8ccac84ee5e5d8d7"
+      ],
+      "__v": 5
     },
     {
       "_id": "6762f72b19a0f653b4229d2f",
@@ -998,8 +1305,11 @@
       "order": 19,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "6765761c8ccac84ee5e5d8e6",
+        "6765770b8ccac84ee5e5d903"
+      ],
+      "__v": 5
     },
     {
       "_id": "6762f73819a0f653b4229d55",
@@ -1008,8 +1318,10 @@
       "order": 20,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676577668ccac84ee5e5d912"
+      ],
+      "__v": 3
     },
     {
       "_id": "6762f77f19a0f653b4229d6f",
@@ -1018,8 +1330,11 @@
       "order": 9,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67657be88ccac84ee5e5d935",
+        "67657bfa8ccac84ee5e5d944"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f7f619a0f653b4229edc",
@@ -1028,8 +1343,10 @@
       "order": 20,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676582e18ccac84ee5e5da31"
+      ],
+      "__v": 2
     },
     {
       "_id": "6762f81219a0f653b4229f8d",
@@ -1038,8 +1355,11 @@
       "order": 19,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "6765832c8ccac84ee5e5da40",
+        "676583468ccac84ee5e5da4f"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f89019a0f653b422a13f",
@@ -1048,8 +1368,11 @@
       "order": 10,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67657c418ccac84ee5e5d953",
+        "67657c738ccac84ee5e5d962"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f8c119a0f653b422a2b3",
@@ -1058,8 +1381,11 @@
       "order": 11,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67657c9f8ccac84ee5e5d971",
+        "67657cb18ccac84ee5e5d980"
+      ],
+      "__v": 4
     },
     {
       "_id": "6762f90819a0f653b422a42f",
@@ -1078,8 +1404,12 @@
       "order": 13,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67657e868ccac84ee5e5d98f",
+        "67657e998ccac84ee5e5d99e",
+        "67657ecc8ccac84ee5e5d9ad"
+      ],
+      "__v": 7
     },
     {
       "_id": "6762f96319a0f653b422a73f",
@@ -1088,8 +1418,10 @@
       "order": 14,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "67657f4c8ccac84ee5e5d9ca"
+      ],
+      "__v": 2
     },
     {
       "_id": "6762f99b19a0f653b422a8d3",
@@ -1098,8 +1430,12 @@
       "order": 15,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676580bb8ccac84ee5e5d9d9",
+        "676581a78ccac84ee5e5d9e8",
+        "676581e58ccac84ee5e5d9f7"
+      ],
+      "__v": 6
     },
     {
       "_id": "6762f9ce19a0f653b422aa6f",
@@ -1108,8 +1444,10 @@
       "order": 16,
       "resolved": false,
       "solutions": [],
-      "hints": [],
-      "__v": 0
+      "hints": [
+        "676582298ccac84ee5e5da06"
+      ],
+      "__v": 3
     }
   ],
   "solutions": []
